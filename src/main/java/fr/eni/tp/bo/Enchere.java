@@ -2,7 +2,7 @@ package fr.eni.tp.bo;
 
 import java.time.LocalDate;
 
-public class Auction {
+public class Enchere {
 
 	private LocalDate auctionDate;
 	private int bidAmount;
@@ -12,12 +12,12 @@ public class Auction {
 	// Constructors
 	
 	
-	public Auction(LocalDate auctionDate, int bidAmount) {
+	public Enchere(LocalDate auctionDate, int bidAmount) {
 		this.auctionDate = auctionDate;
 		this.bidAmount = bidAmount;
 	}
 	
-	public Auction() {
+	public Enchere() {
 	}
 	
 	
