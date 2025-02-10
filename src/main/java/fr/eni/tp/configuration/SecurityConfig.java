@@ -62,7 +62,8 @@ public class SecurityConfig {
         // Requête pour récupérer les autorités (rôles)
         jdbcUserDetailsManager.setAuthoritiesByUsernameQuery(
         		"SELECT pseudo AS username, administrateur AS authority " +
-        	            "FROM utilisateurs "
+        	            "FROM utilisateurs " +
+        	            "WHERE pseudo = ?"
         );
         return jdbcUserDetailsManager;
 	}
