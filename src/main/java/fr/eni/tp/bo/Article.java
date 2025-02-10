@@ -11,9 +11,8 @@ public class Article {
 	private LocalDate bidEnd;
 	private int initPrice;
 	private int sellPrice;
-	private int userNumber;
-	private int categoryNumber;
-	
+	private Utilisateur user;
+	private Categorie category;
 	
 	public Article(String name, String description, LocalDate bidStart, LocalDate bidEnd, int initPrice) {
 		this.name = name;
@@ -23,14 +22,12 @@ public class Article {
 		this.initPrice = initPrice;
 	}
 
-
 	/**
 	 * @return the name
 	 */
 	public String getName() {
 		return name;
 	}
-
 
 	/**
 	 * @param name the name to set
@@ -39,14 +36,12 @@ public class Article {
 		this.name = name;
 	}
 
-
 	/**
 	 * @return the description
 	 */
 	public String getDescription() {
 		return description;
 	}
-
 
 	/**
 	 * @param description the description to set
@@ -55,14 +50,12 @@ public class Article {
 		this.description = description;
 	}
 
-
 	/**
 	 * @return the bidStart
 	 */
 	public LocalDate getBidStart() {
 		return bidStart;
 	}
-
 
 	/**
 	 * @param bidStart the bidStart to set
@@ -71,14 +64,12 @@ public class Article {
 		this.bidStart = bidStart;
 	}
 
-
 	/**
 	 * @return the bidEnd
 	 */
 	public LocalDate getBidEnd() {
 		return bidEnd;
 	}
-
 
 	/**
 	 * @param bidEnd the bidEnd to set
@@ -87,14 +78,12 @@ public class Article {
 		this.bidEnd = bidEnd;
 	}
 
-
 	/**
 	 * @return the initPrice
 	 */
 	public int getInitPrice() {
 		return initPrice;
 	}
-
 
 	/**
 	 * @param initPrice the initPrice to set
@@ -103,14 +92,12 @@ public class Article {
 		this.initPrice = initPrice;
 	}
 
-
 	/**
 	 * @return the sellPrice
 	 */
 	public int getSellPrice() {
 		return sellPrice;
 	}
-
 
 	/**
 	 * @param sellPrice the sellPrice to set
@@ -119,38 +106,33 @@ public class Article {
 		this.sellPrice = sellPrice;
 	}
 
-
 	/**
-	 * @return the userNumber
+	 * @return the user
 	 */
-	public int getUserNumber() {
-		return userNumber;
+	public Utilisateur getUser() {
+		return user;
 	}
 
-
 	/**
-	 * @param userNumber the userNumber to set
+	 * @param user the user to set
 	 */
-	public void setUserNumber(int userNumber) {
-		this.userNumber = userNumber;
+	public void setUser(Utilisateur user) {
+		this.user = user;
 	}
 
-
 	/**
-	 * @return the categoryNumber
+	 * @return the category
 	 */
-	public int getCategoryNumber() {
-		return categoryNumber;
+	public Categorie getCategory() {
+		return category;
 	}
 
-
 	/**
-	 * @param categoryNumber the categoryNumber to set
+	 * @param category the category to set
 	 */
-	public void setCategoryNumber(int categoryNumber) {
-		this.categoryNumber = categoryNumber;
+	public void setCategory(Categorie category) {
+		this.category = category;
 	}
-
 
 	/**
 	 * @return the number
@@ -158,6 +140,9 @@ public class Article {
 	public int getNumber() {
 		return number;
 	}
+	
+	
+	
 	
 	
 	
