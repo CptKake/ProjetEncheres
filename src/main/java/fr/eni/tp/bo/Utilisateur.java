@@ -1,8 +1,9 @@
 package fr.eni.tp.bo;
 
+import java.util.ArrayList;
 import java.util.List;
 
-public class User {
+public class Utilisateur {
 
 	private int nbUser;
 	private String pseudo;
@@ -19,21 +20,20 @@ public class User {
 	
 	
 
-	private List<Auction> auctions;
+	private List<Enchere> auctions;
 	private List<Article> articles;
 	
 	
 	// Constructors
 	
-	public User() {
-	};
+
 	
-	public User(List<Auction> auctions, List<Article> articles) {
-		this.auctions = auctions;
-		this.articles = articles;
+	public Utilisateur() {
+		 auctions = new ArrayList<Enchere>() ;
+		 articles = new ArrayList<Article>();
 	}
 	
-	public User(int nbUser, String pseudo, String lastName, String firstName, String email, String phone, String street,
+	public Utilisateur(int nbUser, String pseudo, String lastName, String firstName, String email, String phone, String street,
 			String postalCode, String city, int credit, Byte admin) {
 		this();
 		this.nbUser = nbUser;
@@ -201,6 +201,36 @@ public class User {
 	public void setAdmin(Byte admin) {
 		this.admin = admin;
 	}
+	
+	
+
+	/**
+	 * @return the auctions
+	 */
+	public List<Enchere> getAuctions() {
+		return auctions;
+	}
+
+	/**
+	 * @param auctions the auctions to set
+	 */
+	public void setAuctions(List<Enchere> auctions) {
+		this.auctions = auctions;
+	}
+
+	/**
+	 * @return the articles
+	 */
+	public List<Article> getArticles() {
+		return articles;
+	}
+
+	/**
+	 * @param articles the articles to set
+	 */
+	public void setArticles(List<Article> articles) {
+		this.articles = articles;
+	}
 
 	@Override
 	public String toString() {
@@ -209,13 +239,7 @@ public class User {
 				+ ", city=" + city + ", credit=" + credit + ", admin=" + admin + "]";
 	}
 
-	public Auction getAuction() {
-		return auction;
-	}
 
-	public void setAuction(Auction auction) {
-		this.auction = auction;
-	}
 	
 	
 	
