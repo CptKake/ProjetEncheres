@@ -56,13 +56,13 @@ public class SecurityConfig {
 
         // Requête pour récupérer les utilisateurs
         jdbcUserDetailsManager.setUsersByUsernameQuery(
-            "SELECT pseudo AS username, mot_de_passe as password, 1 AS enabled FROM utilisateurs WHERE pseudo = ?"
+            "SELECT pseudo AS username, mot_de_passe as password, 'true' AS enabled FROM utilisateurs WHERE pseudo = ?"
         );
 
         // Requête pour récupérer les autorités (rôles)
         jdbcUserDetailsManager.setAuthoritiesByUsernameQuery(
         		"SELECT pseudo AS username, administrateur AS authority " +
-        	            "FROM utilisateurs "
+        	            "FROM utilisateurs WHERE pseudo = ? "
         );
         return jdbcUserDetailsManager;
 	}
