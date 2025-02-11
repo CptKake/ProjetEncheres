@@ -11,7 +11,7 @@ import java.util.Optional;
 @RestController
 @RequestMapping("/encheres")
 public class EnchereController {
-
+/*
     private final EnchereService enchereService;
 
     public EnchereController(EnchereService enchereService) {
@@ -54,4 +54,5 @@ public class EnchereController {
             return ResponseEntity.notFound().build();
         }
     }
+   */
 }

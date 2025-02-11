@@ -2,7 +2,7 @@ package fr.eni.tp.bll;
 
 import fr.eni.tp.bo.Utilisateur;
 
-public interface AccountService {
+public interface UtilisateurService {
 
 	void createAccount(Utilisateur user);
 	

@@ -6,7 +6,7 @@ import fr.eni.tp.bo.Utilisateur;
 import fr.eni.tp.dal.UtilisateurDAO;
 
 @Service
-public class AccountServiceImpl implements AccountService {
+public class AccountServiceImpl implements UtilisateurService {
 
 	private UtilisateurDAO userDAO;
 	

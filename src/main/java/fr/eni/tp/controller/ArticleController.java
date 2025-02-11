@@ -10,7 +10,7 @@ package fr.eni.tp.controller;
 	@RestController
 	@RequestMapping("/articles") // URL de base pour les articles
 	public class ArticleController {
-
+/*
 	    private final ArticleService articleService;
 
 	    public ArticleController(ArticleService articleService) {
@@ -63,5 +63,5 @@ package fr.eni.tp.controller;
 	        return ResponseEntity.noContent().build();
 	    }
 	}
-
+*/
 }

@@ -32,19 +32,19 @@ package fr.eni.tp.configuration;
 					.requestMatchers("/images/*").permitAll()
 					.requestMatchers("/login").permitAll()
 					.requestMatchers("/logout").permitAll()
-					.anyRequest().denyAll() // interdit l'accès aux urls non configurées
+					.anyRequest().permitAll() // interdit l'accès aux urls non configurées
 				)
 				.httpBasic(Customizer.withDefaults())
 				.formLogin((formLogin) ->
 					formLogin
 						.loginPage("/login")
-						.defaultSuccessUrl("/")
+						.defaultSuccessUrl("/encheres")
 				)
 				.logout((logout) ->
 					logout
 						.invalidateHttpSession(true)
 						.logoutRequestMatcher(new AntPathRequestMatcher("/logout", "GET"))
-						.logoutSuccessUrl("/")
+						.logoutSuccessUrl("/encheres")
 				);
 
 				
