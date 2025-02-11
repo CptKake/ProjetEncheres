@@ -72,7 +72,7 @@ public class SecurityConfig {
 >>>>>>> 5ed76171692646d1c27e38609cd7328eb716541f
 =======
 
-        	            "FROM utilisateurs WHERE pseudo = ? 
+        	            "FROM utilisateurs WHERE pseudo = ? "
 
 >>>>>>> c67d8ccbe2909dc187cc52e5d7bffd8f6cdb8779
 
