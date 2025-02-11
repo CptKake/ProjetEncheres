@@ -4,18 +4,14 @@ import fr.eni.tp.bo.Utilisateur;
 
 public interface AccountService {
 
-	Utilisateur createAccount();
+	void createAccount(Utilisateur user);
 	
-	void deleteAccount(Utilisateur user);
+	void deleteAccount(String pseudo);
 	
 	int getCredits(Utilisateur user);
 	
-	void login(String pseudo, String password);
+	void modifyAccount(Utilisateur user);
 	
-	void logout();
-	
-	Utilisateur modifyAccount();
-	
-	Utilisateur profileById(int userNumber);
+	Utilisateur profileByPseudo(String pseudo);
 	
 }
