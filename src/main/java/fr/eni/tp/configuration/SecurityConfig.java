@@ -63,7 +63,6 @@ public class SecurityConfig {
         jdbcUserDetailsManager.setAuthoritiesByUsernameQuery(
         		"SELECT pseudo AS username, administrateur AS authority " +
         	            "FROM utilisateurs WHERE pseudo = ? "
-
         );
         return jdbcUserDetailsManager;
 	}
