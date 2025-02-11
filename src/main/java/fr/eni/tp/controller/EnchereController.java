@@ -1,5 +1,6 @@
 package fr.eni.tp.controller;
 
+import fr.eni.tp.bll.EnchereService;
 import fr.eni.tp.bo.Enchere;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -20,7 +21,7 @@ public class EnchereController {
     // Récupérer toutes les enchères
     @GetMapping
     public List<Enchere> getAllEncheres() {
-        return enchereService.getAllEncheres();
+        return enchereService.getEncheres();
     }
 
     // Récupérer une enchère par son ID
@@ -32,8 +33,8 @@ public class EnchereController {
 
     // Ajouter une enchère
     @PostMapping
-    public Enchere createEnchere(@RequestBody Enchere enchere) {
-        return enchereService.createEnchere(enchere);
+    public void createEnchere(@RequestBody Enchere enchere) {
+        enchereService.bid(enchere.getBidAmount());
     }
 
     // Modifier une enchère
