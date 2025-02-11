@@ -1,8 +1,8 @@
 package fr.eni.tp.dal;
 
-import java.time.LocalDate;
 import java.util.List;
 
+import fr.eni.tp.bo.Article;
 import fr.eni.tp.bo.Enchere;
 
 public interface EnchereDAO {
@@ -11,11 +11,11 @@ public interface EnchereDAO {
 	
 	List<Enchere> findAll();
 	
-	Enchere findUserBid(int nbUser, LocalDate auctionDate);
+	Enchere findUserBid(int nbUser);
 	
-	Enchere findByUser(int nbUser, int nbArticle);
+	Enchere winByUser(int nbUser, int nbArticle);
 	
-	Enchere findUsersAuction(int nbUser);
+	List<Article> findUsersAuction(int nbUser);
 	
 	
 	
