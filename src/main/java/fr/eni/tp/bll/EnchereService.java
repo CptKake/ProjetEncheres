@@ -11,9 +11,9 @@ public interface EnchereService {
 
 	List<Enchere> getEncheres();
 	
-	void bid(int sum);
+	void bid(Utilisateur user, int sum, Article art);
 	
-	Article buy(Utilisateur user);
+	Article buy(Utilisateur user, Article art);
 
 	List<Article> getSells(Utilisateur user);
 	

@@ -10,5 +10,5 @@ public interface ArticleDAO {
 	
 	void readArticle (int nbrArticle);
 	
-	
+	void updateArticle(Article article);
 }
