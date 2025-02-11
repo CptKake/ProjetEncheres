@@ -1,7 +1,13 @@
 package fr.eni.tp.dal;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
+import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
+import org.springframework.jdbc.support.GeneratedKeyHolder;
+import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 
 import fr.eni.tp.bo.Article;
@@ -28,6 +34,8 @@ public class UtilisateurDAOImpl implements UtilisateurDAO {
 		this.namedParameterJdbcTemplate = namedParameterJdbcTemplate;
 	}
 
+	
+	// création d'un user dans la BDD
 	@Override
 	public void createUser(Utilisateur user) {
 		MapSqlParameterSource namedParameters = new MapSqlParameterSource();
@@ -36,43 +44,76 @@ public class UtilisateurDAOImpl implements UtilisateurDAO {
 		namedParameters.addValue("prenom", user.getFirstName());
 		namedParameters.addValue("email", user.getEmail());
 		namedParameters.addValue("telephone", user.getPhone());
+		namedParameters.addValue("rue", user.getStreet());
 		namedParameters.addValue("code_postal", user.getPostalCode());
 		namedParameters.addValue("ville", user.getCity());
 		namedParameters.addValue("mot_de_passe", user.getPassword());
 	
-	
-		namedParameterJdbcTemplate.update(INSERT, namedParameters);
-	
+		KeyHolder keyHolder = new GeneratedKeyHolder();
+		namedParameterJdbcTemplate.update(INSERT, namedParameters, keyHolder);
+		
+		if(keyHolder != null && keyHolder.getKey() != null) {
+		
+			user.setNbUser(keyHolder.getKey().intValue());
+		}
+		
 	}
 
+	
+	// Suppression d'un user
 	@Override
 	public void deleteUser(String pseudo) {
-		// TODO Auto-generated method stub
-		
+		 MapSqlParameterSource namedParameters = new MapSqlParameterSource();
+        namedParameters.addValue("pseudo", pseudo);
+
+        namedParameterJdbcTemplate.update(DELETE, namedParameters);
+	    
 	}
 
+	// MAJ des données d'un user
 	@Override
 	public void updateUser(Utilisateur user) {
-		// TODO Auto-generated method stub
-		
+        MapSqlParameterSource namedParameters = new MapSqlParameterSource();
+        namedParameters.addValue("pseudo", user.getPseudo());
+        namedParameters.addValue("nom", user.getLastName());
+        namedParameters.addValue("prenom", user.getFirstName());
+        namedParameters.addValue("email", user.getEmail());
+        namedParameters.addValue("telephone", user.getPhone());
+        namedParameters.addValue("rue", user.getStreet());
+        namedParameters.addValue("code_postal", user.getPostalCode());
+        namedParameters.addValue("ville", user.getCity());
+        namedParameters.addValue("mot_de_passe", user.getPassword());
+
+        namedParameterJdbcTemplate.update(UPDATE, namedParameters);
 	}
 
+
+	// afficher détails d'un user
 	@Override
 	public Utilisateur readUser(String pseudo) {
-		// TODO Auto-generated method stub
-		return null;
+		MapSqlParameterSource namedParameters = new MapSqlParameterSource();
+        namedParameters.addValue("pseudo", pseudo);
+
+        return namedParameterJdbcTemplate.queryForObject(SELECT_BY_PSEUDO, namedParameters, new UtilisateurRowMapper());
 	}
 
+	
+	// vérifier si email présent 1 fois (pour vérif email unique)
 	@Override
 	public int countByEmail(String email) {
-		// TODO Auto-generated method stub
-		return 0;
+		MapSqlParameterSource namedParameters = new MapSqlParameterSource();
+        namedParameters.addValue("email", email);
+
+        return namedParameterJdbcTemplate.queryForObject(COUNT_EMAIL, namedParameters, Integer.class);
 	}
 
+	// vérifier si pseudo présent 1 fois (pour vérif pseudo unique)
 	@Override
 	public int countByPseudo(String pseudo) {
-		// TODO Auto-generated method stub
-		return 0;
+		MapSqlParameterSource namedParameters = new MapSqlParameterSource();
+        namedParameters.addValue("pseudo", pseudo);
+
+        return namedParameterJdbcTemplate.queryForObject(COUNT_PSEUDO, namedParameters, Integer.class);
 	}
 
 	@Override
@@ -80,5 +121,25 @@ public class UtilisateurDAOImpl implements UtilisateurDAO {
 		// TODO Auto-generated method stub
 		
 	}
+	
+	
+	// RowMapper pour récup lecture des données d'un user
+	
+	private static class UtilisateurRowMapper implements RowMapper<Utilisateur> {
+		
+        @Override
+        public Utilisateur mapRow(ResultSet rs, int rowNum) throws SQLException {
+            Utilisateur user = new Utilisateur();
+            user.setPseudo(rs.getString("pseudo"));
+            user.setLastName(rs.getString("nom"));
+            user.setFirstName(rs.getString("prenom"));
+            user.setEmail(rs.getString("email"));
+            user.setPhone(rs.getString("telephone"));
+            user.setStreet(rs.getString("rue"));
+            user.setPostalCode(rs.getString("code_postal"));
+            user.setCity(rs.getString("ville"));
+            return user;
+        }
+    }
 
 }
