@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.Optional;
 
 import fr.eni.tp.bo.Article;
-import fr.eni.tp.bo.Categorie;
 import fr.eni.tp.bo.Enchere;
 import fr.eni.tp.bo.Utilisateur;
 
@@ -18,7 +17,7 @@ public interface EnchereService {
 
 	List<Article> getSells(Utilisateur user);
 	
-	Article sell(Utilisateur user, Categorie category, Article article);
+	void sell(Article article);
 	
 	void cancelAuction(Article article);
 
