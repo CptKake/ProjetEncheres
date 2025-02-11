@@ -7,7 +7,7 @@ public interface UtilisateurDAO {
 
 	void createUser(Utilisateur user);
 	
-	void deleteUser(Utilisateur user);
+	void deleteUser(String pseudo);
 	
 	void updateUser(Utilisateur user);
 	
