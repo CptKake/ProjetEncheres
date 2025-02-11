@@ -29,14 +29,18 @@ public class EnchereServiceImpl implements EnchereService  {
 	}
 
 	@Override
-	public void bid(int sum) {
-		
+	public void bid(Utilisateur user, int sum, Article art) {
+		if (sum > art.getSellPrice() && sum <= user.getCredit()) {
+			articleDAO.updateArticle(art);
+		} else {
+			System.err.println("Nbr crédits insuffisants ou offre trop basse");
+		}
 		
 	}
 
 	@Override
-	public Article buy(Utilisateur user) {
-		// TODO Auto-generated method stub
+	public Article buy(Utilisateur user, Article art) {
+		
 		return null;
 	}
 
