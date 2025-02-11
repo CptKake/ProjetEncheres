@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Liste des enchères</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+    <div class="header">
+        <h1>ENI-Encheres</h1>
+        <a th:href="@{/inscription}">S'inscrire / Se connecter</a>
+    </div>
+    <h2>Liste des enchères</h2>
+    <ul>
+        <li th:each="auction : ${auctions}">
+            <h3 th:text="${auction.title}"></h3>
+            <p th:text="${auction.description}"></p>
+            <p>Points requis: <span th:text="${auction.requiredPoints}"></span></p>
+            <p>Fin: <span th:text="${auction.endTime}"></span></p>
+        </li>
+    </ul>
+    <p>Filtres :</p>
+    <div class="search-container">
+        <input type="text" placeholder="Rechercher...">
+        <select>
+            <option value="all">Catégorie</option>
+            <option value="computer science">Informatique</option>
+            <option value="furniture">Ameublement</option>
+            <option value="clothes">Vêtements</option>
+            <option value="sport and hobby">Sport et Loisirs</option>
+        </select>
+        <button type="button">Rechercher</button>
+    </div>
+    <div class="announcements">
+        <div class="announcement">
+            <a th:href="@{/produit1}">Annonce 1 : Produit A</a>
+        </div>
+        <div class="announcement">
+            <a th:href="@{/produit2}">Annonce 2 : Produit B</a>
+        </div>
+    </div>
+</body>
+</html>
