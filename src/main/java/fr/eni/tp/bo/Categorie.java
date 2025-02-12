@@ -11,6 +11,18 @@ public class Categorie {
 	}
 
 
+	
+	
+	/**
+	 * @param number the number to set
+	 */
+	public void setNumber(int number) {
+		this.number = number;
+	}
+
+
+
+
 	/**
 	 * @return the number
 	 */

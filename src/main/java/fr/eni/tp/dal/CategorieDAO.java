@@ -4,9 +4,9 @@ import fr.eni.tp.bo.Categorie;
 
 public interface CategorieDAO {
 
-	void readCategorie(String name);
+	Categorie readCategorie(String name);
 	
-	Categorie findByName(String name);
+	Categorie findById(int id);
 	
-	
+	void createCategorie(Categorie cat);
 }
