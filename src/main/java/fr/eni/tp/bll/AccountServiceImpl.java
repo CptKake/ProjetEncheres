@@ -19,7 +19,7 @@ public class AccountServiceImpl implements UtilisateurService {
 		// verification pseudo et email unique
 		int valide = userDAO.countByEmail(user.getEmail()) + userDAO.countByPseudo(user.getPseudo());
 		//création utilisateur en passant par la DAO si email et mdp sont uniques
-		if (valide == 2) {
+		if (valide == 0) {
 			userDAO.createUser(user);
 		} else {
 			System.err.println("mot de passe ou email déja existant");
