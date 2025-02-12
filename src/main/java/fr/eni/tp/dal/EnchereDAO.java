@@ -4,23 +4,20 @@ import java.util.List;
 
 import fr.eni.tp.bo.Article;
 import fr.eni.tp.bo.Enchere;
+import fr.eni.tp.bo.Utilisateur;
 
 public interface EnchereDAO {
 
-	Enchere readAuction(int nbArticle);
+	Enchere readAuction(Enchere enchere);
 	
 	//voir les encheres en cours d'un user
+	List<Enchere> finduserBid(Utilisateur user);
+
 	List<Enchere> findAll();
 	
-	Enchere findUserBid(int nbUser);
+	List<Enchere> findEnCours(Utilisateur user);
 	
 	//vente remportée par le user
-	Enchere winByUser(int nbUser, int nbArticle);
-	
-	//voir les ventes d'un user
-	List<Article> findUsersAuction(int nbUser);
-	
-	
-	
+	List<Article> findWinByUser(Utilisateur user);
 	
 }
