@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Profil</title>
+
+
+
+
+
+</head>
+<body>
+
+<form th:action="@{/profil/modifier}" method="POST" th:object="${user}">
+ <h1>User Profile</h1>
+ 
+  <ul>
+  	<li>
+	    <label for="idPseudo">Pseudo: </label>
+	    <input id="idPseudo" type="text" th:field="*{pseudo}"/>
+    </li>
+    <li>
+	    <label for="idNom">Nom: </label>
+	    <input id="idNom" type="text" th:field="*{lastName}"/>
+    </li>
+    <li>
+	    <label for="idPrenom">Prénom: </label>
+	    <input id="idPrenom" type="text" th:field="*{firstName}"/>
+    </li>
+    <li>
+	    <label for="idEmail">Email: </label>
+	    <input id="idEmail" type="text" th:field="*{email}"/>
+    </li>
+    <li>
+	    <label for="idPhone">Téléphone: </label>
+	    <input id="idPhone" type="text" th:field="*{phone}"/>
+    </li>
+   <li>
+	    <label for="idStreet">Rue: </label>
+	    <input id="idStreet" type="text" th:field="*{street}"/>
+    </li>
+    <li>
+	    <label for="idCP">Code Postal: </label>
+	    <input id="idCP" type="text" th:field="*{postalCode}"/>
+    </li>
+   <li>
+	    <label for="idCity">Ville: </label>
+	    <input id=""idCity"" type="text" th:field="*{city}"/>
+    </li>
+    <li>
+	    <label for="idMdp">Mot de passe: </label>
+	    <input id="idMdp" type="text" th:field="*{password}"/>
+    </li>
+    
+    
+    
+    
+		<button type="submit">Modifier</button>
+	
+  </ul> 
+</form>
+
+<form th:action="@{/profil/supprimer}" method="POST">
+    <button type="submit">Supprimer le compte</button>
+</form>
+
+
+
+</body>
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Inscription</title>
+</head>
+<body>
+
+<h1>Inscription</h1>
+
+<form th:action="@{/profil/inscription}" method="POST" th:object="${user}">
+    <ul>
+        <li>
+            <label for="idPseudo">Pseudo: </label>
+            <input id="idPseudo" type="text" th:field="*{pseudo}"/>
+        </li>
+        <li>
+            <label for="idNom">Nom: </label>
+            <input id="idNom" type="text" th:field="*{lastName}"/>
+        </li>
+        <li>
+            <label for="idPrenom">Prénom: </label>
+            <input id="idPrenom" type="text" th:field="*{firstName}"/>
+        </li>
+        <li>
+            <label for="idEmail">Email: </label>
+            <input id="idEmail" type="text" th:field="*{email}"/>
+        </li>
+        <li>
+            <label for="idPhone">Téléphone: </label>
+            <input id="idPhone" type="text" th:field="*{phone}"/>
+        </li>
+        <li>
+            <label for="idStreet">Rue: </label>
+            <input id="idStreet" type="text" th:field="*{street}"/>
+        </li>
+        <li>
+            <label for="idCP">Code Postal: </label>
+            <input id="idCP" type="text" th:field="*{postalCode}"/>
+        </li>
+        <li>
+            <label for="idCity">Ville: </label>
+            <input id="idCity" type="text" th:field="*{city}"/>
+        </li>
+        <li>
+            <label for="idMdp">Mot de passe: </label>
+            <input id="idMdp" type="password" th:field="*{password}"/>
+        </li>
+    </ul>
+    <button type="submit">S'inscrire</button>
+</form>
+
+<div th:if="${error}" style="color: red;">
+    <p th:text="${error}"></p>
+</div>
+
+</body>
+</html>

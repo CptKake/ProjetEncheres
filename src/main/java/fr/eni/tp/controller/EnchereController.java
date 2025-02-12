@@ -23,10 +23,7 @@ public class EnchereController {
         this.enchereService = enchereService;
     }
 
-    @GetMapping
-    public String index () {
-    	return "index";
-    }
+   
     
     /*
     // Récupérer toutes les enchères
