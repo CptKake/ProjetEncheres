@@ -5,9 +5,11 @@ import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
+import org.springframework.stereotype.Repository;
 
 import fr.eni.tp.bo.Categorie;
 
+@Repository
 public class CategorieDAOImpl implements CategorieDAO {
 
 	private static final String FIND_BY_LIBELLE = "SELECT * FROM categories WHERE libelle = :libelle ";

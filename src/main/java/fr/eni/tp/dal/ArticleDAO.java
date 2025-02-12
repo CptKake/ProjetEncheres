@@ -8,7 +8,7 @@ public interface ArticleDAO {
 	
 	void suppressArticle ( Article article);
 	
-	void readArticle (int nbrArticle);
+	Article readArticle (int nbrArticle);
 	
 	void updateArticle(Article article);
 }
