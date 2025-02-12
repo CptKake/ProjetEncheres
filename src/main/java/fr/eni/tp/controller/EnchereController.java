@@ -9,14 +9,11 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Optional;
 
-<<<<<<< HEAD
+
 //@RestController
 @Controller
-||||||| d8e1819
-@RestController
-=======
-@Controller
->>>>>>> ccb14883f03ac3b4b36dc8828db1b86e32546efa
+
+
 @RequestMapping("/encheres")
 public class EnchereController {
 
