@@ -48,7 +48,7 @@ public class EnchereServiceImpl implements EnchereService  {
 
 	@Override
 	public List<Article> getSells(Utilisateur user) {
-		List<Article> articles = enchereDAO.findUsersAuction(user.getNbUser());
+		List<Article> articles = articleDAO.findUserSells(user);
 		
 		return articles;
 	}
