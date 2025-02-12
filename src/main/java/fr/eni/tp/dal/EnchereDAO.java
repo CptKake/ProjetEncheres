@@ -7,14 +7,17 @@ import fr.eni.tp.bo.Enchere;
 
 public interface EnchereDAO {
 
-	Enchere readAuctions(int nbArticle);
+	Enchere readAuction(int nbArticle);
 	
+	//voir les encheres en cours d'un user
 	List<Enchere> findAll();
 	
 	Enchere findUserBid(int nbUser);
 	
+	//vente remportée par le user
 	Enchere winByUser(int nbUser, int nbArticle);
 	
+	//voir les ventes d'un user
 	List<Article> findUsersAuction(int nbUser);
 	
 	

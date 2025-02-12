@@ -1,6 +1,9 @@
 package fr.eni.tp.dal;
 
+import java.util.List;
+
 import fr.eni.tp.bo.Article;
+import fr.eni.tp.bo.Utilisateur;
 
 public interface ArticleDAO {
 
@@ -11,4 +14,11 @@ public interface ArticleDAO {
 	Article readArticle (int nbrArticle);
 	
 	void updateArticle(Article article);
+	
+	List<Article> findAll();
+	
+	List<Article> findEnCours();
+	
+	List<Article> findUserSells(Utilisateur user);
+	
 }

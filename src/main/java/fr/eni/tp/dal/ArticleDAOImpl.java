@@ -1,5 +1,7 @@
 package fr.eni.tp.dal;
 
+import java.util.List;
+
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
@@ -8,6 +10,7 @@ import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 
 import fr.eni.tp.bo.Article;
+import fr.eni.tp.bo.Utilisateur;
 
 @Repository
 public class ArticleDAOImpl implements ArticleDAO {
@@ -21,6 +24,9 @@ public class ArticleDAOImpl implements ArticleDAO {
 											+ "prix_vente = :sellPrice, no_categorie = :catId WHERE no_article = :artId";
 	private static final String FIND_BY_ID = "SELECT * FROM articles_vendus WHERE no_article = :id";
 	private static final String DELETE_ART_BY_ID = "delete from articles_vendus where no_article = :id";
+	private static final String FIND_ALL = "select * from articles_vendus";
+	private static final String FIND_EN_COURS = "SELECT * FROM articles_vendus WHERE date_fin_encheres > CURRENT_DATE";
+	private static final String FIND_SELLS = "SELECT * FROM articles_vendus WHERE no_utilisateur = :idUser";
 	
 	private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 	
@@ -76,6 +82,24 @@ public class ArticleDAOImpl implements ArticleDAO {
 		map.addValue("catId", art.getCategory().getNumber());
 		map.addValue("artId", art.getNumber());
 		 namedParameterJdbcTemplate.update(UPDATE_ART, map);
+	}
+
+	@Override
+	public List<Article> findAll() {
+		return namedParameterJdbcTemplate.query(FIND_ALL, new BeanPropertyRowMapper<>(Article.class));
+	}
+
+	@Override
+	public List<Article> findEnCours() {
+		return namedParameterJdbcTemplate.query(FIND_EN_COURS, new BeanPropertyRowMapper<>(Article.class));
+	}
+
+	@Override
+	public List<Article> findUserSells(Utilisateur user) {
+		MapSqlParameterSource map = new MapSqlParameterSource();
+		map.addValue("idUser", user.getNbUser());
+		
+		return namedParameterJdbcTemplate.query(FIND_SELLS, map, new BeanPropertyRowMapper<>(Article.class));
 	}
 
 }
