@@ -8,7 +8,6 @@ import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 
 import fr.eni.tp.bo.Article;
-import fr.eni.tp.bo.Categorie;
 
 @Repository
 public class ArticleDAOImpl implements ArticleDAO {
