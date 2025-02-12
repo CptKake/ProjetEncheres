@@ -1,4 +1,4 @@
-/*
+
  package fr.eni.tp.bll;
  
 
@@ -70,4 +70,3 @@ public class EnchereServiceImpl implements EnchereService  {
 	}
 
 }
-*/

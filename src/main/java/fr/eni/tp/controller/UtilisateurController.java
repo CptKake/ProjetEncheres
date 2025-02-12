@@ -1,4 +1,4 @@
-package fr.eni.tp.controller;
+/*package fr.eni.tp.controller;
 
 import fr.eni.tp.bll.UtilisateurService;
 import fr.eni.tp.bo.Utilisateur;
@@ -40,7 +40,7 @@ public class UtilisateurController {
         return ResponseEntity.ok(savedUtilisateur);
     }
 
-    /*
+   
     // 🔹 4. Mettre à jour un utilisateur existant
     @PutMapping("/{id}")
     public ResponseEntity<Utilisateur> updateUtilisateur(@PathVariable String pseudo, @RequestBody Utilisateur newUtilisateur) {
@@ -60,7 +60,7 @@ public class UtilisateurController {
             return ResponseEntity.ok(updatedUtilisateur);
         }).orElseGet(() -> ResponseEntity.notFound().build());
     }
-*/
+
     // 🔹 5. Supprimer un utilisateur
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteUtilisateur(@PathVariable String pseudo) {
@@ -68,3 +68,4 @@ public class UtilisateurController {
         return ResponseEntity.noContent().build();
     }
 }
+*/

@@ -9,17 +9,29 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Optional;
 
+<<<<<<< HEAD
 //@RestController
 @Controller
+||||||| d8e1819
+@RestController
+=======
+@Controller
+>>>>>>> ccb14883f03ac3b4b36dc8828db1b86e32546efa
 @RequestMapping("/encheres")
 public class EnchereController {
-/*
+
     private final EnchereService enchereService;
 
     public EnchereController(EnchereService enchereService) {
         this.enchereService = enchereService;
     }
 
+    @GetMapping
+    public String index () {
+    	return "index";
+    }
+    
+    /*
     // Récupérer toutes les enchères
     @GetMapping
     public List<Enchere> getAllEncheres() {
