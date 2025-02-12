@@ -22,6 +22,17 @@ public class Article {
 		this.initPrice = initPrice;
 	}
 
+	
+	
+	/**
+	 * @param number the number to set
+	 */
+	public void setNumber(int number) {
+		this.number = number;
+	}
+
+
+
 	/**
 	 * @return the name
 	 */
