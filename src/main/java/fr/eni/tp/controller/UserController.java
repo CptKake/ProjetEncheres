@@ -4,6 +4,8 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -12,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import fr.eni.tp.bll.UtilisateurService;
 import fr.eni.tp.bo.Utilisateur;
+import jakarta.validation.Valid;
+
 import org.springframework.web.bind.annotation.RequestParam;
 
 
@@ -32,15 +36,28 @@ public class UserController {
     }
 
     @PostMapping("/inscription")
-    public String registerUser(@ModelAttribute("user") Utilisateur user, Model model) {
+    public String registerUser(@ModelAttribute("user") @Valid Utilisateur user, BindingResult result, Model model) {
        
-            utilisateurService.createAccount(user);
-            return "redirect:/login";
-     
-         
+    	 if (result.hasErrors()) {
+             return "inscription";
+         }
+
+         try {
+             utilisateurService.createAccount(user);
+             return "redirect:/encheres";
+         } catch (IllegalArgumentException e) {
+             model.addAttribute("error", e.getMessage());
+             return "inscription";
+         }
         
     }
 	
+    
+    @ExceptionHandler(IllegalArgumentException.class)
+    public String handleIllegalArgumentException(IllegalArgumentException ex, Model model) {
+        model.addAttribute("error", ex.getMessage());
+        return "inscription";
+    }
 	
 	@GetMapping
 	 public String userProfile(@AuthenticationPrincipal UserDetails userDetails, Model model) {
