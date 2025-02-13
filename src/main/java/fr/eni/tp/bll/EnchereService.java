@@ -1,7 +1,6 @@
 package fr.eni.tp.bll;
 
 import java.util.List;
-import java.util.Optional;
 
 import fr.eni.tp.bo.Article;
 import fr.eni.tp.bo.Enchere;
@@ -9,18 +8,32 @@ import fr.eni.tp.bo.Utilisateur;
 
 public interface EnchereService {
 
-	List<Enchere> getEncheres();
+	List<Enchere> userEncheres(Utilisateur user);
 	
-	void bid(Utilisateur user, int sum, Article art);
+	List<Enchere> encheresEnCours(Utilisateur user);
 	
-	Article buy(Utilisateur user, Article art);
-
-	List<Article> getSells(Utilisateur user);
+	void createEnchere(Enchere enchere);
 	
-	void sell(Article article);
+	void deleteEnchere(Enchere enchere);
 	
-	void cancelAuction(Article article);
-
-	Optional<Enchere> getEnchereById(int id);
+	void updateEnchere(Enchere enchere);
+	
+	List<Article> encheresWinByUser(Utilisateur user);
+	
+	Enchere bestEnchere(Article art);
+	
+	void createArticle (Article article);
+	
+	void deleteArticle ( Article article);
+	
+	void updateArticle(Article article);
+	
+	Article readArticle (int nbrArticle);
+	
+	List<Article> allArticles();
+	
+	List<Article> VentesEnCours();
+	
+	List<Article> UserVentes(Utilisateur user);
 	
 }
