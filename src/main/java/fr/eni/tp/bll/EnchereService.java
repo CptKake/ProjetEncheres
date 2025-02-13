@@ -36,4 +36,6 @@ public interface EnchereService {
 	
 	List<Article> UserVentes(Utilisateur user);
 	
+	//TODO get all categories
+	
 }
