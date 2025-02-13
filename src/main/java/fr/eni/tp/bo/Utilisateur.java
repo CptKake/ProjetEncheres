@@ -9,23 +9,72 @@ import jakarta.validation.constraints.Pattern;
 public class Utilisateur {
 
 	private int nbUser;
+<<<<<<< HEAD
 	@NotBlank
+||||||| c131493
+=======
+	
+	@NotBlank
+>>>>>>> 7aace31e825866b6997054ba4800caa64f693196
 	private String pseudo;
+<<<<<<< HEAD
 	@NotBlank
+||||||| c131493
+=======
+	
+	@NotBlank
+>>>>>>> 7aace31e825866b6997054ba4800caa64f693196
 	private String lastName;
+<<<<<<< HEAD
 	@NotBlank
+||||||| c131493
+=======
+	
+	@NotBlank
+>>>>>>> 7aace31e825866b6997054ba4800caa64f693196
 	private String firstName;
+<<<<<<< HEAD
 	@NotBlank
+||||||| c131493
+=======
+	
+	@NotBlank
+>>>>>>> 7aace31e825866b6997054ba4800caa64f693196
 	private String email;
 	private String phone;
+<<<<<<< HEAD
 	@NotBlank
+||||||| c131493
+=======
+	
+	@NotBlank
+>>>>>>> 7aace31e825866b6997054ba4800caa64f693196
 	private String street;
+<<<<<<< HEAD
 	@NotBlank
+||||||| c131493
+=======
+	
+	@NotBlank
+>>>>>>> 7aace31e825866b6997054ba4800caa64f693196
 	private String postalCode;
+<<<<<<< HEAD
 	@NotBlank
+||||||| c131493
+=======
+	
+	@NotBlank
+>>>>>>> 7aace31e825866b6997054ba4800caa64f693196
 	private String city;
+<<<<<<< HEAD
 	@NotBlank
 	@Pattern(regexp = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{8,}$")
+||||||| c131493
+=======
+	
+	@NotBlank
+	@Pattern(regexp ="^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{8,}$")
+>>>>>>> 7aace31e825866b6997054ba4800caa64f693196
 	private String password;
 	private int credit;
 	private Byte admin;
