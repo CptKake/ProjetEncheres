@@ -12,7 +12,7 @@ public interface EnchereService {
 	
 	List<Enchere> encheresEnCours(Utilisateur user);
 	
-	void createEnchere(Enchere enchere);
+	void createEnchere(Enchere enchere, Article art);
 	
 	void deleteEnchere(Enchere enchere);
 	
