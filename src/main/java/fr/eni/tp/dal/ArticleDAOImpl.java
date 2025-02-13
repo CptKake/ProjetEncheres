@@ -1,8 +1,11 @@
 package fr.eni.tp.dal;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.List;
 
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
+import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
@@ -101,6 +104,17 @@ public class ArticleDAOImpl implements ArticleDAO {
 		
 		return namedParameterJdbcTemplate.query(FIND_SELLS, map, new BeanPropertyRowMapper<>(Article.class));
 	}
+}
+
+private static class ArticleRowMapper implements RowMapper<Article> {
+		
+        @Override
+        public Article mapRow(ResultSet rs, int rowNum) throws SQLException {
+            Article art = new Article();
+            art.set(rs.getString("pseudo"));
+           
+            return user;
+        }
 
 }
 
