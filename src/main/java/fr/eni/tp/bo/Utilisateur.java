@@ -3,17 +3,29 @@ package fr.eni.tp.bo;
 import java.util.ArrayList;
 import java.util.List;
 
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Pattern;
+
 public class Utilisateur {
 
 	private int nbUser;
+	@NotBlank
 	private String pseudo;
+	@NotBlank
 	private String lastName;
+	@NotBlank
 	private String firstName;
+	@NotBlank
 	private String email;
 	private String phone;
+	@NotBlank
 	private String street;
+	@NotBlank
 	private String postalCode;
+	@NotBlank
 	private String city;
+	@NotBlank
+	@Pattern(regexp = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{8,}$")
 	private String password;
 	private int credit;
 	private Byte admin;
