@@ -25,48 +25,87 @@ public class EnchereServiceImpl implements EnchereService  {
 	}
 
 	@Override
-	public List<Enchere> getEncheres() {
-		List<Enchere> encheres = enchereDAO.findAll();
+	public List<Enchere> userEncheres(Utilisateur user) {
+		List<Enchere> encheres = enchereDAO.finduserBid(user);
 		return encheres;
 	}
 
 	@Override
-	public void bid(Utilisateur user, int sum, Article art) {
-		if (sum > art.getSellPrice() && sum <= user.getCredit()) {
-			articleDAO.updateArticle(art);
-		} else {
-			System.err.println("Nbr crédits insuffisants ou offre trop basse");
-		}
+	public List<Enchere> encheresEnCours(Utilisateur user) {
+		List<Enchere> encheres = enchereDAO.findEnCours(user);
+		return encheres;
+	}
+
+	@Override
+	public void createEnchere(Enchere enchere) {
+		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public Article buy(Utilisateur user, Article art) {
+	public void deleteEnchere(Enchere enchere) {
+		// TODO Auto-generated method stub
 		
+	}
+
+	@Override
+	public void updateEnchere(Enchere enchere) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public List<Article> encheresWinByUser(Utilisateur user) {
+		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public List<Article> getSells(Utilisateur user) {
-		List<Article> articles = articleDAO.findUserSells(user);
-		
-		return articles;
-	}
-
-	@Override
-	public void sell(Article article) {
-		articleDAO.createArticle(article);
-	}
-
-	@Override
-	public void cancelAuction(Article article) {
-		articleDAO.suppressArticle(article);
-	}
-
-	@Override
-	public Optional<Enchere> getEnchereById(int id) {
+	public Enchere bestEnchere(Article art) {
 		// TODO Auto-generated method stub
-		return Optional.empty();
+		return null;
+	}
+
+	@Override
+	public void createArticle(Article article) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void deleteArticle(Article article) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void updateArticle(Article article) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Article readArticle(int nbrArticle) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Article> allArticles() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Article> VentesEnCours() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Article> UserVentes(Utilisateur user) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }
