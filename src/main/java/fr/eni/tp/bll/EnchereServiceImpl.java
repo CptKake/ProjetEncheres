@@ -2,8 +2,8 @@
  package fr.eni.tp.bll;
  
 
+import java.time.LocalDate;
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
@@ -37,75 +37,82 @@ public class EnchereServiceImpl implements EnchereService  {
 	}
 
 	@Override
-	public void createEnchere(Enchere enchere) {
-		// TODO Auto-generated method stub
+	public void createEnchere(Enchere enchere, Article art) {
+		if (enchere.getBidAmount() > art.getSellPrice() && LocalDate.now().isBefore(art.getBidEnd())) {
+			enchereDAO.create(enchere);
+			art.setSellPrice(enchere.getBidAmount());
+			articleDAO.updateArticle(art);
+		} else {
+			System.err.println("montant enchère trop bas, ou enchère terminée");
+		}
 		
 	}
 
 	@Override
 	public void deleteEnchere(Enchere enchere) {
-		// TODO Auto-generated method stub
-		
+		enchereDAO.delete(enchere);
 	}
 
 	@Override
 	public void updateEnchere(Enchere enchere) {
-		// TODO Auto-generated method stub
+		
 		
 	}
 
 	@Override
 	public List<Article> encheresWinByUser(Utilisateur user) {
-		// TODO Auto-generated method stub
-		return null;
+		List<Article> ventesGagnees = enchereDAO.findWinByUser(user);
+		return ventesGagnees;
 	}
 
 	@Override
 	public Enchere bestEnchere(Article art) {
-		// TODO Auto-generated method stub
-		return null;
+		Enchere bestEnchere = enchereDAO.findBestBid(art);
+		return bestEnchere;
 	}
 
 	@Override
 	public void createArticle(Article article) {
-		// TODO Auto-generated method stub
+		articleDAO.createArticle(article);
 		
 	}
 
 	@Override
 	public void deleteArticle(Article article) {
-		// TODO Auto-generated method stub
-		
+		if (LocalDate.now().isBefore(article.getBidStart())) {
+			articleDAO.suppressArticle(article);
+		}
 	}
 
 	@Override
-	public void updateArticle(Article article) {
-		// TODO Auto-generated method stub
-		
+	public void updateArticle(Article art) {
+		if (LocalDate.now().isBefore(art.getBidStart())) {
+			articleDAO.updateArticle(art);
+		}
 	}
 
 	@Override
 	public Article readArticle(int nbrArticle) {
-		// TODO Auto-generated method stub
-		return null;
+		Article art = articleDAO.readArticle(nbrArticle);
+		return art;
 	}
 
 	@Override
 	public List<Article> allArticles() {
-		// TODO Auto-generated method stub
-		return null;
+		List<Article> articles = articleDAO.findAll();
+		return articles;
 	}
 
 	@Override
 	public List<Article> VentesEnCours() {
-		// TODO Auto-generated method stub
-		return null;
+		List<Article> articles = articleDAO.findEnCours();
+		return articles;
 	}
 
 	@Override
 	public List<Article> UserVentes(Utilisateur user) {
-		// TODO Auto-generated method stub
-		return null;
+		List<Article> articles = articleDAO.findUserSells(user);
+		return articles;
 	}
 
 }

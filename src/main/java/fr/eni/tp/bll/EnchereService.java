@@ -12,7 +12,7 @@ public interface EnchereService {
 	
 	List<Enchere> encheresEnCours(Utilisateur user);
 	
-	void createEnchere(Enchere enchere);
+	void createEnchere(Enchere enchere, Article art);
 	
 	void deleteEnchere(Enchere enchere);
 	
@@ -35,5 +35,7 @@ public interface EnchereService {
 	List<Article> VentesEnCours();
 	
 	List<Article> UserVentes(Utilisateur user);
+	
+	//TODO get all categories
 	
 }

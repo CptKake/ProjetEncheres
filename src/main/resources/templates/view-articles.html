@@ -12,15 +12,6 @@
         <a th:href="@{/login}">Connexion</a>
         <a th:href="@{/profil}">Profil</a>
 	</div>
-    <h2>Liste des enchères</h2>
-    <ul>
-        <li th:each="enchere : ${encheres}">
-            <h3 th:text="${enchere.title}"></h3>
-            <p th:text="${enchere.description}"></p>
-            <p>Points requis: <span th:text="${enchere.requiredPoints}"></span></p>
-            <p>Fin: <span th:text="${enchere.endTime}"></span></p>
-        </li>
-    </ul>
     <p>Filtres :</p>
     <div class="search-container">
         <input type="text" placeholder="Rechercher...">
@@ -33,8 +24,20 @@
         </select>
         <button type="button">Rechercher</button>
     </div>
-   	<div th:each="art : ${articles}">
-		<p th:text="${art.name}"></p>
-   	</div>
+    <table>
+	    <tbody>
+	    	<tr>
+	    		<th>name</th>
+	    		<th>sellprice</th>
+	    		<th>user</th>
+	    	</tr>
+		   	<tr th:each="art : ${articles}">
+				<td th:text="${art.name}"></td>
+				<td th:text="${art.sellPrice}"></td>
+				<td th:text="${art.user}"></td>
+				<td><a th:href="@{encheres/details(idArt=${art.number})}">Détails</a></td>
+			</tr>
+		</tbody>
+	</table>
 </body>
 </html>

@@ -14,6 +14,9 @@ public class Article {
 	private Utilisateur user;
 	private Categorie category;
 	
+	public Article() {
+	}
+
 	public Article(String name, String description, LocalDate bidStart, LocalDate bidEnd, int initPrice) {
 		this.name = name;
 		this.description = description;
