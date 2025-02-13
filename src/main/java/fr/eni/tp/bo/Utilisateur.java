@@ -3,6 +3,7 @@ package fr.eni.tp.bo;
 import java.util.ArrayList;
 import java.util.List;
 
+import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
 
@@ -10,16 +11,17 @@ public class Utilisateur {
 
 	private int nbUser;
 
-	@NotBlank
+	@NotBlank(message = "Le pseudo est obligatoire")
 	private String pseudo;
 
-	@NotBlank
+	@NotBlank(message = "Le nom est obligatoire")
 	private String lastName;
 
-	@NotBlank
+	@NotBlank(message = "Le prénom est obligatoire")
 	private String firstName;
 
-	@NotBlank
+	@NotBlank(message = "L'email est obligatoire")
+	@Email(message = "L'email doit être valide")
 	private String email;
 	private String phone;
 
@@ -33,9 +35,8 @@ public class Utilisateur {
 	@NotBlank
 	private String city;
 
-	@NotBlank
-	@Pattern(regexp ="^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{8,}$")
-
+	@NotBlank(message = "Le mot de passe est obligatoire")
+	
 	private String password;
 	private int credit;
 	private Byte admin;

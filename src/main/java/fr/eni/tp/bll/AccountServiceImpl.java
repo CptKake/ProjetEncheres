@@ -1,5 +1,6 @@
 package fr.eni.tp.bll;
 
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import fr.eni.tp.bo.Utilisateur;
@@ -9,34 +10,41 @@ import fr.eni.tp.dal.UtilisateurDAO;
 public class AccountServiceImpl implements UtilisateurService {
 
 	private UtilisateurDAO userDAO;
+    private final PasswordEncoder passwordEncoder;
 	
-	public AccountServiceImpl(UtilisateurDAO userDAO) {
+	public AccountServiceImpl(UtilisateurDAO userDAO, PasswordEncoder passwordEncoder) {
 		this.userDAO = userDAO;
+		this.passwordEncoder = passwordEncoder;
 	}
 
 	@Override
 	public void createAccount(Utilisateur user) {
-		// verification pseudo et email unique
-		int valide = userDAO.countByEmail(user.getEmail()) + userDAO.countByPseudo(user.getPseudo());
-		//création utilisateur en passant par la DAO si email et mdp sont uniques
-		if (valide == 0) {
-			userDAO.createUser(user);
-		} else {
-			System.err.println("mot de passe ou email déja existant");
-		}
+		if (userDAO.countByEmail(user.getEmail()) > 0) {
+            throw new IllegalArgumentException("L'email est déjà utilisé.");
+        }
+        if (userDAO.countByPseudo(user.getPseudo()) > 0) {
+            throw new IllegalArgumentException("Le pseudo est déjà utilisé.");
+        }
+
+        // Hachage du mot de passe avant de sauvegarder l'utilisateur
+        String encodedPassword = passwordEncoder.encode(user.getPassword());
+        user.setPassword(encodedPassword);
+
+        // Création de l'utilisateur
+        userDAO.createUser(user);
+		
 		
 	}
 
 	@Override
 	public void deleteAccount(String pseudo) {
-		// verification utilisateur existant
-		int valide = userDAO.countByPseudo(pseudo);
-		// suppression du compte si pseudo existant en BDD
-		if (valide == 1) {
+		 // Vérification de l'existence de l'utilisateur
+        if (userDAO.countByPseudo(pseudo) == 0) {
+            throw new IllegalArgumentException("Pseudo inexistant dans la BDD.");
+        }
 			userDAO.deleteUser(pseudo);
-		} else {
-			System.err.println("pseudo inexistant dans la BDD");
-		}
+	
+		
 		
 	}
 
@@ -49,6 +57,8 @@ public class AccountServiceImpl implements UtilisateurService {
 
 	@Override
 	public void modifyAccount(Utilisateur user) {
+		 String encodedPassword = passwordEncoder.encode(user.getPassword());
+	        user.setPassword(encodedPassword);
 		userDAO.updateUser(user);
 	}
 

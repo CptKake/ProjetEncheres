@@ -10,7 +10,8 @@ package fr.eni.tp.configuration;
 	import org.springframework.security.core.userdetails.User;
 	import org.springframework.security.core.userdetails.UserDetails;
 	import org.springframework.security.core.userdetails.UserDetailsService;
-	import org.springframework.security.crypto.factory.PasswordEncoderFactories;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 	import org.springframework.security.crypto.password.PasswordEncoder;
 	import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 	import org.springframework.security.provisioning.JdbcUserDetailsManager;
@@ -59,25 +60,10 @@ package fr.eni.tp.configuration;
 		
 		
 		
-		//@Bean
-		public UserDetailsService userDetailsService() {
-			PasswordEncoder passwordEncoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
-			String passwordChiffre = passwordEncoder.encode("Pa$$w0rd");
-			
-			UserDetails userDetails = User.builder()
-				.username("user")
-				.password(passwordChiffre)
-				.roles("USER")
-				.build();
-			
-			UserDetails stephane = User.builder()
-					.username("sgobin@campus-eni.fr")
-					.password(passwordChiffre)
-					.roles("FORMATEUR", "ADMIN")
-					.build();
-
-			return new InMemoryUserDetailsManager(userDetails, stephane);
-		}
+		  @Bean
+		  public PasswordEncoder passwordEncoder() {
+		        return new BCryptPasswordEncoder();
+		    }
 		
 		@Bean
 	    UserDetailsManager users(DataSource dataSource) {
