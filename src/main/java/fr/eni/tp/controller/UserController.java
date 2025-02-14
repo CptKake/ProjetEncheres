@@ -68,7 +68,8 @@ public class UserController {
         Utilisateur user = utilisateurService.profileByPseudo(pseudo);
 
         // Ajouter les informations de l'utilisateur au modèle
-        model.addAttribute("user", user);
+        Utilisateur changedUser = utilisateurService.profileByNbUser(user.getNbUser());
+        model.addAttribute("user", changedUser);
 
         // Retourner le nom de la vue
         return "profil";
@@ -76,11 +77,15 @@ public class UserController {
 	
 	@PostMapping("/modifier")
 	public String modifyProfile(@ModelAttribute("user") @Valid Utilisateur user, BindingResult result, Model model) {
+		
 	    if (result.hasErrors()) {
 	        return "modifier-profile";
 	    }
+	    Utilisateur changedUser = utilisateurService.profileByNbUser(user.getNbUser());
+	    model.addAttribute("user", changedUser);
 	    this.utilisateurService.modifyAccount(user);
-	    return "redirect:/encheres";
+	    
+	    return "redirect:/profil";
 	}
 		
 	
@@ -91,7 +96,7 @@ public class UserController {
 
         // Utiliser la méthode readUser pour obtenir les informations de l'utilisateur
         Utilisateur user = utilisateurService.profileByPseudo(pseudo);
-
+        
         // Ajouter les informations de l'utilisateur au modèle
         model.addAttribute("user", user);
 
