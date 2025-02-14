@@ -1,3 +1,4 @@
+
 package fr.eni.tp.configuration;
  
 import jakarta.validation.ConstraintValidator;
@@ -16,3 +17,4 @@ public class PasswordMatchValidator implements ConstraintValidator<PasswordMatch
         return user.getPassword().equals(user.getConfirmPassword());
     }
 }
+

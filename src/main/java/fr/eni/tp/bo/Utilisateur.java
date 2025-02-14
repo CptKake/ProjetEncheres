@@ -1,16 +1,19 @@
 package fr.eni.tp.bo;
- 
+
  
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
+
 import java.util.ArrayList;
 import java.util.List;
+
  
 import fr.eni.tp.configuration.PasswordMatchValidator;
 import jakarta.validation.Constraint;
 import jakarta.validation.Payload;
+
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
@@ -49,14 +52,13 @@ public class Utilisateur {
 	private int credit;
 	private Byte admin;
 	
-	
-	
- 
+
 	private List<Enchere> auctions;
 	private List<Article> articles;
 	
 	//pour confimation du mdp
 	
+
 	private String confirmPassword;
  
 	public String getConfirmPassword() {
@@ -75,6 +77,9 @@ public class Utilisateur {
 	    Class<?>[] groups() default {};
 	    Class<? extends Payload>[] payload() default {};
 	}
+
+	
+
 	// Constructors
 	
  

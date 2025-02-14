@@ -11,11 +11,14 @@ public interface UtilisateurDAO {
 	
 	void updateUser(Utilisateur user);
 	
-	Utilisateur readUser(String pseudo);
 	
 	int countByEmail(String email);
 	
 	int countByPseudo(String pseudo);
 	
 	void sellArticle(Article article);
+
+	Utilisateur readUser(int noUtilisateur);
+
+	Utilisateur readUser(String pseudo);
 }

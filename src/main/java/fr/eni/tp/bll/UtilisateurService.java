@@ -13,5 +13,8 @@ public interface UtilisateurService {
 	void modifyAccount(Utilisateur user);
 	
 	Utilisateur profileByPseudo(String pseudo);
-	
+
+	Utilisateur profileByNbUser(int nbUser);
+
+
 }
