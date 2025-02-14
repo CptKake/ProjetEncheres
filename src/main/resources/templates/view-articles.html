@@ -6,12 +6,9 @@
 
 </head>
 <body>
-    <div class="header">
-        <h1>ENI-Encheres</h1>
-        <a th:href="@{/profil/inscription}">S'inscrire</a>
-        <a th:href="@{/login}">Connexion</a>
-        <a th:href="@{/profil}">Profil</a>
-	</div>
+	
+	<div th:replace="~{fragments/fragment-entete}"></div>
+	
     <p>Filtres :</p>
     <div class="search-container">
         <input type="text" placeholder="Rechercher...">
@@ -24,21 +21,7 @@
         </select>
         <button type="button">Rechercher</button>
     </div>
-    <table>
-	    <tbody>
-	    	<tr>
-	    		<th>name</th>
-	    		<th>sellprice</th>
-	    		<th>user</th>
-	    	</tr>
-		   	<tr th:each="art : ${articles}">
-				<td th:text="${art.name}"></td>
-				<td th:text="${art.sellPrice}"></td>
-				<td th:text="${art.user}"></td>
-				<td><a th:href="@{encheres/details(idArt=${art.number})}">Détails</a></td>
-			</tr>
-		</tbody>
-	</table>
+    
 	<div th:each="art : ${articles}">
 		<p th:text="${art.name}"></p>
 		<p th:text="${art.sellPrice}"></p>
@@ -47,6 +30,6 @@
 		<p><a th:href="@{encheres/details(idArt=${art.number})}">Détails</a></p>
 	</div>
 		
-	
+	<div th:replace="~{fragments/fragment-footer}"></div>
 </body>
 </html>

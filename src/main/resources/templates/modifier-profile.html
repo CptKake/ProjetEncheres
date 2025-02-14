@@ -11,6 +11,8 @@
 </head>
 <body>
 
+	<div th:replace="~{fragments/fragment-entete}"></div>
+
 <form th:action="@{/profil/modifier}" method="POST" th:object="${user}">
  <h1>User Profile</h1>
  
@@ -66,7 +68,7 @@
     <button type="submit">Supprimer le compte</button>
 </form>
 
-
+<div th:replace="~{fragments/fragment-footer}"></div>
 
 </body>
 </html>
