@@ -1,55 +1,180 @@
 package fr.eni.tp.bo;
-
+ 
+ 
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
 import java.util.ArrayList;
 import java.util.List;
+<<<<<<< HEAD
 
 import jakarta.validation.constraints.Email;
+||||||| 18cb1d7
+
+=======
+ 
+import fr.eni.tp.configuration.PasswordMatchValidator;
+import jakarta.validation.Constraint;
+import jakarta.validation.Payload;
+import jakarta.validation.constraints.Email;
+>>>>>>> alex
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
-
+ 
 public class Utilisateur {
-
+ 
 	private int nbUser;
+<<<<<<< HEAD
 
 	@NotBlank(message = "Le pseudo est obligatoire")
+||||||| 18cb1d7
+<<<<<<< HEAD
+	@NotBlank
+||||||| c131493
+=======
+	
+	@NotBlank
+>>>>>>> 7aace31e825866b6997054ba4800caa64f693196
+=======
+ 
+	@NotBlank(message = "Le pseudo est obligatoire")
+>>>>>>> alex
 	private String pseudo;
+<<<<<<< HEAD
 
 	@NotBlank(message = "Le nom est obligatoire")
+||||||| 18cb1d7
+<<<<<<< HEAD
+	@NotBlank
+||||||| c131493
+=======
+	
+	@NotBlank
+>>>>>>> 7aace31e825866b6997054ba4800caa64f693196
+=======
+ 
+	@NotBlank(message = "Le nom est obligatoire")
+>>>>>>> alex
 	private String lastName;
+<<<<<<< HEAD
 
 	@NotBlank(message = "Le prénom est obligatoire")
+||||||| 18cb1d7
+<<<<<<< HEAD
+	@NotBlank
+||||||| c131493
+=======
+	
+	@NotBlank
+>>>>>>> 7aace31e825866b6997054ba4800caa64f693196
+=======
+ 
+	@NotBlank(message = "Le prénom est obligatoire")
+>>>>>>> alex
 	private String firstName;
+<<<<<<< HEAD
 
 	@NotBlank(message = "L'email est obligatoire")
 	@Email(message = "L'email doit être valide")
+||||||| 18cb1d7
+<<<<<<< HEAD
+	@NotBlank
+||||||| c131493
+=======
+	
+	@NotBlank
+>>>>>>> 7aace31e825866b6997054ba4800caa64f693196
+=======
+ 
+	@NotBlank(message = "L'email est obligatoire")
+	@Email(message = "L'email doit être valide")
+>>>>>>> alex
 	private String email;
 	private String phone;
+<<<<<<< HEAD
 
+||||||| 18cb1d7
+<<<<<<< HEAD
+=======
+ 
+>>>>>>> alex
 	@NotBlank
 	private String street;
+<<<<<<< HEAD
 
+||||||| 18cb1d7
+<<<<<<< HEAD
+=======
+ 
+>>>>>>> alex
 	@NotBlank
 	private String postalCode;
+<<<<<<< HEAD
 
+||||||| 18cb1d7
+<<<<<<< HEAD
+	@NotBlank
+||||||| c131493
+=======
+=======
+ 
+>>>>>>> alex
 	
 	@NotBlank
 	private String city;
+<<<<<<< HEAD
 
 	@NotBlank(message = "Le mot de passe est obligatoire")
 	
+||||||| 18cb1d7
+<<<<<<< HEAD
+	@NotBlank
+	@Pattern(regexp = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{8,}$")
+||||||| c131493
+=======
+	
+	@NotBlank
+	@Pattern(regexp ="^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{8,}$")
+>>>>>>> 7aace31e825866b6997054ba4800caa64f693196
+=======
+ 
+	@NotBlank(message = "Le mot de passe est obligatoire")
+	@Pattern(regexp = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[\\W_]).{8,}$" )
+>>>>>>> alex
 	private String password;
 	private int credit;
 	private Byte admin;
 	
 	
-
+	
+ 
 	private List<Enchere> auctions;
 	private List<Article> articles;
 	
+	//pour confimation du mdp
 	
+	private String confirmPassword;
+ 
+	public String getConfirmPassword() {
+	    return confirmPassword;
+	}
+ 
+	public void setConfirmPassword(String confirmPassword) {
+	    this.confirmPassword = confirmPassword;
+	}
+	
+	@Constraint(validatedBy = PasswordMatchValidator.class)
+	@Target({ ElementType.TYPE })
+	@Retention(RetentionPolicy.RUNTIME)
+	public @interface PasswordMatch {
+	    String message() default "Les mots de passe ne correspondent pas";
+	    Class<?>[] groups() default {};
+	    Class<? extends Payload>[] payload() default {};
+	}
 	// Constructors
 	
-
+ 
 	
 	public Utilisateur() {
 		 auctions = new ArrayList<Enchere>() ;
@@ -226,43 +351,43 @@ public class Utilisateur {
 	}
 	
 	
-
+ 
 	/**
 	 * @return the auctions
 	 */
 	public List<Enchere> getAuctions() {
 		return auctions;
 	}
-
+ 
 	/**
 	 * @param auctions the auctions to set
 	 */
 	public void setAuctions(List<Enchere> auctions) {
 		this.auctions = auctions;
 	}
-
+ 
 	/**
 	 * @return the articles
 	 */
 	public List<Article> getArticles() {
 		return articles;
 	}
-
+ 
 	/**
 	 * @param articles the articles to set
 	 */
 	public void setArticles(List<Article> articles) {
 		this.articles = articles;
 	}
-
+ 
 	@Override
 	public String toString() {
 		return "User [nbUser=" + nbUser + ", pseudo=" + pseudo + ", lastName=" + lastName + ", firstName=" + firstName
 				+ ", email=" + email + ", phone=" + phone + ", street=" + street + ", postalCode=" + postalCode
 				+ ", city=" + city + ", credit=" + credit + ", admin=" + admin + "]";
 	}
-
-
+ 
+ 
 	
 	
 	
