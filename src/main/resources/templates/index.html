@@ -20,12 +20,12 @@
     <p>Filtres :</p>
     <div class="search-container">
         <input type="text" placeholder="Rechercher...">
-        <select>
-     		<option value="all">Catégorie</option>
-            <option value="computer science">Informatique</option>
-            <option value="furniture">Ameublement</option>
-            <option value="clothes">Vêtements</option>
-            <option value="sport and hobby">Sport et Loisirs</option>
+        <select >
+     		<option th:each="cat : ${categories}"
+     				th:text="${cat.name}"
+     				th:value="${cat.number}">
+     		</option>
+           
         </select>
         <button type="button">Rechercher</button>
     </div>

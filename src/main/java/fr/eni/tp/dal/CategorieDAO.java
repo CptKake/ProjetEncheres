@@ -1,5 +1,7 @@
 package fr.eni.tp.dal;
 
+import java.util.List;
+
 import fr.eni.tp.bo.Categorie;
 
 public interface CategorieDAO {
@@ -9,4 +11,6 @@ public interface CategorieDAO {
 	Categorie findById(int id);
 	
 	void createCategorie(Categorie cat);
+
+	List<Categorie> findAll();
 }

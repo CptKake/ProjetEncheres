@@ -3,6 +3,7 @@ package fr.eni.tp.bll;
 import java.util.List;
 
 import fr.eni.tp.bo.Article;
+import fr.eni.tp.bo.Categorie;
 import fr.eni.tp.bo.Enchere;
 import fr.eni.tp.bo.Utilisateur;
 
@@ -35,7 +36,10 @@ public interface EnchereService {
 	List<Article> VentesEnCours();
 	
 	List<Article> UserVentes(Utilisateur user);
+
+	List<Categorie> getAllCategories();
+
+	Categorie getCatById(int id);
 	
-	//TODO get all categories
-	
+	Categorie getCatByName(String libelle);
 }

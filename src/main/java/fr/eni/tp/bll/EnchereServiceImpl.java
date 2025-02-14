@@ -8,9 +8,11 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import fr.eni.tp.bo.Article;
+import fr.eni.tp.bo.Categorie;
 import fr.eni.tp.bo.Enchere;
 import fr.eni.tp.bo.Utilisateur;
 import fr.eni.tp.dal.ArticleDAO;
+import fr.eni.tp.dal.CategorieDAO;
 import fr.eni.tp.dal.EnchereDAO;
 
 @Service
@@ -18,10 +20,12 @@ public class EnchereServiceImpl implements EnchereService  {
 
 	private EnchereDAO enchereDAO;
 	private ArticleDAO articleDAO;
+	private CategorieDAO categorieDAO;
 	
-	public EnchereServiceImpl(EnchereDAO enchereDAO, ArticleDAO articleDAO) {
+	public EnchereServiceImpl(EnchereDAO enchereDAO, ArticleDAO articleDAO, CategorieDAO categorieDAO) {
 		this.enchereDAO = enchereDAO;
 		this.articleDAO = articleDAO;
+		this.categorieDAO = categorieDAO;
 	}
 
 	@Override
@@ -49,14 +53,28 @@ public class EnchereServiceImpl implements EnchereService  {
 	}
 
 	@Override
+	public List<Categorie> getAllCategories(){
+		List<Categorie> categories = categorieDAO.findAll();
+		
+		return categories;
+	}
+	
+	@Override
+	public Categorie getCatById(int id) {
+		Categorie cat = categorieDAO.findById(id);
+		
+		return cat;
+	}
+	
+	
+	@Override
 	public void deleteEnchere(Enchere enchere) {
 		enchereDAO.delete(enchere);
 	}
 
 	@Override
 	public void updateEnchere(Enchere enchere) {
-		
-		
+		enchereDAO.update(enchere);
 	}
 
 	@Override
@@ -113,6 +131,13 @@ public class EnchereServiceImpl implements EnchereService  {
 	public List<Article> UserVentes(Utilisateur user) {
 		List<Article> articles = articleDAO.findUserSells(user);
 		return articles;
+	}
+
+	@Override
+	public Categorie getCatByName(String libelle) {
+		Categorie cat = categorieDAO.readCategorie(libelle);
+		
+		return cat;
 	}
 
 }
