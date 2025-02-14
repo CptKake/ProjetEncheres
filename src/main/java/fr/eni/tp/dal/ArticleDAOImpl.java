@@ -4,7 +4,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
-import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
@@ -70,7 +69,7 @@ public class ArticleDAOImpl implements ArticleDAO {
 		MapSqlParameterSource map = new MapSqlParameterSource();
 		map.addValue("id", nbrArticle);
 		
-		return namedParameterJdbcTemplate.queryForObject(FIND_BY_ID, map, new BeanPropertyRowMapper<Article>(Article.class));
+		return namedParameterJdbcTemplate.queryForObject(FIND_BY_ID, map, new ArticleRowMapper());
 	}
 
 	@Override
@@ -89,12 +88,12 @@ public class ArticleDAOImpl implements ArticleDAO {
 
 	@Override
 	public List<Article> findAll() {
-		return namedParameterJdbcTemplate.query(FIND_ALL, new BeanPropertyRowMapper<>(Article.class));
+		return namedParameterJdbcTemplate.query(FIND_ALL, new ArticleRowMapper());
 	}
 
 	@Override
 	public List<Article> findEnCours() {
-		return namedParameterJdbcTemplate.query(FIND_EN_COURS, new BeanPropertyRowMapper<>(Article.class));
+		return namedParameterJdbcTemplate.query(FIND_EN_COURS, new ArticleRowMapper());
 	}
 
 	@Override
@@ -102,18 +101,26 @@ public class ArticleDAOImpl implements ArticleDAO {
 		MapSqlParameterSource map = new MapSqlParameterSource();
 		map.addValue("idUser", user.getNbUser());
 		
-		return namedParameterJdbcTemplate.query(FIND_SELLS, map, new BeanPropertyRowMapper<>(Article.class));
+		return namedParameterJdbcTemplate.query(FIND_SELLS, map, new ArticleRowMapper());
 	}
 }
 
-private static class ArticleRowMapper implements RowMapper<Article> {
+class ArticleRowMapper implements RowMapper<Article> {
 		
         @Override
         public Article mapRow(ResultSet rs, int rowNum) throws SQLException {
-            Article art = new Article();
-            art.set(rs.getString("pseudo"));
-           
-            return user;
+        	Article art = new Article();
+            art.setNumber(rs.getInt("no_article"));
+            art.setName(rs.getString("nom_article"));
+            art.setDescription(rs.getString("description"));
+            art.setBidStart(rs.getDate("date_debut_encheres").toLocalDate());
+            art.setBidEnd(rs.getDate("date_fin_encheres").toLocalDate());
+            art.setInitPrice(rs.getInt("prix_initial"));
+            art.setSellPrice(rs.getInt("prix_vente"));
+           // TODO créer une fonction get cat by id
+           //art.setCategory(rs.getInt("no_categorie"));
+            
+            return art;
         }
 
 }

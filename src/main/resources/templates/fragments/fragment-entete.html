@@ -1,0 +1,11 @@
+<header th:fragment="entete" >
+	<nav>
+		<ul>
+			<li sec:authorize="hasRole('ROLE_ADMIN')"><a th:href="@{/categories}">Catégories</a></li>
+			<li sec:authorize="!isAuthenticated()"><a th:href="@{/login}" >Connexion</a></li>
+			<li sec:authorize="!isAuthenticated()"><a th:href="@{/profil/inscription}" >Inscription</a></li>
+			<li sec:authorize="isAuthenticated()"><a th:href="@{/profil}" >Profil</a></li>
+			<li sec:authorize="isAuthenticated()"><a th:href="@{/logout}" >Deconnexion</a></li>
+		</ul>
+	</nav>
+</header>

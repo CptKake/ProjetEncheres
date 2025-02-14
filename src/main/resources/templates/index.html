@@ -6,6 +6,17 @@
 
 </head>
 <body>
+<<<<<<< HEAD
+   <div th:replace="~{fragments/fragment-entete}"></div>
+   
+||||||| 7b4ddad
+    <div class="header">
+        <h1>ENI-Encheres</h1>
+        <a th:href="@{/profil/inscription}">S'inscrire</a>
+        <a th:href="@{/login}">Connexion</a>
+        <a th:href="@{/profil}">Profil</a>
+	</div>
+=======
     <div class="header">
         <h1>ENI-Encheres</h1>
         <a  sec:authorize="!isAuthenticated()" th:href="@{/profil/inscription}">S'inscrire</a>
@@ -13,6 +24,7 @@
         <a sec:authorize="isAuthenticated()" th:href="@{/profil}">Profil</a>
         <a sec:authorize="isAuthenticated()" th:href="@{/logout}">Déconnexion</a>
 	</div>
+>>>>>>> kev
     <h2>Liste des enchères</h2>
     <ul>
         <li th:each="enchere : ${encheres}">
@@ -37,5 +49,7 @@
    	<div th:each="art : ${articles}">
 		<p th:text="${art.name}"></p>
    	</div>
+   	
+   	<div th:replace="~{fragments/fragment-footer}"></div>
 </body>
 </html>

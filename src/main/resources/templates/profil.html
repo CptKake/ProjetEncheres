@@ -11,6 +11,8 @@
 </head>
 <body>
 
+	<div th:replace="~{fragments/fragment-entete}"></div>
+
  <h1>User Profile</h1>
     <p>Pseudo: <span th:text="${user.pseudo}"></span></p>
     <p>Nom: <span th:text="${user.lastName}"></span></p>
@@ -23,5 +25,6 @@
     
 <button><a th:href="@{/profil/modifier}">Modifier</a></button>
 
+	<div th:replace="~{fragments/fragment-footer}"></div>
 </body>
 </html>

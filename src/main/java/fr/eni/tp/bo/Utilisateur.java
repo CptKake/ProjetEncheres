@@ -1,55 +1,56 @@
 package fr.eni.tp.bo;
 
-
+ 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
+
 import java.util.ArrayList;
 import java.util.List;
 
+ 
 import fr.eni.tp.configuration.PasswordMatchValidator;
 import jakarta.validation.Constraint;
 import jakarta.validation.Payload;
+
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
-
+ 
 public class Utilisateur {
-
+ 
 	private int nbUser;
-
+ 
 	@NotBlank(message = "Le pseudo est obligatoire")
 	private String pseudo;
-
+ 
 	@NotBlank(message = "Le nom est obligatoire")
 	private String lastName;
-
+ 
 	@NotBlank(message = "Le prénom est obligatoire")
 	private String firstName;
-
+ 
 	@NotBlank(message = "L'email est obligatoire")
 	@Email(message = "L'email doit être valide")
 	private String email;
 	private String phone;
-
+ 
 	@NotBlank
 	private String street;
-
+ 
 	@NotBlank
 	private String postalCode;
-
+ 
 	
 	@NotBlank
 	private String city;
-
+ 
 	@NotBlank(message = "Le mot de passe est obligatoire")
 	@Pattern(regexp = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[\\W_]).{8,}$" )
 	private String password;
 	private int credit;
 	private Byte admin;
-	
-	
 	
 
 	private List<Enchere> auctions;
@@ -57,12 +58,13 @@ public class Utilisateur {
 	
 	//pour confimation du mdp
 	
-	private String confirmPassword;
 
+	private String confirmPassword;
+ 
 	public String getConfirmPassword() {
 	    return confirmPassword;
 	}
-
+ 
 	public void setConfirmPassword(String confirmPassword) {
 	    this.confirmPassword = confirmPassword;
 	}
@@ -75,9 +77,12 @@ public class Utilisateur {
 	    Class<?>[] groups() default {};
 	    Class<? extends Payload>[] payload() default {};
 	}
-	// Constructors
+
 	
 
+	// Constructors
+	
+ 
 	
 	public Utilisateur() {
 		 auctions = new ArrayList<Enchere>() ;
@@ -254,45 +259,47 @@ public class Utilisateur {
 	}
 	
 	
-
+ 
 	/**
 	 * @return the auctions
 	 */
 	public List<Enchere> getAuctions() {
 		return auctions;
 	}
-
+ 
 	/**
 	 * @param auctions the auctions to set
 	 */
 	public void setAuctions(List<Enchere> auctions) {
 		this.auctions = auctions;
 	}
-
+ 
 	/**
 	 * @return the articles
 	 */
 	public List<Article> getArticles() {
 		return articles;
 	}
-
+ 
 	/**
 	 * @param articles the articles to set
 	 */
 	public void setArticles(List<Article> articles) {
 		this.articles = articles;
 	}
-
+ 
 	@Override
 	public String toString() {
 		return "User [nbUser=" + nbUser + ", pseudo=" + pseudo + ", lastName=" + lastName + ", firstName=" + firstName
 				+ ", email=" + email + ", phone=" + phone + ", street=" + street + ", postalCode=" + postalCode
 				+ ", city=" + city + ", credit=" + credit + ", admin=" + admin + "]";
 	}
+ 
+ 
+	
+	
 
-
-	
-	
-	
 	
 }
+ 
+ 
