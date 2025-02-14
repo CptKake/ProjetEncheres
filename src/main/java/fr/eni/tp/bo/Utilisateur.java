@@ -7,141 +7,44 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 import java.util.ArrayList;
 import java.util.List;
-<<<<<<< HEAD
-
-import jakarta.validation.constraints.Email;
-||||||| 18cb1d7
-
-=======
  
 import fr.eni.tp.configuration.PasswordMatchValidator;
 import jakarta.validation.Constraint;
 import jakarta.validation.Payload;
 import jakarta.validation.constraints.Email;
->>>>>>> alex
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
  
 public class Utilisateur {
  
 	private int nbUser;
-<<<<<<< HEAD
-
-	@NotBlank(message = "Le pseudo est obligatoire")
-||||||| 18cb1d7
-<<<<<<< HEAD
-	@NotBlank
-||||||| c131493
-=======
-	
-	@NotBlank
->>>>>>> 7aace31e825866b6997054ba4800caa64f693196
-=======
  
 	@NotBlank(message = "Le pseudo est obligatoire")
->>>>>>> alex
 	private String pseudo;
-<<<<<<< HEAD
-
-	@NotBlank(message = "Le nom est obligatoire")
-||||||| 18cb1d7
-<<<<<<< HEAD
-	@NotBlank
-||||||| c131493
-=======
-	
-	@NotBlank
->>>>>>> 7aace31e825866b6997054ba4800caa64f693196
-=======
  
 	@NotBlank(message = "Le nom est obligatoire")
->>>>>>> alex
 	private String lastName;
-<<<<<<< HEAD
-
-	@NotBlank(message = "Le prénom est obligatoire")
-||||||| 18cb1d7
-<<<<<<< HEAD
-	@NotBlank
-||||||| c131493
-=======
-	
-	@NotBlank
->>>>>>> 7aace31e825866b6997054ba4800caa64f693196
-=======
  
 	@NotBlank(message = "Le prénom est obligatoire")
->>>>>>> alex
 	private String firstName;
-<<<<<<< HEAD
-
-	@NotBlank(message = "L'email est obligatoire")
-	@Email(message = "L'email doit être valide")
-||||||| 18cb1d7
-<<<<<<< HEAD
-	@NotBlank
-||||||| c131493
-=======
-	
-	@NotBlank
->>>>>>> 7aace31e825866b6997054ba4800caa64f693196
-=======
  
 	@NotBlank(message = "L'email est obligatoire")
 	@Email(message = "L'email doit être valide")
->>>>>>> alex
 	private String email;
 	private String phone;
-<<<<<<< HEAD
-
-||||||| 18cb1d7
-<<<<<<< HEAD
-=======
  
->>>>>>> alex
 	@NotBlank
 	private String street;
-<<<<<<< HEAD
-
-||||||| 18cb1d7
-<<<<<<< HEAD
-=======
  
->>>>>>> alex
 	@NotBlank
 	private String postalCode;
-<<<<<<< HEAD
-
-||||||| 18cb1d7
-<<<<<<< HEAD
-	@NotBlank
-||||||| c131493
-=======
-=======
  
->>>>>>> alex
 	
 	@NotBlank
 	private String city;
-<<<<<<< HEAD
-
-	@NotBlank(message = "Le mot de passe est obligatoire")
-	
-||||||| 18cb1d7
-<<<<<<< HEAD
-	@NotBlank
-	@Pattern(regexp = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{8,}$")
-||||||| c131493
-=======
-	
-	@NotBlank
-	@Pattern(regexp ="^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{8,}$")
->>>>>>> 7aace31e825866b6997054ba4800caa64f693196
-=======
  
 	@NotBlank(message = "Le mot de passe est obligatoire")
 	@Pattern(regexp = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[\\W_]).{8,}$" )
->>>>>>> alex
 	private String password;
 	private int credit;
 	private Byte admin;
@@ -390,6 +293,8 @@ public class Utilisateur {
  
 	
 	
-	
+
 	
 }
+ 
+ 
