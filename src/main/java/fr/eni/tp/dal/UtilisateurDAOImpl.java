@@ -16,8 +16,9 @@ import fr.eni.tp.bo.Utilisateur;
 @Repository
 public class UtilisateurDAOImpl implements UtilisateurDAO {
 	
-	private static final String INSERT = "INSERT INTO UTILISATEURS (pseudo, nom, prenom, email, telephone, rue, code_postal, ville, mot_de_passe, credit, administrateur) VALUES (:pseudo, :nom, :prenom, :email, :telephone, :rue, :code_postal, :ville, :mot_de_passe, 0, '0')";
-	private static final String SELECT_BY_PSEUDO = "SELECT pseudo, nom, prenom, email, telephone, rue, code_postal, ville, mot_de_passe, credit, administrateur FROM UTILISATEURS WHERE pseudo = :pseudo";
+	private static final String INSERT = "INSERT INTO UTILISATEURS (pseudo, nom, prenom, email, telephone, rue, code_postal, ville, mot_de_passe, credit, administrateur) VALUES (:pseudo, :nom, :prenom, :email, :telephone, :rue, :code_postal, :ville, :mot_de_passe, 0, '0') RETURNING no_utilisateur";
+	private static final String SELECT_BY_PSEUDO = "SELECT no_utilisateur, pseudo, nom, prenom, email, telephone, rue, code_postal, ville, mot_de_passe, credit, administrateur FROM UTILISATEURS WHERE pseudo = :pseudo ";
+	private static final String SELECT_BY_NO_UTILISATEUR = "SELECT no_utilisateur, pseudo, nom, prenom, email, telephone, rue, code_postal, ville, mot_de_passe, credit, administrateur FROM UTILISATEURS WHERE no_utilisateur = :no_utilisateur";
 	private static final String DELETE = "DELETE FROM UTILISATEURS WHERE pseudo= :pseudo ";
 	private static final String UPDATE = "UPDATE UTILISATEURS SET pseudo = :pseudo, nom = :nom, prenom = :prenom, email = :email, telephone = :telephone, rue = :rue, code_postal = :code_postal, ville = :ville, mot_de_passe = :mot_de_passe WHERE no_utilisateur= :no_utilisateur ";
 	private static final String COUNT_PSEUDO = "SELECT COUNT(*) FROM UTILISATEURS WHERE pseudo LIKE (:pseudo)";
@@ -73,6 +74,8 @@ public class UtilisateurDAOImpl implements UtilisateurDAO {
 	// MAJ des données d'un user
 	@Override
 	public void updateUser(Utilisateur user) {
+		
+		 
         MapSqlParameterSource namedParameters = new MapSqlParameterSource();
         namedParameters.addValue("pseudo", user.getPseudo());
         namedParameters.addValue("nom", user.getLastName());
@@ -83,6 +86,7 @@ public class UtilisateurDAOImpl implements UtilisateurDAO {
         namedParameters.addValue("code_postal", user.getPostalCode());
         namedParameters.addValue("ville", user.getCity());
         namedParameters.addValue("mot_de_passe", user.getPassword());
+        namedParameters.addValue("no_utilisateur", user.getNbUser());
 
         namedParameterJdbcTemplate.update(UPDATE, namedParameters);
 	}
@@ -90,11 +94,11 @@ public class UtilisateurDAOImpl implements UtilisateurDAO {
 
 	// afficher détails d'un user
 	@Override
-	public Utilisateur readUser(String pseudo) {
-		MapSqlParameterSource namedParameters = new MapSqlParameterSource();
-        namedParameters.addValue("pseudo", pseudo);
+	public Utilisateur readUser(int noUtilisateur) {
+	    MapSqlParameterSource namedParameters = new MapSqlParameterSource();
+	    namedParameters.addValue("no_utilisateur", noUtilisateur);
 
-        return namedParameterJdbcTemplate.queryForObject(SELECT_BY_PSEUDO, namedParameters, new UtilisateurRowMapper());
+	    return namedParameterJdbcTemplate.queryForObject(SELECT_BY_NO_UTILISATEUR, namedParameters, new UtilisateurRowMapper());
 	}
 
 	
@@ -130,6 +134,7 @@ public class UtilisateurDAOImpl implements UtilisateurDAO {
         @Override
         public Utilisateur mapRow(ResultSet rs, int rowNum) throws SQLException {
             Utilisateur user = new Utilisateur();
+            user.setNbUser(rs.getInt("no_utilisateur"));
             user.setPseudo(rs.getString("pseudo"));
             user.setLastName(rs.getString("nom"));
             user.setFirstName(rs.getString("prenom"));
@@ -141,5 +146,14 @@ public class UtilisateurDAOImpl implements UtilisateurDAO {
             return user;
         }
     }
+
+
+	@Override
+	public Utilisateur readUser(String pseudo) {
+	    MapSqlParameterSource namedParameters = new MapSqlParameterSource();
+	    namedParameters.addValue("pseudo", pseudo);
+
+	    return namedParameterJdbcTemplate.queryForObject(SELECT_BY_PSEUDO, namedParameters, new UtilisateurRowMapper());
+	}
 
 }

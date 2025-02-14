@@ -75,11 +75,12 @@ public class UserController {
     }
 	
 	@PostMapping("/modifier")
-	public String modifyProfile(@ModelAttribute("user") Utilisateur user) {
-		
-		this.utilisateurService.modifyAccount(user);
-		return "redirect:/profil/modifier";
-		
+	public String modifyProfile(@ModelAttribute("user") @Valid Utilisateur user, BindingResult result, Model model) {
+	    if (result.hasErrors()) {
+	        return "modifier-profile";
+	    }
+	    this.utilisateurService.modifyAccount(user);
+	    return "redirect:/encheres";
 	}
 		
 	

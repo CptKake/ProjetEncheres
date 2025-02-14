@@ -8,9 +8,10 @@
 <body>
     <div class="header">
         <h1>ENI-Encheres</h1>
-        <a th:href="@{/profil/inscription}">S'inscrire</a>
-        <a th:href="@{/login}">Connexion</a>
-        <a th:href="@{/profil}">Profil</a>
+        <a  sec:authorize="!isAuthenticated()" th:href="@{/profil/inscription}">S'inscrire</a>
+        <a sec:authorize="!isAuthenticated()" th:href="@{/login}">Connexion</a>
+        <a sec:authorize="isAuthenticated()" th:href="@{/profil}">Profil</a>
+        <a sec:authorize="isAuthenticated()" th:href="@{/logout}">Déconnexion</a>
 	</div>
     <h2>Liste des enchères</h2>
     <ul>

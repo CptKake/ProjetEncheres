@@ -62,9 +62,16 @@ public class AccountServiceImpl implements UtilisateurService {
 		userDAO.updateUser(user);
 	}
 
+	
 	@Override
 	public Utilisateur profileByPseudo(String pseudo) {
 		Utilisateur user = userDAO.readUser(pseudo);
+		return user;
+	}
+	
+	@Override
+	public Utilisateur profileByNbUser(int nbUser) {
+		Utilisateur user = userDAO.readUser(nbUser);
 		return user;
 	}
 

@@ -51,6 +51,11 @@
             <input id="idMdp" type="password" th:field="*{password}"/>
             <div th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Mot de passe Error</div>
         </li>
+        <li>
+	        <label for="idConfirmMdp">Confirmer le mot de passe: </label>
+	        <input id="idConfirmMdp" type="password" th:field="*{confirmPassword}"/>
+        <div th:if="${#fields.hasErrors('confirmPassword')}" th:errors="*{confirmPassword}">Confirmation Error</div>
+    </li>
     </ul>
     <button type="submit">S'inscrire</button>
 </form>

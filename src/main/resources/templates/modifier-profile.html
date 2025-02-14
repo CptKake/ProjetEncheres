@@ -12,6 +12,7 @@
 <body>
 
 <form th:action="@{/profil/modifier}" method="POST" th:object="${user}">
+	<input type="hidden" th:field="*{nbUser}"/>
  <h1>User Profile</h1>
  
   <ul>
@@ -50,8 +51,11 @@
     <li>
 	    <label for="idMdp">Mot de passe: </label>
 	    <input id="idMdp" type=password th:field="*{password}"/>
-
-
+    </li>
+    
+     <li>
+        <label for="idConfirmMdp">Confirmer le mot de passe: </label>
+        <input id="idConfirmMdp" type="password" th:field="*{confirmPassword}"/>
     </li>
     
     

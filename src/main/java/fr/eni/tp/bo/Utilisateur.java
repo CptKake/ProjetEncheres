@@ -1,8 +1,16 @@
 package fr.eni.tp.bo;
 
+
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
 import java.util.ArrayList;
 import java.util.List;
 
+import fr.eni.tp.configuration.PasswordMatchValidator;
+import jakarta.validation.Constraint;
+import jakarta.validation.Payload;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
@@ -36,17 +44,37 @@ public class Utilisateur {
 	private String city;
 
 	@NotBlank(message = "Le mot de passe est obligatoire")
-	
+	@Pattern(regexp = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[\\W_]).{8,}$" )
 	private String password;
 	private int credit;
 	private Byte admin;
+	
 	
 	
 
 	private List<Enchere> auctions;
 	private List<Article> articles;
 	
+	//pour confimation du mdp
 	
+	private String confirmPassword;
+
+	public String getConfirmPassword() {
+	    return confirmPassword;
+	}
+
+	public void setConfirmPassword(String confirmPassword) {
+	    this.confirmPassword = confirmPassword;
+	}
+	
+	@Constraint(validatedBy = PasswordMatchValidator.class)
+	@Target({ ElementType.TYPE })
+	@Retention(RetentionPolicy.RUNTIME)
+	public @interface PasswordMatch {
+	    String message() default "Les mots de passe ne correspondent pas";
+	    Class<?>[] groups() default {};
+	    Class<? extends Payload>[] payload() default {};
+	}
 	// Constructors
 	
 
