@@ -39,5 +39,14 @@
 			</tr>
 		</tbody>
 	</table>
+	<div th:each="art : ${articles}">
+		<p th:text="${art.name}"></p>
+		<p th:text="${art.sellPrice}"></p>
+		<p th:text="${art.bidEnd}"></p>
+		<p th:text="${art.user}"></p>
+		<p><a th:href="@{encheres/details(idArt=${art.number})}">Détails</a></p>
+	</div>
+		
+	
 </body>
 </html>
