@@ -3,28 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <title>Liste des enchères</title>
-
+	<link rel="stylesheet" th:href="@{/css/style.css}" />
 </head>
 <body>
-<<<<<<< HEAD
+
    <div th:replace="~{fragments/fragment-entete}"></div>
-   
-||||||| 7b4ddad
-    <div class="header">
-        <h1>ENI-Encheres</h1>
-        <a th:href="@{/profil/inscription}">S'inscrire</a>
-        <a th:href="@{/login}">Connexion</a>
-        <a th:href="@{/profil}">Profil</a>
-	</div>
-=======
-    <div class="header">
-        <h1>ENI-Encheres</h1>
-        <a  sec:authorize="!isAuthenticated()" th:href="@{/profil/inscription}">S'inscrire</a>
-        <a sec:authorize="!isAuthenticated()" th:href="@{/login}">Connexion</a>
-        <a sec:authorize="isAuthenticated()" th:href="@{/profil}">Profil</a>
-        <a sec:authorize="isAuthenticated()" th:href="@{/logout}">Déconnexion</a>
-	</div>
->>>>>>> kev
+
     <h2>Liste des enchères</h2>
     <ul>
         <li th:each="enchere : ${encheres}">
