@@ -5,12 +5,16 @@ package fr.eni.tp.controller;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
 import fr.eni.tp.bll.EnchereService;
 import fr.eni.tp.bo.Article;
+import fr.eni.tp.bo.Categorie;
 
 @Controller
+@SessionAttributes({"catSession"})
 public class ArticleController {
 
 	private EnchereService enchereService;
@@ -23,6 +27,9 @@ public class ArticleController {
 
 	@GetMapping("/encheres")
 	public String afficherArticles(Model model) {
+		
+		List<Categorie> categories = this.enchereService.getAllCategories(); 
+		model.addAttribute("categories", categories);
 		
 		List<Article> articles = this.enchereService.allArticles();
 		model.addAttribute("articles", articles);
@@ -42,4 +49,8 @@ public class ArticleController {
 		return "view-article-details";
 	}
 	
+	@ModelAttribute("catSession")
+	public List<Categorie> chargerCatEnSession() {
+		return this.enchereService.getAllCategories();	
+	}
 }

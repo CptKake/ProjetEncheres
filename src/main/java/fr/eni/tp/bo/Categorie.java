@@ -6,6 +6,14 @@ public class Categorie {
 	private String name;
 	
 	
+	
+	
+	public Categorie() {
+	}
+
+
+
+
 	public Categorie(String name) {
 		this.name = name;
 	}

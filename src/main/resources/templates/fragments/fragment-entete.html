@@ -1,4 +1,4 @@
-<header th:fragment="entete" >
+<header th:fragment="entete">
 	<nav>
 		<ul>
 			<li sec:authorize="hasRole('ROLE_ADMIN')"><a th:href="@{/categories}">Catégories</a></li>
