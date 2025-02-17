@@ -51,7 +51,8 @@
     <p>Filtres :</p>
     <div class="search-container">
         <input type="text" placeholder="Rechercher...">
-        <select >
+        <label for="idCat">Categorie</label>
+        <select id="idCat" th:field="*{categorie}">
      		<option th:each="cat : ${categories}"
      				th:text="${cat.name}"
      				th:value="${cat.number}">

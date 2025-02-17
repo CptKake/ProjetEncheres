@@ -2,7 +2,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>...</title>
+<title>Vente</title>
+<link rel="stylesheet" th:href="@{/css/style.css}" />
 
 
 
@@ -11,6 +12,53 @@
 <body>
 
 	<div th:replace="~{fragments/fragment-entete}"></div>
+
+		<form th:action="@{/vendre}" method="POST" th:object="${article}">
+    <ul>
+        <li>
+            <label for="idName">Article: </label>
+            <input id="idName" type="text" th:field="*{name}"/>
+            <div th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name Error</div>
+        </li>
+  		<li>
+            <label for="idDescription">Descritpion: </label>
+            <textarea id="idDescription" rows="5" th:field="*{description}"/></textarea>
+            <div th:if="${#fields.hasErrors('description')}" th:errors="*{description}">description Error</div>
+        </li>
+        <li>
+            <label for="idCategory">Categorie</label>
+        	<select id="idCategory" th:field="*{category}">
+     			<option th:each="cat : ${category}"
+     				th:text="${cat.name}"
+     				th:value="${cat.number}">
+     			</option> 
+       		</select>
+            <div th:if="${#fields.hasErrors('category')}" th:errors="*{category}">category Error</div>
+        </li>
+        <p>upload img(à venir)</p>
+        <li>
+            <label for="idPrix">Mise à prix: </label>
+            <input id="idPrix" type="number" min="1" th:field="*{initPrice}"/>
+            <div th:if="${#fields.hasErrors('initPrice')}" th:errors="*{initPrice}">initPrice Error</div>
+        </li>
+        <li>
+            <label for="idStart">Début de l'enchère: </label>
+            <input id="idStart" type="date" th:field="*{bidStart}"/>
+            <div th:if="${#fields.hasErrors('bidStart')}" th:errors="*{bidStart}">bidStart Error</div>
+        </li>
+        <li>
+            <label for="idEnd">Fin de l'enchère: </label>
+            <input id="idEnd" type="date" th:field="*{bidEnd}"/>
+            <div th:if="${#fields.hasErrors('bidEnd')}" th:errors="*{bidEnd}">bidEnd Error</div>
+        </li>
+    </ul>
+    <button type="submit">Enregistrer</button>
+    <button type="reset">Annuler</button>
+</form>
+
+<div th:if="${error}" style="color: red;">
+    <p th:text="${error}"></p>
+</div>
 
 	<div th:replace="~{fragments/fragment-footer}"></div>
 </body>

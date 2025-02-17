@@ -53,4 +53,5 @@ public class ArticleController {
 	public List<Categorie> chargerCatEnSession() {
 		return this.enchereService.getAllCategories();	
 	}
+	
 }

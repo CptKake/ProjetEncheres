@@ -20,7 +20,7 @@ public class ArticleDAOImpl implements ArticleDAO {
 	private static final String CREATE_ART = "INSERT INTO articles_vendus (nom_article, description, date_debut_encheres, date_fin_encheres, "
 											+ "prix_initial, prix_vente, no_utilisateur, no_categorie) "
 											+ "VALUES (:name, :description, :bidS, :bidE, "
-											+ ":initPrice, :sellPrice, :userId, :catId)";
+											+ ":initPrice, :sellPrice, :userId, :catId) RETURNING no_article";
 	private static final String UPDATE_ART = "UPDATE articles_vendus SET nom_article = :name, description = :description, "
 											+ "date_debut_encheres = :bidS, date_fin_encheres = :bidE, prix_initial = :initPrice, "
 											+ "prix_vente = :sellPrice, no_categorie = :catId WHERE no_article = :artId";
