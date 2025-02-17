@@ -27,6 +27,13 @@ public class Article {
 
 	
 	
+	@Override
+	public String toString() {
+		return String.format(
+				"Article [number=%s, name=%s, description=%s, bidStart=%s, bidEnd=%s, initPrice=%s, sellPrice=%s, user=%s, category=%s]",
+				number, name, description, bidStart, bidEnd, initPrice, sellPrice, user, category);
+	}
+
 	/**
 	 * @param number the number to set
 	 */

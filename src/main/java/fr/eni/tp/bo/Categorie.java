@@ -21,6 +21,14 @@ public class Categorie {
 
 	
 	
+	@Override
+	public String toString() {
+		return String.format("Categorie [name=%s]", name);
+	}
+
+
+
+
 	/**
 	 * @param number the number to set
 	 */

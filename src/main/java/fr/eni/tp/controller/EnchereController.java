@@ -58,5 +58,23 @@ public class EnchereController {
 
 	}
 	
+	@PostMapping("/encherir")
+	public String faireEnchere (@ModelAttribute("article") @Valid Article art, BindingResult result,@AuthenticationPrincipal UserDetails userDetails, Model model) {
+		
+		if (result.hasErrors()) {
+            return "view-article-details";
+        }
+
+        try {
+        	art.setUser(utilisateurService.profileByPseudo(userDetails.getUsername()));
+        	art.setCategory(enchereService.getCatById(10));
+            enchereService.createArticle(art);
+            return "redirect:/encheres/details";
+        } catch (IllegalArgumentException e) {
+            model.addAttribute("error", e.getMessage());
+            return "view-article-details";
+        }
+
+	}
 	
 }
