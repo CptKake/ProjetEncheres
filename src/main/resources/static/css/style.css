@@ -62,3 +62,12 @@ header li{
     color: #9dbda2;
     font-size: 18px;
 }
+
+.article {
+    border-style: inset;
+    border-color: red;
+    margin: 5px;
+
+    display: inline-block;
+    
+}
