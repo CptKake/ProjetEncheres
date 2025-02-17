@@ -2,7 +2,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Demo Spring Boot Web</title>
+<title>ENI - Encheres</title>
+<link rel="stylesheet" th:href="@{/css/style.css}" />
 
 </head>
 <body>
@@ -20,7 +21,7 @@
 			<ul class="flex-outer">
 				<li>
 	
-					<label for="idUsername">pseudo</label>
+					<label for="idUsername">Identifiant</label>
 	
 					<input id="idUsername" type="text" name="username"/>
 				</li>
@@ -37,6 +38,11 @@
 		
 		
 		</form>
+		
+		 <a th:href="@{/profil/inscription}">
+        	<button type="button">Créer un compte</button>
+   		 </a>
+		
 		
 	</main>
 

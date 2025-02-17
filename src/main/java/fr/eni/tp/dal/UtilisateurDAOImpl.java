@@ -23,7 +23,7 @@ public class UtilisateurDAOImpl implements UtilisateurDAO {
 	private static final String UPDATE = "UPDATE UTILISATEURS SET pseudo = :pseudo, nom = :nom, prenom = :prenom, email = :email, telephone = :telephone, rue = :rue, code_postal = :code_postal, ville = :ville, mot_de_passe = :mot_de_passe WHERE no_utilisateur= :no_utilisateur ";
 	private static final String COUNT_PSEUDO = "SELECT COUNT(*) FROM UTILISATEURS WHERE pseudo LIKE (:pseudo)";
 	private static final String COUNT_EMAIL = "SELECT COUNT(*) FROM UTILISATEURS WHERE email LIKE (:email)";
-	
+	private static final String COUNT_BY_NB_USER = "SELECT COUNT(*) FROM UTILISATEURS WHERE no_utilisateur = :no_utilisateur";
 	
 	
 	
@@ -74,7 +74,9 @@ public class UtilisateurDAOImpl implements UtilisateurDAO {
 	// MAJ des données d'un user
 	@Override
 	public void updateUser(Utilisateur user) {
-		
+		 if (countByNbUser(user.getNbUser()) == 0) {
+		        throw new IllegalArgumentException("Utilisateur inexistant.");
+		    }
 		 
         MapSqlParameterSource namedParameters = new MapSqlParameterSource();
         namedParameters.addValue("pseudo", user.getPseudo());
@@ -94,12 +96,29 @@ public class UtilisateurDAOImpl implements UtilisateurDAO {
 
 	// afficher détails d'un user
 	@Override
-	public Utilisateur readUser(int noUtilisateur) {
+	public Utilisateur readUserByNbUser(int noUtilisateur) {
 	    MapSqlParameterSource namedParameters = new MapSqlParameterSource();
 	    namedParameters.addValue("no_utilisateur", noUtilisateur);
 
 	    return namedParameterJdbcTemplate.queryForObject(SELECT_BY_NO_UTILISATEUR, namedParameters, new UtilisateurRowMapper());
 	}
+	
+	@Override
+	public Utilisateur readUserByPseudo(String pseudo) {
+	    MapSqlParameterSource namedParameters = new MapSqlParameterSource();
+	    namedParameters.addValue("pseudo", pseudo);
+
+	    return namedParameterJdbcTemplate.queryForObject(SELECT_BY_PSEUDO, namedParameters, new UtilisateurRowMapper());
+	}
+
+
+	@Override
+	public int countByNbUser(int noUtilisateur) {
+		MapSqlParameterSource namedParameters = new MapSqlParameterSource();
+        namedParameters.addValue("no_utilisateur", noUtilisateur);
+
+        return namedParameterJdbcTemplate.queryForObject(COUNT_BY_NB_USER, namedParameters, Integer.class);
+    }
 
 	
 	// vérifier si email présent 1 fois (pour vérif email unique)
@@ -148,12 +167,7 @@ public class UtilisateurDAOImpl implements UtilisateurDAO {
     }
 
 
-	@Override
-	public Utilisateur readUser(String pseudo) {
-	    MapSqlParameterSource namedParameters = new MapSqlParameterSource();
-	    namedParameters.addValue("pseudo", pseudo);
-
-	    return namedParameterJdbcTemplate.queryForObject(SELECT_BY_PSEUDO, namedParameters, new UtilisateurRowMapper());
-	}
+	
+	
 
 }

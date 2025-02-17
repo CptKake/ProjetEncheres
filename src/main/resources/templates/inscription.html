@@ -59,7 +59,10 @@
         <div th:if="${#fields.hasErrors('confirmPassword')}" th:errors="*{confirmPassword}">Confirmation Error</div>
     </li>
     </ul>
-    <button type="submit">S'inscrire</button>
+    <button type="submit">Créer</button>
+    <a th:href="@{/encheres}">
+        	<button type="button">Annuler</button>
+   		 </a>
 </form>
 
 

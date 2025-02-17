@@ -59,12 +59,17 @@
         <label for="idConfirmMdp">Confirmer le mot de passe: </label>
         <input id="idConfirmMdp" type="password" th:field="*{confirmPassword}"/>
     </li>
+ 	<li>
+        <label for="idCredits">Crédit : </label>
+        <input id="idCredits" type="text" th:field="*{credit}" readonly/>
+    </li>
+ 
     
     
-    
-    
-		<button type="submit">Modifier</button>
+		<button type="submit">Enregistrer</button>
 	
+	
+
   </ul> 
 </form>
 

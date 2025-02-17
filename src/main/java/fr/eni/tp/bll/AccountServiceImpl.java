@@ -57,6 +57,10 @@ public class AccountServiceImpl implements UtilisateurService {
 
 	@Override
 	public void modifyAccount(Utilisateur user) {
+		
+		if (userDAO.countByNbUser(user.getNbUser()) == 0) {
+            throw new IllegalArgumentException("Utilisateur inexistant.");
+        }
 		 String encodedPassword = passwordEncoder.encode(user.getPassword());
 	        user.setPassword(encodedPassword);
 		userDAO.updateUser(user);
@@ -65,13 +69,13 @@ public class AccountServiceImpl implements UtilisateurService {
 	
 	@Override
 	public Utilisateur profileByPseudo(String pseudo) {
-		Utilisateur user = userDAO.readUser(pseudo);
+		Utilisateur user = userDAO.readUserByPseudo(pseudo);
 		return user;
 	}
 	
 	@Override
 	public Utilisateur profileByNbUser(int nbUser) {
-		Utilisateur user = userDAO.readUser(nbUser);
+		Utilisateur user = userDAO.readUserByNbUser(nbUser);
 		return user;
 	}
 
