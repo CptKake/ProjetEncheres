@@ -4,17 +4,18 @@
 <meta charset="UTF-8">
 <title>Profil</title>
 <link rel="stylesheet" th:href="@{/css/style.css}" />
+<link rel="stylesheet" th:href="@{/css/forms.css}" />
 
 
 
 
 
 </head>
-<body>
+<body class=container>
 
 	<div th:replace="~{fragments/fragment-entete}"></div>
-
-<form th:action="@{/profil/modifier}" method="POST" th:object="${user}">
+<main class="form-container">
+<form class= "form-group" th:action="@{/profil/modifier}" method="POST" th:object="${user}">
 	<input type="hidden" th:field="*{nbUser}"/>
  <h1>User Profile</h1>
  
@@ -60,23 +61,24 @@
         <label for="idConfirmMdp">Confirmer le mot de passe: </label>
         <input id="idConfirmMdp" type="password" th:field="*{confirmPassword}"/>
     </li>
- 	<li>
+ 	<li class="credits">
         <label for="idCredits">Crédit : </label>
         <input id="idCredits" type="text" th:field="*{credit}" readonly/>
     </li>
  
     
     
-		<button type="submit">Enregistrer</button>
+		<button class=buttons type="submit">Enregistrer</button>
 	
 	
 
   </ul> 
 </form>
 
-<form th:action="@{/profil/supprimer}" method="POST">
-    <button type="submit">Supprimer le compte</button>
+<form class=suppress  th:action="@{/profil/supprimer}" method="POST">
+    <button class=buttons type="submit">Supprimer le compte</button>
 </form>
+</main>
 
 <div th:replace="~{fragments/fragment-footer}"></div>
 
