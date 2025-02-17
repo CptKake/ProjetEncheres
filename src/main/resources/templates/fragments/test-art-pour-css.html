@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Liste des enchères</title>
+	<link rel="stylesheet" href="/ProjetEncheres/src/main/resources/static/css/style.css" />
+</head>
+<body>
+	
+	<div th:replace="~{fragments/fragment-entete}"></div>
+	
+    <p>Filtres :</p>
+    <div class="search-container">
+        <input type="text" placeholder="Rechercher...">
+     
+        <label for="idCat">Categorie</label>
+        <select id="idCat">
+     		<option>sport</option>
+			<option>sport</option>
+			<option>sport</option>
+        </select>
+        
+        <button type="button">Rechercher</button>
+    </div>
+    
+	<div>
+		<div class="article">
+			<p>Formateur</p>
+			<p>Prix : 210 points</p>
+			<p>Fin de l'enchère : 18/02/2025</p>
+			<p>Vendeur : jojo44</p>
+		</div>
+		<div class="article">
+			<p>Formateur</p>
+			<p>Prix : 210 points</p>
+			<p>Fin de l'enchère : 18/02/2025</p>
+			<p>Vendeur : jojo44</p>
+		</div>
+		<div class="article">
+			<p>Formateur</p>
+			<p>Prix : 210 points</p>
+			<p>Fin de l'enchère : 18/02/2025</p>
+			<p>Vendeur : jojo44</p>
+		</div>
+		<div class="article">
+			<p>Formateur</p>
+			<p>Prix : 210 points</p>
+			<p>Fin de l'enchère : 18/02/2025</p>
+			<p>Vendeur : jojo44</p>
+		</div>
+	<div th:replace="~{fragments/fragment-footer}"></div>
+</body>
+</html>
