@@ -16,9 +16,11 @@ public interface UtilisateurDAO {
 	
 	int countByPseudo(String pseudo);
 	
+	int countByNbUser(int noUtilisateur);
+	
 	void sellArticle(Article article);
 
-	Utilisateur readUser(int noUtilisateur);
+	Utilisateur readUserByNbUser(int noUtilisateur);
 
-	Utilisateur readUser(String pseudo);
+	Utilisateur readUserByPseudo(String pseudo);
 }

@@ -66,10 +66,11 @@ public class UserController {
 
         // Utiliser la méthode readUser pour obtenir les informations de l'utilisateur
         Utilisateur user = utilisateurService.profileByPseudo(pseudo);
+        
+        user = utilisateurService.profileByNbUser(user.getNbUser());
 
         // Ajouter les informations de l'utilisateur au modèle
-        Utilisateur changedUser = utilisateurService.profileByNbUser(user.getNbUser());
-        model.addAttribute("user", changedUser);
+        model.addAttribute("user", user);
 
         // Retourner le nom de la vue
         return "profil";
@@ -81,8 +82,7 @@ public class UserController {
 	    if (result.hasErrors()) {
 	        return "modifier-profile";
 	    }
-	    Utilisateur changedUser = utilisateurService.profileByNbUser(user.getNbUser());
-	    model.addAttribute("user", changedUser);
+	   
 	    this.utilisateurService.modifyAccount(user);
 	    
 	    return "redirect:/profil";
@@ -97,6 +97,9 @@ public class UserController {
         // Utiliser la méthode readUser pour obtenir les informations de l'utilisateur
         Utilisateur user = utilisateurService.profileByPseudo(pseudo);
         
+        // Utiliser no_utilisateur pour obtenir les informations de l'utilisateur
+        user = utilisateurService.profileByNbUser(user.getNbUser());
+        
         // Ajouter les informations de l'utilisateur au modèle
         model.addAttribute("user", user);
 
@@ -109,6 +112,7 @@ public class UserController {
 	    // Récupérer le pseudo de l'utilisateur connecté
 	    String pseudo = userDetails.getUsername();
 
+	    
 	    // Supprimer l'utilisateur
 	    utilisateurService.deleteAccount(pseudo);
 
