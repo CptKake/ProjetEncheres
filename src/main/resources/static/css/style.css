@@ -64,10 +64,17 @@ header li{
 }
 
 .article {
-    border-style: inset;
-    border-color: red;
+    border-style: ridge;
+    border-color: burlywood;
+    background-color: green;
     margin: 5px;
-
+    padding: 2rem;
     display: inline-block;
-    
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    color: whitesmoke;
+}
+
+.annonces {
+    display: block;
+    justify-content: flex-start;
 }
