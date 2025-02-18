@@ -13,6 +13,11 @@ public class Retrait {
 		this.city = city;
 	}
 
+	public Retrait() {
+	}
+
+	
+
 	/**
 	 * @return the street
 	 */
@@ -62,6 +67,10 @@ public class Retrait {
 		return number;
 	}
 	
-	
+	@Override
+	public String toString() {
+		return "Retrait [number=" + number + ", street=" + street + ", postalCode=" + postalCode + ", city=" + city
+				+ "]";
+	}
 	
 }

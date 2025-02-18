@@ -20,6 +20,30 @@ ul {
   list-style-type: none;
 }
 
+button {
+	padding: 10px 20px;
+    font-size: 16px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+button:hover{
+	background: #555; ;
+}
+button a {
+	padding: 10px 20px;
+    font-size: 16px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 4px;
+    text-decoration: none
+}
+
 nav ul{
 	
 	display: flex;
@@ -46,6 +70,22 @@ header li{
 	justify-content: space-between;
 }
 
+div p a{
+	text-decoration: none;
+	color: inherit; 
+	background-color:  #212423;
+	border-radius: 3px;
+	padding: 3px
+
+	}
+	
+a :hover{
+	text-decoration:blink;
+	color :#007bff;
+	background-color:#007bff
+	
+}
+	
 
 .search-container {
     display: flex;
@@ -97,4 +137,5 @@ header li{
 .annonces {
     display: block;
     justify-content: flex-start;
+    
 }
