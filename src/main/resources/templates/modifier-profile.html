@@ -62,22 +62,22 @@
         <input id="idConfirmMdp" type="password" th:field="*{confirmPassword}"/>
     </li>
  	<li class="credits">
-        <label for="idCredits">Crédit : </label>
+        <label for="idCredits">Crédit </label>
         <input id="idCredits" type="text" th:field="*{credit}" readonly/>
     </li>
  
     
     
-		<button class=buttons type="submit">Enregistrer</button>
+		<button class=save type="submit">Enregistrer</button>
 	
 	
 
   </ul> 
 </form>
 
-<form class=suppress  th:action="@{/profil/supprimer}" method="POST">
-    <button class=buttons type="submit">Supprimer le compte</button>
-</form>
+	<form  th:action="@{/profil/supprimer}" method="POST">
+	    <button class=suppress type="submit">Supprimer le compte</button>
+	</form>
 </main>
 
 <div th:replace="~{fragments/fragment-footer}"></div>
