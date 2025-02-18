@@ -141,4 +141,10 @@ public class EnchereServiceImpl implements EnchereService  {
 		return cat;
 	}
 
+	@Override
+	public List<Enchere> findEncheresByArt(Article art) {
+		List<Enchere> encheres = enchereDAO.findArtEncheres(art);
+		return encheres;
+	}
+
 }

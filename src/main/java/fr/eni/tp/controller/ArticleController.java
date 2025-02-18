@@ -38,7 +38,6 @@ public class ArticleController {
 		
 		for (Article art : articles) {
 			art.setUser(utilisateurService.profileByNbUser(art.getUser().getNbUser()));
-			System.err.println(art.getUser());
 		}
 		
 		return "view-articles";

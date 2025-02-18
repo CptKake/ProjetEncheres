@@ -14,5 +14,6 @@ public interface UtilisateurService {
 
 	Utilisateur profileByNbUser(int nbUser);
 
+	void updateCredits(Utilisateur user);
 
 }

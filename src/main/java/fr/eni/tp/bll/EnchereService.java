@@ -13,6 +13,8 @@ public interface EnchereService {
 	
 	List<Enchere> encheresEnCours(Utilisateur user);
 	
+	List<Enchere> findEncheresByArt(Article art);
+	
 	void createEnchere(Enchere enchere, Article art);
 	
 	void deleteEnchere(Enchere enchere);

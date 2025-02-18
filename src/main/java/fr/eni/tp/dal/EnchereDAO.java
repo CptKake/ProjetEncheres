@@ -13,6 +13,8 @@ public interface EnchereDAO {
 	
 	List<Enchere> findEnCours(Utilisateur user);
 	
+	List<Enchere> findArtEncheres(Article art);
+	
 	//vente remportée par le user
 	List<Article> findWinByUser(Utilisateur user);
 	

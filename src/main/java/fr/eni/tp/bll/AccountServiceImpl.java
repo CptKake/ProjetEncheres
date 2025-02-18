@@ -73,4 +73,9 @@ public class AccountServiceImpl implements UtilisateurService {
 		return user;
 	}
 
+	@Override
+	public void updateCredits(Utilisateur user) {
+		// TODO Auto-generated method stub
+	}
+
 }
