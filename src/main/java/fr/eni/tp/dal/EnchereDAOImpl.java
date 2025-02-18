@@ -35,6 +35,7 @@ public class EnchereDAOImpl implements EnchereDAO {
 	private static final String DELETE_ENCHERE = "DELETE FROM encheres WHERE no_utilisateur = :idUser AND no_article = :idArt";
 	private static final String UPDATE_ENCHERE = "UPDATE encheres SET date_enchere = CURRENT_DATE, montant_enchere = :sum "
 												+ "WHERE no_utilisateur = :idUser AND no_article = :idArt";
+	private static final String ENCHERES_BY_ART = "select * from encheres WHERE no_article = :idArt";
 	
 	
 	private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
@@ -78,8 +79,8 @@ public class EnchereDAOImpl implements EnchereDAO {
 	@Override
 	public void create(Enchere enchere) {
 		MapSqlParameterSource map = new MapSqlParameterSource();
-		map.addValue("idUser", enchere.getNbUser());
-		map.addValue("idArt", enchere.getNbArticle());
+		map.addValue("idUser", enchere.getNbUser().getNbUser());
+		map.addValue("idArt", enchere.getNbArticle().getNumber());
 		map.addValue("sum", enchere.getBidAmount());
 		
 		namedParameterJdbcTemplate.update(CREATE_ENCHERE, map);
@@ -102,6 +103,14 @@ public class EnchereDAOImpl implements EnchereDAO {
 		map.addValue("sum", enchere.getBidAmount());
 		
 		namedParameterJdbcTemplate.update(UPDATE_ENCHERE, map);
+	}
+
+	@Override
+	public List<Enchere> findArtEncheres(Article art) {
+		MapSqlParameterSource map = new MapSqlParameterSource();
+		map.addValue("idArt", art.getNumber());
+		
+		return namedParameterJdbcTemplate.query(ENCHERES_BY_ART, map, new BeanPropertyRowMapper<Enchere>(Enchere.class));
 	}
 
 	

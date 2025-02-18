@@ -23,4 +23,6 @@ public interface UtilisateurDAO {
 	Utilisateur readUserByNbUser(int noUtilisateur);
 
 	Utilisateur readUserByPseudo(String pseudo);
+	
+	void updateCredit(Utilisateur user);
 }

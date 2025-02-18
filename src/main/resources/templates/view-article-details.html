@@ -25,7 +25,10 @@
 		<form th:action="@{/encherir}" method="POST">
 			<label for="idBid">Ma proposition: </label>
             <input name="idBid" id="idBid" type="number" th:min="${art.sellPrice}" />
-            <input name="idArt" th:value="${art.number}" type="hidden"/>
+            
+            
+            <input name="idArt" id="idArt" th:value="${art.number}" type="hidden"/>
+            
 			<button type="submit">Enchérir</button>
 		</form>
 	</div>

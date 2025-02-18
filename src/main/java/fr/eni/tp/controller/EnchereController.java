@@ -3,7 +3,6 @@ package fr.eni.tp.controller;
 
 import java.time.LocalDate;
 import java.util.List;
-import java.util.Objects;
 
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -63,41 +62,42 @@ public class EnchereController {
 	}
 	
 	@PostMapping("/encherir")
-	public String faireEnchere (@RequestParam("idBid") int montant, @RequestParam(name="idArt",
-			required = true) int idArt, @AuthenticationPrincipal UserDetails userDetails, Model model) {
+	public String faireEnchere (@RequestParam("idBid") int montant, @RequestParam(name="idArt") int idArt, @AuthenticationPrincipal UserDetails userDetails, Model model) {
 
         try {
     		//récupération du user qui encherit
 			Utilisateur user = utilisateurService.profileByPseudo(userDetails.getUsername());
         	Article art = enchereService.readArticle(idArt);
-			
+        	
         	Enchere bid = new Enchere();
         	bid.setAuctionDate(LocalDate.now());
         	bid.setBidAmount(montant);
         	bid.setNbArticle(art);
         	bid.setNbUser(user);
         	
-        	System.err.println("bid date = " + bid.getAuctionDate());
-        	System.err.println("bid montant = " + bid.getBidAmount());
-        	System.err.println("bid art = " + bid.getNbArticle());
-        	System.err.println("bid user = " + bid.getNbUser());
         	//vérification enchère meilleures que les précédentes et toujours en cours
         	if (bid.getBidAmount() > art.getSellPrice() && user.getCredit() >= bid.getBidAmount() && bid.getAuctionDate().isBefore(art.getBidEnd())) {
         		System.err.println("##### ASSEZ DE CREDITS ET DATE BONNE #####");
         		//déduction des crédits de l'enchère
 				user.setCredit(user.getCredit() - bid.getBidAmount());
-				utilisateurService.modifyAccount(user);
-				System.err.println("COUCOU");
+				utilisateurService.updateCredits(user);
+				
+				List<Enchere> encheres = enchereService.findEncheresByArt(art);
+				System.err.println("##### ENCHERES.size = " + encheres.size());
 				
 				//vérification présence d'enchère antérieures
-	        	if (Objects.isNull(enchereService.bestEnchere(art))) {
+	        	if (encheres.size() != 0) {
 	        		System.err.println("##### PASSAGE PAR ENCHERE PRECEDENTE #####");
 	        		
 	        		//récupération utilisateur avec la plus haute enchère
-	        		Utilisateur bestBidder = enchereService.bestEnchere(art).getNbUser();
+	        		Enchere bestBid = enchereService.bestEnchere(art);
+	        		System.err.println("##### best bid amount = " + bestBid.getBidAmount());
+	        		Utilisateur bestBidder = bestBid.getNbUser();
+	        		System.err.println("##### best bidder pseudo= " + bestBidder.getPseudo());
+	        		
 	        		//remboursement de l'enchère précedente
 	        		bestBidder.setCredit(bestBidder.getCredit() + enchereService.bestEnchere(art).getBidAmount());
-	        		utilisateurService.modifyAccount(bestBidder);
+	        		utilisateurService.updateCredits(bestBidder);
 	        		//Création de la nouvelle enchère
 	        		enchereService.createEnchere(bid, art);
 	        		//màj du prix de vente de l'art
@@ -134,8 +134,10 @@ public class EnchereController {
     		model.addAttribute("user", seller);
     		model.addAttribute("art", art);
         	
-            return "redirect:/encheres/details";
+            return "redirect:/encheres";
         } catch (IllegalArgumentException e) {
+        	e.printStackTrace();
+        	
             model.addAttribute("error", e.getMessage());
             Article art = enchereService.readArticle(idArt);
             Categorie cat = this.enchereService.getCatById(art.getCategory().getNumber());

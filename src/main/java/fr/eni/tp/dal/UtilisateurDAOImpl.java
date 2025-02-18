@@ -24,6 +24,7 @@ public class UtilisateurDAOImpl implements UtilisateurDAO {
 	private static final String COUNT_PSEUDO = "SELECT COUNT(*) FROM UTILISATEURS WHERE pseudo LIKE (:pseudo)";
 	private static final String COUNT_EMAIL = "SELECT COUNT(*) FROM UTILISATEURS WHERE email LIKE (:email)";
 	private static final String COUNT_BY_NB_USER = "SELECT COUNT(*) FROM UTILISATEURS WHERE no_utilisateur = :no_utilisateur";
+	private static final String UPDATE_CREDIT = "UPDATE UTILISATEURS SET credit = :credit WHERE pseudo= :pseudo ";
 	
 	
 	
@@ -146,9 +147,16 @@ public class UtilisateurDAOImpl implements UtilisateurDAO {
 		
 	}
 	
+	@Override
+	public void updateCredit(Utilisateur user) {
+		MapSqlParameterSource map = new MapSqlParameterSource();
+		map.addValue("credit", user.getCredit());
+		map.addValue("pseudo", user.getPseudo());
+		
+		namedParameterJdbcTemplate.update(UPDATE_CREDIT , map);
+	}
 	
 	// RowMapper pour récup lecture des données d'un user
-	
 	private static class UtilisateurRowMapper implements RowMapper<Utilisateur> {
 		
         @Override
@@ -168,6 +176,11 @@ public class UtilisateurDAOImpl implements UtilisateurDAO {
             return user;
         }
     }
+
+
+	
+		
+	
 
 
 	
