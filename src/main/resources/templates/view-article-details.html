@@ -24,7 +24,7 @@
 		</ul>
 		<form th:action="@{/encherir}" method="POST">
 			<label for="idBid">Ma proposition: </label>
-            <input id="idBid" type="number" min="1" />
+            <input id="idBid" type="number" th:min="${art.sellPrice}" />
 			<button type="submit">Enchérir</button>
 		</form>
 	</div>

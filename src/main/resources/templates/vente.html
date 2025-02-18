@@ -9,7 +9,6 @@
 
 
 
-
 </head>
 <body>
 
@@ -32,7 +31,7 @@
         	<select id="idCategory" th:field="*{category}">
      			<option th:each="cat : ${categories}"
      				th:text="${cat.name}"
-     				th:value="${cat}">
+     				th:value="${cat.number}">
      			</option> 
        		</select>
             <div th:if="${#fields.hasErrors('category')}" th:errors="*{category}">category Error</div>

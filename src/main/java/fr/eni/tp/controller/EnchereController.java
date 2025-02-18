@@ -16,6 +16,7 @@ import fr.eni.tp.bll.EnchereService;
 import fr.eni.tp.bll.UtilisateurService;
 import fr.eni.tp.bo.Article;
 import fr.eni.tp.bo.Categorie;
+import fr.eni.tp.bo.Utilisateur;
 import jakarta.validation.Valid;
 
 @Controller
@@ -48,7 +49,6 @@ public class EnchereController {
 
         try {
         	art.setUser(utilisateurService.profileByPseudo(userDetails.getUsername()));
-        	System.err.println("art = " + art);
             enchereService.createArticle(art);
             return "redirect:/encheres";
         } catch (IllegalArgumentException e) {
@@ -59,16 +59,31 @@ public class EnchereController {
 	}
 	
 	@PostMapping("/encherir")
-	public String faireEnchere (@ModelAttribute("article") @Valid Article art, BindingResult result,@AuthenticationPrincipal UserDetails userDetails, Model model) {
+	public String faireEnchere (@ModelAttribute("article") @Valid Article art, BindingResult result, @AuthenticationPrincipal UserDetails userDetails, Model model) {
 		
 		if (result.hasErrors()) {
             return "view-article-details";
         }
 
         try {
-        	art.setUser(utilisateurService.profileByPseudo(userDetails.getUsername()));
-        	art.setCategory(enchereService.getCatById(10));
-            enchereService.createArticle(art);
+        	/*
+        	//vérification enchère meilleures que les précédentes
+        	if (enchere > art.getSellPrice()) {
+				Utilisateur user = utilisateurService.profileByPseudo(userDetails.getUsername());
+				user.setCredit()
+			}
+        	*/
+        	//vérification présence d'enchère antérieures
+        	if (enchereService.bestEnchere(art) != null) {
+        		//récupération utilisateur avec la plus haute enchère
+        		Utilisateur bestBidder = enchereService.bestEnchere(art).getNbUser();
+        		//remboursement de l'enchère précedente
+        		bestBidder.setCredit(bestBidder.getCredit() + enchereService.bestEnchere(art).getBidAmount());
+        		utilisateurService.modifyAccount(bestBidder);
+			}
+        	
+        	
+        	
             return "redirect:/encheres/details";
         } catch (IllegalArgumentException e) {
             model.addAttribute("error", e.getMessage());
