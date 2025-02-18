@@ -55,7 +55,8 @@ public class Utilisateur {
 
 	private List<Enchere> auctions;
 	private List<Article> articles;
-	
+	 private Retrait retrait;
+	 
 	//pour confimation du mdp
 	
 
@@ -293,6 +294,14 @@ public class Utilisateur {
 		return "User [nbUser=" + nbUser + ", pseudo=" + pseudo + ", lastName=" + lastName + ", firstName=" + firstName
 				+ ", email=" + email + ", phone=" + phone + ", street=" + street + ", postalCode=" + postalCode
 				+ ", city=" + city + ", credit=" + credit + ", admin=" + admin + "]";
+	}
+
+	public Retrait getRetrait() {
+		return retrait;
+	}
+
+	public void setRetrait(Retrait retrait) {
+		this.retrait = retrait;
 	}
  
  
