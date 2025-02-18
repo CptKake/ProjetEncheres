@@ -24,6 +24,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class UserController {
 
 	private final UtilisateurService utilisateurService;
+	
 
 	public UserController(UtilisateurService utilisateurService) {
 		this.utilisateurService = utilisateurService;
@@ -44,7 +45,9 @@ public class UserController {
 
          try {
              utilisateurService.createAccount(user);
-             return "redirect:/encheres";
+             
+             
+             return "redirect:/login";
          } catch (IllegalArgumentException e) {
              model.addAttribute("error", e.getMessage());
              return "inscription";
@@ -67,7 +70,7 @@ public class UserController {
         // Utiliser la méthode readUser pour obtenir les informations de l'utilisateur
         Utilisateur user = utilisateurService.profileByPseudo(pseudo);
         
-        user = utilisateurService.profileByNbUser(user.getNbUser());
+        
 
         // Ajouter les informations de l'utilisateur au modèle
         model.addAttribute("user", user);
@@ -78,7 +81,7 @@ public class UserController {
 	
 	@PostMapping("/modifier")
 	public String modifyProfile(@ModelAttribute("user") @Valid Utilisateur user, BindingResult result, Model model) {
-		
+		System.out.println(user);
 	    if (result.hasErrors()) {
 	        return "modifier-profile";
 	    }
@@ -97,8 +100,7 @@ public class UserController {
         // Utiliser la méthode readUser pour obtenir les informations de l'utilisateur
         Utilisateur user = utilisateurService.profileByPseudo(pseudo);
         
-        // Utiliser no_utilisateur pour obtenir les informations de l'utilisateur
-        user = utilisateurService.profileByNbUser(user.getNbUser());
+        
         
         // Ajouter les informations de l'utilisateur au modèle
         model.addAttribute("user", user);
@@ -117,7 +119,7 @@ public class UserController {
 	    utilisateurService.deleteAccount(pseudo);
 
 	    // Rediriger vers une page de confirmation ou d'accueil
-	    return "redirect:/encheres";
+	    return "redirect:/logout";
 	}
 
 	    

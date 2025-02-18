@@ -24,6 +24,7 @@ import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 	public class SecurityConfig {
 
 		
+		
 		@Bean
 		public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 			http
@@ -71,7 +72,7 @@ import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 
 	        // Requête pour récupérer les utilisateurs
 	        jdbcUserDetailsManager.setUsersByUsernameQuery(
-	            "SELECT pseudo AS username, mot_de_passe as password, 'true' AS enabled FROM utilisateurs WHERE pseudo = ?"
+	            "SELECT  pseudo AS username, mot_de_passe as password, 'true' AS enabled FROM utilisateurs WHERE pseudo = ?"
 	        );
 
 	        // Requête pour récupérer les autorités (rôles)

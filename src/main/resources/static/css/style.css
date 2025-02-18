@@ -21,6 +21,7 @@ ul {
 }
 
 nav ul{
+	
 	display: flex;
 	flex-wrap: wrap;
 	align-content: space-between;
@@ -28,7 +29,7 @@ nav ul{
 	
 }
 nav ul a {
-	
+	font-weight : 10px;
 	padding: 10px ;
 }
 
@@ -82,13 +83,14 @@ header li{
 }
 
 .article {
-    border-style: ridge;
-    border-color: burlywood;
-    background-color: green;
+    border-style: solid;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    background-color: #659e6f;
     margin: 5px;
     padding: 2rem;
     display: inline-block;
-    font-family: Georgia, 'Times New Roman', Times, serif;
+    
     color: whitesmoke;
 }
 
