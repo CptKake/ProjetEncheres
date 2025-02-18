@@ -11,7 +11,6 @@
 
 .form-container {
     background: #fff;
-   
     padding: 20px;
     margin: 20px 0;
     border-radius: 8px;
@@ -126,5 +125,17 @@
 }
 
 
+button {
+	padding: 10px 20px;
+    font-size: 16px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 4px;
+}
 
+button:hover{
+	background: #555; ;
+}
 
