@@ -15,10 +15,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import fr.eni.tp.bll.EnchereService;
+import fr.eni.tp.bll.RetraitService;
 import fr.eni.tp.bll.UtilisateurService;
 import fr.eni.tp.bo.Article;
 import fr.eni.tp.bo.Categorie;
 import fr.eni.tp.bo.Enchere;
+import fr.eni.tp.bo.Retrait;
 import fr.eni.tp.bo.Utilisateur;
 import jakarta.validation.Valid;
 
@@ -27,17 +29,26 @@ public class EnchereController {
 
 	private EnchereService enchereService;
 	private UtilisateurService utilisateurService;
+	private RetraitService retraitService;
 
-	public EnchereController(EnchereService enchereService, UtilisateurService utilisateurService) {
+	public EnchereController(EnchereService enchereService, UtilisateurService utilisateurService, RetraitService retraitService) {
 		this.enchereService = enchereService;
 		this.utilisateurService = utilisateurService;
+		this.retraitService = retraitService;
 	}
 
 	@GetMapping("/vendre")
-	public String vendreArticle (Model model) {
+	public String vendreArticle (Model model, @AuthenticationPrincipal UserDetails userDetails) {
 		List<Categorie> categories = this.enchereService.getAllCategories(); 
 		model.addAttribute("categories", categories);
 		
+		Utilisateur user = utilisateurService.profileByPseudo(userDetails.getUsername());
+		
+		
+		 Article article = new Article();
+		 Retrait retrait = new Retrait(user.getStreet(), user.getPostalCode(), user.getCity());
+		 article.setRetrait(retrait); 
+		 System.err.println(retrait);
 		model.addAttribute("article", new Article());
 		
 		return "vente";
@@ -53,6 +64,7 @@ public class EnchereController {
         try {
         	art.setUser(utilisateurService.profileByPseudo(userDetails.getUsername()));
             enchereService.createArticle(art);
+            retraitService.saveRetrait(art.getRetrait(), art.getNumber());
             return "redirect:/encheres";
         } catch (IllegalArgumentException e) {
             model.addAttribute("error", e.getMessage());

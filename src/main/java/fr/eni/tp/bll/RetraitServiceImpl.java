@@ -2,7 +2,7 @@ package fr.eni.tp.bll;
 
 import org.springframework.stereotype.Service;
 
-import fr.eni.tp.bo.Article;
+
 import fr.eni.tp.bo.Retrait;
 import fr.eni.tp.dal.RetraitDAO;
 

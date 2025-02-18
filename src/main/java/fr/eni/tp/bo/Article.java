@@ -13,6 +13,7 @@ public class Article {
 	private int sellPrice;
 	private Utilisateur user;
 	private Categorie category;
+	private Retrait retrait;
 	
 	public Article() {
 	}
@@ -160,6 +161,14 @@ public class Article {
 	 */
 	public int getNumber() {
 		return number;
+	}
+
+	public Retrait getRetrait() {
+		return retrait;
+	}
+
+	public void setRetrait(Retrait retrait) {
+		this.retrait = retrait;
 	}
 	
 	

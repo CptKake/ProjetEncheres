@@ -19,7 +19,10 @@
 			<p>meilleur offre par ...</p>
 			<li>Mise à prix :<p th:text="${art.initPrice}"></p></li>
 			<li>Fin de l'enchère :<p th:text="${art.bidEnd}"></p></li>
-			<p>Retrait</p>
+			<p>Retrait :</p>
+				<li>Rue : <p th:text="${retrait.street}"></p></li>
+				<li>Code Postal : <p th:text="${retrait.postalCode}"></p></li>
+				<li>Ville : <p th:text="${retrait.city}"></p></li>
 			<li>Vendeur :<p th:text="${user.pseudo}"></p></li>
 		</ul>
 		<form th:action="@{/encherir}" method="POST">
