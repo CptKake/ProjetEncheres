@@ -15,12 +15,12 @@
 			<h2>Détail vente</h2>
 			<li th:text="${art.name}"></li>
 			<li>Description :<p th:text="${art.description}"></p></li>
-			<li>Catégorie :<p th:text="${art.category}"></p></li>
+			<li>Catégorie :<p th:text="${cat.name}"></p></li>
 			<p>meilleur offre par ...</p>
 			<li>Mise à prix :<p th:text="${art.initPrice}"></p></li>
 			<li>Fin de l'enchère :<p th:text="${art.bidEnd}"></p></li>
 			<p>Retrait</p>
-			<li>Vendeur :<p th:text="${art.user}"></p></li>
+			<li>Vendeur :<p th:text="${user.pseudo}"></p></li>
 		</ul>
 		<form th:action="@{/encherir}" method="POST">
 			<label for="idBid">Ma proposition: </label>

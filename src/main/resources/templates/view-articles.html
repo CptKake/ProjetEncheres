@@ -30,7 +30,7 @@
 			<p th:text="${art.name}"></p>
 			<p th:text="|Prix : ${art.sellPrice}|"></p>
 			<p th:text="|Fin de l'enchère : ${art.bidEnd}|"></p>
-			<p th:text="|Vendeur : ${art.user}|"></p>
+			<p th:text="|Vendeur : ${art.user.pseudo}|"></p>
 			<p><a th:href="@{encheres/details(idArt=${art.number})}">Détails</a></p>
 		</div>
 	</div>	

@@ -23,4 +23,5 @@ public interface EnchereDAO {
 	void delete(Enchere enchere);
 	
 	void update(Enchere enchere);
+
 }

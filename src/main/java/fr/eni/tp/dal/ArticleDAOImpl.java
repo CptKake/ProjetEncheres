@@ -12,6 +12,7 @@ import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 
 import fr.eni.tp.bo.Article;
+import fr.eni.tp.bo.Categorie;
 import fr.eni.tp.bo.Utilisateur;
 
 @Repository
@@ -31,6 +32,7 @@ public class ArticleDAOImpl implements ArticleDAO {
 	private static final String FIND_SELLS = "SELECT * FROM articles_vendus WHERE no_utilisateur = :idUser";
 	
 	private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
+	
 	
 	public ArticleDAOImpl(NamedParameterJdbcTemplate namedParameterJdbcTemplate) {
 		this.namedParameterJdbcTemplate = namedParameterJdbcTemplate;
@@ -106,23 +108,30 @@ public class ArticleDAOImpl implements ArticleDAO {
 }
 
 class ArticleRowMapper implements RowMapper<Article> {
-		
-        @Override
-        public Article mapRow(ResultSet rs, int rowNum) throws SQLException {
-        	Article art = new Article();
-            art.setNumber(rs.getInt("no_article"));
-            art.setName(rs.getString("nom_article"));
-            art.setDescription(rs.getString("description"));
-            art.setBidStart(rs.getDate("date_debut_encheres").toLocalDate());
-            art.setBidEnd(rs.getDate("date_fin_encheres").toLocalDate());
-            art.setInitPrice(rs.getInt("prix_initial"));
-            art.setSellPrice(rs.getInt("prix_vente"));
-           // TODO créer une fonction get cat by id
-           //art.setCategory(rs.getInt("no_categorie"));
-            
-            return art;
-        }
 
+	@Override
+    public Article mapRow(ResultSet rs, int rowNum) throws SQLException {
+    	Article art = new Article();
+        art.setNumber(rs.getInt("no_article"));
+        art.setName(rs.getString("nom_article"));
+        art.setDescription(rs.getString("description"));
+        art.setBidStart(rs.getDate("date_debut_encheres").toLocalDate());
+        art.setBidEnd(rs.getDate("date_fin_encheres").toLocalDate());
+        art.setInitPrice(rs.getInt("prix_initial"));
+        art.setSellPrice(rs.getInt("prix_vente"));
+        //art.setCategory(categorieDAO.findById(rs.getInt("no_categorie")));
+        
+        Categorie cat = new Categorie();
+        cat.setNumber(rs.getInt("no_categorie"));
+        art.setCategory(cat);
+        
+        Utilisateur user = new Utilisateur();
+        user.setNbUser(rs.getInt("no_utilisateur"));
+        art.setUser(user);
+        
+        return art;
+    }
+	
 }
 
 
