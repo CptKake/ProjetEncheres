@@ -21,7 +21,7 @@ public class EnchereServiceImpl implements EnchereService  {
 	private EnchereDAO enchereDAO;
 	private ArticleDAO articleDAO;
 	private CategorieDAO categorieDAO;
-	
+
 	public EnchereServiceImpl(EnchereDAO enchereDAO, ArticleDAO articleDAO, CategorieDAO categorieDAO) {
 		this.enchereDAO = enchereDAO;
 		this.articleDAO = articleDAO;
@@ -118,6 +118,7 @@ public class EnchereServiceImpl implements EnchereService  {
 	@Override
 	public List<Article> allArticles() {
 		List<Article> articles = articleDAO.findAll();
+		
 		return articles;
 	}
 

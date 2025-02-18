@@ -25,15 +25,15 @@
         
         <button type="button">Rechercher</button>
     </div>
-    
-	<div th:each="art : ${articles}">
-		<p th:text="${art.name}"></p>
-		<p th:text="${art.sellPrice}"></p>
-		<p th:text="${art.bidEnd}"></p>
-		<p th:text="${art.user}"></p>
-		<p><a th:href="@{encheres/details(idArt=${art.number})}">Détails</a></p>
-	</div>
-		
+    <div class="annonces">
+		<div th:each="art : ${articles}" class="article">
+			<p th:text="${art.name}"></p>
+			<p th:text="|Prix : ${art.sellPrice}|"></p>
+			<p th:text="|Fin de l'enchère : ${art.bidEnd}|"></p>
+			<p th:text="|Vendeur : ${art.user.pseudo}|"></p>
+			<p><a th:href="@{encheres/details(idArt=${art.number})}">Détails</a></p>
+		</div>
+	</div>	
 	<div th:replace="~{fragments/fragment-footer}"></div>
 </body>
 </html>

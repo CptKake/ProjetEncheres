@@ -21,9 +21,14 @@ public class Categorie {
 
 	
 	
+
+
+
+
+
 	@Override
 	public String toString() {
-		return String.format("Categorie [name=%s]", name);
+		return String.format("Categorie [number=%s, name=%s]", number, name);
 	}
 
 

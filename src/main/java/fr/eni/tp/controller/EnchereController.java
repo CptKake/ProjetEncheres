@@ -32,7 +32,7 @@ public class EnchereController {
 	@GetMapping("/vendre")
 	public String vendreArticle (Model model) {
 		List<Categorie> categories = this.enchereService.getAllCategories(); 
-		model.addAttribute("category", categories);
+		model.addAttribute("categories", categories);
 		
 		model.addAttribute("article", new Article());
 		
@@ -48,7 +48,7 @@ public class EnchereController {
 
         try {
         	art.setUser(utilisateurService.profileByPseudo(userDetails.getUsername()));
-        	art.setCategory(enchereService.getCatById(10));
+        	System.err.println("art = " + art);
             enchereService.createArticle(art);
             return "redirect:/encheres";
         } catch (IllegalArgumentException e) {

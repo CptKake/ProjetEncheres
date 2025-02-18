@@ -30,9 +30,9 @@
         <li>
             <label for="idCategory">Categorie</label>
         	<select id="idCategory" th:field="*{category}">
-     			<option th:each="cat : ${category}"
+     			<option th:each="cat : ${categories}"
      				th:text="${cat.name}"
-     				th:value="${cat.number}">
+     				th:value="${cat}">
      			</option> 
        		</select>
             <div th:if="${#fields.hasErrors('category')}" th:errors="*{category}">category Error</div>
