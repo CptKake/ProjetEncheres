@@ -48,12 +48,6 @@ public class AccountServiceImpl implements UtilisateurService {
 		
 	}
 
-	@Override
-	public int getCredits(Utilisateur user) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
 
 	@Override
 	public void modifyAccount(Utilisateur user) {

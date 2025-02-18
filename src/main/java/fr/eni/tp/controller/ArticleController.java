@@ -48,7 +48,6 @@ public class ArticleController {
 	public String afficherDetailArticle(@RequestParam(name="idArt",
 			required = true) int idArt, Model model) {
 		
-		System.out.println("idArt = " + idArt);
 		Article art = this.enchereService.readArticle(idArt);
 		Categorie cat = this.enchereService.getCatById(art.getCategory().getNumber());
 		Utilisateur user = this.utilisateurService.profileByNbUser(art.getUser().getNbUser());

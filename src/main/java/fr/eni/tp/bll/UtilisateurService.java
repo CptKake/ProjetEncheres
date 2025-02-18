@@ -8,8 +8,6 @@ public interface UtilisateurService {
 	
 	void deleteAccount(String pseudo);
 	
-	int getCredits(Utilisateur user);
-	
 	void modifyAccount(Utilisateur user);
 	
 	Utilisateur profileByPseudo(String pseudo);

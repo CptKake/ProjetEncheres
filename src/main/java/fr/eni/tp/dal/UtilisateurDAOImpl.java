@@ -20,7 +20,7 @@ public class UtilisateurDAOImpl implements UtilisateurDAO {
 	private static final String SELECT_BY_PSEUDO = "SELECT no_utilisateur, pseudo, nom, prenom, email, telephone, rue, code_postal, ville, mot_de_passe, credit, administrateur FROM UTILISATEURS WHERE pseudo = :pseudo ";
 	private static final String SELECT_BY_NO_UTILISATEUR = "SELECT no_utilisateur, pseudo, nom, prenom, email, telephone, rue, code_postal, ville, mot_de_passe, credit, administrateur FROM UTILISATEURS WHERE no_utilisateur = :no_utilisateur";
 	private static final String DELETE = "DELETE FROM UTILISATEURS WHERE pseudo= :pseudo ";
-	private static final String UPDATE = "UPDATE UTILISATEURS SET pseudo = :pseudo, nom = :nom, prenom = :prenom, email = :email, telephone = :telephone, rue = :rue, code_postal = :code_postal, ville = :ville, mot_de_passe = :mot_de_passe WHERE no_utilisateur= :no_utilisateur ";
+	private static final String UPDATE = "UPDATE UTILISATEURS SET pseudo = :pseudo, nom = :nom, prenom = :prenom, email = :email, telephone = :telephone, rue = :rue, credit = :credit, code_postal = :code_postal, ville = :ville, mot_de_passe = :mot_de_passe WHERE no_utilisateur= :no_utilisateur ";
 	private static final String COUNT_PSEUDO = "SELECT COUNT(*) FROM UTILISATEURS WHERE pseudo LIKE (:pseudo)";
 	private static final String COUNT_EMAIL = "SELECT COUNT(*) FROM UTILISATEURS WHERE email LIKE (:email)";
 	private static final String COUNT_BY_NB_USER = "SELECT COUNT(*) FROM UTILISATEURS WHERE no_utilisateur = :no_utilisateur";
@@ -89,6 +89,7 @@ public class UtilisateurDAOImpl implements UtilisateurDAO {
         namedParameters.addValue("ville", user.getCity());
         namedParameters.addValue("mot_de_passe", user.getPassword());
         namedParameters.addValue("no_utilisateur", user.getNbUser());
+        namedParameters.addValue("credit", user.getCredit());
 
         namedParameterJdbcTemplate.update(UPDATE, namedParameters);
 	}
@@ -162,6 +163,8 @@ public class UtilisateurDAOImpl implements UtilisateurDAO {
             user.setStreet(rs.getString("rue"));
             user.setPostalCode(rs.getString("code_postal"));
             user.setCity(rs.getString("ville"));
+            user.setCredit(rs.getInt("credit"));
+            user.setAdmin(rs.getByte("administrateur"));
             return user;
         }
     }
