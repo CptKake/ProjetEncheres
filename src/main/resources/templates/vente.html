@@ -55,6 +55,25 @@
             <input id="idEnd" type="date" th:field="*{bidEnd}"/>
             <div th:if="${#fields.hasErrors('bidEnd')}" th:errors="*{bidEnd}">bidEnd Error</div>
         </li>
+        
+	     
+	     	<p>Retrait</p>
+	        <li>
+	            <label for="idStreet">Rue de retrait: </label>
+	            <input id="idStreet" type="text" th:field="*{retrait.street}"/>
+	          
+	        </li>
+	        <li>
+	            <label for="idPostalCode">Code Postal de retrait: </label>
+	            <input id="idPostalCode" type="text" th:field="*{retrait.postalCode}"/>
+	          
+	        </li>
+	        <li>
+	            <label for="idCity">Ville de retrait: </label>
+	            <input id="idCity" type="text" th:field="*{retrait.city}"/>
+	            
+	        </li>
+        
     </ul>
     <button type="submit">Enregistrer</button>
     <button type="reset">Annuler</button>
