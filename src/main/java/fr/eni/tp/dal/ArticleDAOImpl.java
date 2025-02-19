@@ -82,7 +82,7 @@ public class ArticleDAOImpl implements ArticleDAO {
 		map.addValue("bidS", art.getBidStart());
 		map.addValue("bidE", art.getBidEnd());
 		map.addValue("initPrice", art.getInitPrice());
-		map.addValue("sellPrice", art.getInitPrice());
+		map.addValue("sellPrice", art.getSellPrice());
 		map.addValue("catId", art.getCategory().getNumber());
 		map.addValue("artId", art.getNumber());
 		 namedParameterJdbcTemplate.update(UPDATE_ART, map);

@@ -21,6 +21,12 @@ public class Enchere {
 		this.bidAmount = bidAmount;
 	}
 	
+	@Override
+	public String toString() {
+		return String.format("Enchere [auctionDate=%s, bidAmount=%s, nbUser=%s, nbArticle=%s]", auctionDate, bidAmount,
+				nbUser, nbArticle);
+	}
+
 	public Enchere() {
 	}
 	

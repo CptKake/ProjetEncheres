@@ -75,7 +75,7 @@ public class AccountServiceImpl implements UtilisateurService {
 
 	@Override
 	public void updateCredits(Utilisateur user) {
-		// TODO Auto-generated method stub
+		userDAO.updateCredit(user);
 	}
 
 }

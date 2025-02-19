@@ -95,7 +95,6 @@ public class EnchereController {
 				utilisateurService.updateCredits(user);
 				
 				List<Enchere> encheres = enchereService.findEncheresByArt(art);
-				System.err.println("##### ENCHERES.size = " + encheres.size());
 				
 				//vérification présence d'enchère antérieures
 	        	if (encheres.size() != 0) {
@@ -103,26 +102,36 @@ public class EnchereController {
 	        		
 	        		//récupération utilisateur avec la plus haute enchère
 	        		Enchere bestBid = enchereService.bestEnchere(art);
-	        		System.err.println("##### best bid amount = " + bestBid.getBidAmount());
-	        		Utilisateur bestBidder = bestBid.getNbUser();
-	        		System.err.println("##### best bidder pseudo= " + bestBidder.getPseudo());
+	        		Utilisateur bestBidder = utilisateurService.profileByNbUser(bestBid.getNbUser().getNbUser());
 	        		
+	        		//Deletion ancienne enchère user 
+	        		Utilisateur enchereUser;
+					for (Enchere enchere : encheres) {
+						enchereUser = utilisateurService.profileByNbUser(enchere.getNbUser().getNbUser());
+						if (enchereUser.getNbUser() == user.getNbUser()) {	
+							System.err.println("##### PASSAGE PAR DELETION ENCHERE #####");
+							enchereService.deleteEnchere(enchere);
+						}
+					}
 	        		//remboursement de l'enchère précedente
-	        		bestBidder.setCredit(bestBidder.getCredit() + enchereService.bestEnchere(art).getBidAmount());
+					System.err.println("##### PASSAGE PAR REMBOURSEMENT #####");
+	        		bestBidder.setCredit(bestBidder.getCredit() + art.getSellPrice());
 	        		utilisateurService.updateCredits(bestBidder);
 	        		//Création de la nouvelle enchère
-	        		enchereService.createEnchere(bid, art);
-	        		//màj du prix de vente de l'art
-	        		art.setSellPrice(bid.getBidAmount());
-	        		enchereService.updateArticle(art);
+	        		System.err.println("##### PASSAGE PAR CREATION ENCHERE #####");
+	        		enchereService.createEnchere(bid, art);	
 				} else {
 					System.err.println("##### PAS D'ENCHERE PRECEDENTE #####");
 					
+					//Deletion ancienne enchère user 
+					for (Enchere enchere : encheres) {
+						if (enchere.getNbUser() == user) {
+							enchereService.deleteEnchere(enchere);
+						}
+					}
 					//Création de la nouvelle enchère
+					System.err.println("##### PASSAGE PAR CREATION ENCHERE #####");
 	        		enchereService.createEnchere(bid, art);
-	        		//màj du prix de vente de l'art
-	        		art.setSellPrice(bid.getBidAmount());
-	        		enchereService.updateArticle(art);
 				}
 			} else {
 				System.err.println("##### PAS ASSEZ DE CREDITS #####");

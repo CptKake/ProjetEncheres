@@ -1,9 +1,12 @@
 
 package fr.eni.tp.dal;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.List;
 
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
+import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;
@@ -23,7 +26,7 @@ public class EnchereDAOImpl implements EnchereDAO {
 													+ "ON e.no_article = av.no_article WHERE av.date_fin_encheres < CURRENT_DATE "
 													+ "AND av.prix_vente = e.montant_enchere "
 													+ "AND e.no_utilisateur = :idUser";
-	private static final String ENCHERES_EN_COURS = "SELECT e.no_utilisateur, e.no_article, e.date_enchere, e.montant_enchere "
+	private static final String ENCHERES_EN_COURS = "SELECT e.no_utilisateur, e.no_article, date_enchere, montant_enchere "
 												+ "FROM encheres e JOIN articles_vendus av ON e.no_article = av.no_article "
 												+ "WHERE av.date_fin_encheres > CURRENT_DATE AND e.no_utilisateur = :idUser";
 	private static final String FIND_BEST_BID = "SELECT e.no_utilisateur, e.no_article, e.date_enchere, e.montant_enchere "
@@ -49,7 +52,7 @@ public class EnchereDAOImpl implements EnchereDAO {
 		MapSqlParameterSource map = new MapSqlParameterSource();
 		map.addValue("idUser", user.getNbUser());
 		
-		return namedParameterJdbcTemplate.query(ENCHERES_USER, map, new BeanPropertyRowMapper<Enchere>(Enchere.class));
+		return namedParameterJdbcTemplate.query(ENCHERES_USER, map, new EnchereRowMapper());
 	}
 
 	@Override
@@ -57,7 +60,7 @@ public class EnchereDAOImpl implements EnchereDAO {
 		MapSqlParameterSource map = new MapSqlParameterSource();
 		map.addValue("idUser", user.getNbUser());
 		
-		return namedParameterJdbcTemplate.query(ENCHERES_EN_COURS, map, new BeanPropertyRowMapper<Enchere>(Enchere.class));
+		return namedParameterJdbcTemplate.query(ENCHERES_EN_COURS, map, new EnchereRowMapper());
 	}
 
 	@Override
@@ -73,7 +76,7 @@ public class EnchereDAOImpl implements EnchereDAO {
 		MapSqlParameterSource map = new MapSqlParameterSource();
 		map.addValue("idArt", art.getNumber());
 		
-		return namedParameterJdbcTemplate.queryForObject(FIND_BEST_BID, map, new BeanPropertyRowMapper<Enchere>(Enchere.class));
+		return namedParameterJdbcTemplate.queryForObject(FIND_BEST_BID, map, new EnchereRowMapper());
 	}
 
 	@Override
@@ -89,8 +92,8 @@ public class EnchereDAOImpl implements EnchereDAO {
 	@Override
 	public void delete(Enchere enchere) {
 		MapSqlParameterSource map = new MapSqlParameterSource();
-		map.addValue("idUser", enchere.getNbUser());
-		map.addValue("idArt", enchere.getNbArticle());
+		map.addValue("idUser", enchere.getNbUser().getNbUser());
+		map.addValue("idArt", enchere.getNbArticle().getNumber());
 		
 		namedParameterJdbcTemplate.update(DELETE_ENCHERE, map);
 	}
@@ -98,8 +101,8 @@ public class EnchereDAOImpl implements EnchereDAO {
 	@Override
 	public void update(Enchere enchere) {
 		MapSqlParameterSource map = new MapSqlParameterSource();
-		map.addValue("idUser", enchere.getNbUser());
-		map.addValue("idArt", enchere.getNbArticle());
+		map.addValue("idUser", enchere.getNbUser().getNbUser());
+		map.addValue("idArt", enchere.getNbArticle().getNumber());
 		map.addValue("sum", enchere.getBidAmount());
 		
 		namedParameterJdbcTemplate.update(UPDATE_ENCHERE, map);
@@ -110,10 +113,29 @@ public class EnchereDAOImpl implements EnchereDAO {
 		MapSqlParameterSource map = new MapSqlParameterSource();
 		map.addValue("idArt", art.getNumber());
 		
-		return namedParameterJdbcTemplate.query(ENCHERES_BY_ART, map, new BeanPropertyRowMapper<Enchere>(Enchere.class));
+		return namedParameterJdbcTemplate.query(ENCHERES_BY_ART, map, new EnchereRowMapper());
 	}
 
-	
-	
 
+}
+
+class EnchereRowMapper implements RowMapper<Enchere> {
+
+	@Override
+    public Enchere mapRow(ResultSet rs, int rowNum) throws SQLException {
+    	Enchere ench = new Enchere();
+        ench.setAuctionDate(rs.getDate("date_enchere").toLocalDate());
+        ench.setBidAmount(rs.getInt("montant_enchere"));
+        
+        Article art = new Article();
+        art.setNumber(rs.getInt("no_article"));
+        ench.setNbArticle(art);
+        
+        Utilisateur user = new Utilisateur();
+        user.setNbUser(rs.getInt("no_utilisateur"));
+        ench.setNbUser(user);
+        
+        return ench;
+    }
+	
 }
