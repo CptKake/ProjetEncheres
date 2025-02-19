@@ -1,6 +1,7 @@
 package fr.eni.tp.controller;
 
-	import java.util.List;
+import java.util.List;
+import java.util.Objects;
 
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -62,9 +63,12 @@ public class ArticleController {
 		Categorie cat = this.enchereService.getCatById(art.getCategory().getNumber());
 		Utilisateur user = this.utilisateurService.profileByNbUser(art.getUser().getNbUser());
 		Retrait retrait = this.retraitService.getRetraitForArticle(idArt);
-		Enchere ench = this.enchereService.bestEnchere(art);
-		ench.setNbUser(this.utilisateurService.profileByNbUser(ench.getNbUser().getNbUser()));
-		
+		Enchere ench = null;
+		if (enchereService.findEncheresByArt(art).size() != 0) {
+			ench = this.enchereService.bestEnchere(art);
+			ench.setNbUser(utilisateurService.profileByNbUser(art.getUser().getNbUser()));
+		}
+		 
 		model.addAttribute("cat", cat);
 		model.addAttribute("user", user);
 		model.addAttribute("art", art);

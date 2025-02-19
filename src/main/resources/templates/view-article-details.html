@@ -16,8 +16,8 @@
 			<li th:text="${art.name}"></li>
 			<li th:text="|Description : ${art.description}|"></li>
 			<li th:text="|Catégorie : ${cat.name}|"></li>
-			<li th:text="|Meilleure offre : ${art.sellPrice} pts par ${ench.nbUser.pseudo}|"></li>
-			<li th:text="|Mise à prix : ${art.initPrice}|"></li>
+			<li th:if="${ench != null}" th:text="|Meilleure offre : ${art.sellPrice} pts par ${ench.nbUser.pseudo}|"></li>
+			<li th:text="|Mise à prix : ${art.initPrice} points|"></li>
 			<li th:text="|Fin de l'enchère : ${art.bidEnd}|"></li>
 			<h3>Retrait :</h3>
 			<li th:text="|${retrait.street} |"></li>
