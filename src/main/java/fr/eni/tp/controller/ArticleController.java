@@ -2,6 +2,8 @@ package fr.eni.tp.controller;
 
 	import java.util.List;
 
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -32,7 +34,7 @@ public class ArticleController {
 	}
 
 	@GetMapping("/encheres")
-	public String afficherArticles(Model model) {
+	public String afficherArticles(Model model, @AuthenticationPrincipal UserDetails userDetails) {
 		
 		List<Categorie> categories = this.enchereService.getAllCategories(); 
 		model.addAttribute("categories", categories);
@@ -42,6 +44,10 @@ public class ArticleController {
 		
 		for (Article art : articles) {
 			art.setUser(utilisateurService.profileByNbUser(art.getUser().getNbUser()));
+		}
+		if (userDetails != null) {
+		  Utilisateur user = utilisateurService.profileByPseudo(userDetails.getUsername());
+		    model.addAttribute("user", user);
 		}
 		
 		return "view-articles";

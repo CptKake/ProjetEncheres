@@ -57,22 +57,23 @@
         </li>
         
 	     
-	     	<p>Retrait</p>
+	     	<div class=retrait><p >Retrait</p>
 	        <li>
-	            <label for="idStreet">Rue de retrait: </label>
+	            <label for="idStreet">Rue : </label>
 	            <input id="idStreet" type="text" th:field="*{retrait.street}"/>
 	          
 	        </li>
 	        <li>
-	            <label for="idPostalCode">Code Postal de retrait: </label>
+	            <label for="idPostalCode">Code Postal : </label>
 	            <input id="idPostalCode" type="text" th:field="*{retrait.postalCode}"/>
 	          
 	        </li>
 	        <li>
-	            <label for="idCity">Ville de retrait: </label>
+	            <label for="idCity">Ville : </label>
 	            <input id="idCity" type="text" th:field="*{retrait.city}"/>
 	            
 	        </li>
+	        </div>
         
     </ul>
     <button type="submit">Enregistrer</button>

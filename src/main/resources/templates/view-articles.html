@@ -31,7 +31,10 @@
 			<p th:text="|Prix : ${art.sellPrice}|"></p>
 			<p th:text="|Fin de l'enchère : ${art.bidEnd}|"></p>
 			<p th:text="|Vendeur : ${art.user.pseudo}|"></p>
-			<p><a th:href="@{encheres/details(idArt=${art.number})}">Détails</a></p>
+			<p>
+				<a th:if="${user != null and user.nbUser == art.user.nbUser}" th:href="@{/vendre(idArt=${art.number})}">Modifier</a>
+				<a  th:href="@{encheres/details(idArt=${art.number})}">Détails</a>
+			</p>
 		</div>
 	</div>	
 	<div th:replace="~{fragments/fragment-footer}"></div>
