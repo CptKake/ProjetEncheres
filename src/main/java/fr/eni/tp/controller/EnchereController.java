@@ -55,17 +55,7 @@ public class EnchereController {
 		return "vente";
 	}
 	
-	@GetMapping("/vendre/{idArt}")
-	public String modifierArticle(@PathVariable("idArt") int idArt, Model model) {
-	    Article article = enchereService.readArticle(idArt);
-	    List<Categorie> categories = enchereService.getAllCategories();
-System.err.println(article );
-System.err.println(categories );
-	    model.addAttribute("article", article);
-	    model.addAttribute("categories", categories);
-
-	    return "vente";
-	}
+	
 	
 	@PostMapping("/vendre")
 	public String creerVente (@ModelAttribute("article") @Valid Article art, BindingResult result,@AuthenticationPrincipal UserDetails userDetails, Model model) {
@@ -84,6 +74,44 @@ System.err.println(categories );
             return "vente";
         }
 
+	}
+	
+	@GetMapping("/modifvente/{idArt}")
+	public String modifierArticle(@PathVariable("idArt") int idArt, Model model) {
+	    
+		List<Categorie> categories = enchereService.getAllCategories();
+		Article art = this.enchereService.readArticle(idArt);
+		Utilisateur user = this.utilisateurService.profileByNbUser(art.getUser().getNbUser());
+		Retrait retrait = this.retraitService.getRetraitForArticle(idArt);
+		System.err.println(art);
+		System.err.println(categories );
+			
+		model.addAttribute("categories", categories);
+		model.addAttribute("user", user);
+		model.addAttribute("article", art);
+		model.addAttribute("retrait", retrait);
+
+	    return "modifier-vente";
+	}
+	
+	@PostMapping("/vendre/update")
+	public String updateArticle(@ModelAttribute("article") @Valid Article art, BindingResult result, Model model) {
+	    if (result.hasErrors()) {
+	        List<Categorie> categories = enchereService.getAllCategories();
+	        model.addAttribute("categories", categories);
+	        return "modifier-vente";
+	    }
+
+	    try {
+	        enchereService.updateArticle(art);
+	        retraitService.updateRetrait(art.getRetrait(), art.getNumber());
+	        return "redirect:/encheres";
+	    } catch (IllegalArgumentException e) {
+	        model.addAttribute("error", e.getMessage());
+	        List<Categorie> categories = enchereService.getAllCategories();
+	        model.addAttribute("categories", categories);
+	        return "modifier-vente";
+	    }
 	}
 	
 	@PostMapping("/encherir")

@@ -74,7 +74,7 @@
 			<p th:text="|Fin de l'enchère : ${art.bidEnd}|"></p>
 			<p th:text="|Vendeur : ${art.user.pseudo}|"></p>
 			<p>
-				<a th:if="${user != null and user.nbUser == art.user.nbUser}" th:href="@{/vendre(idArt=${art.number})}">Modifier</a>
+				<a th:if="${user != null and user.nbUser == art.user.nbUser}" th:href="@{/modifvente/{idArt}(idArt=${art.number})}">Modifier</a>
 				<a  th:href="@{encheres/details(idArt=${art.number})}">Détails</a>
 			</p>
 		</div>

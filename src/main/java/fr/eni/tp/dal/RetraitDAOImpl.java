@@ -14,7 +14,7 @@ public class RetraitDAOImpl implements RetraitDAO {
 	
     private static final String SELECT_RETRAIT = "SELECT rue, code_postal, ville FROM retraits WHERE no_article = :no_article";
     private static final String INSERT_RETRAIT = "INSERT INTO retraits (no_article, rue, code_postal, ville) VALUES (:no_article, :rue, :code_postal, :ville)";
-	private static final String UPDATE_RETRAIT = "UPDATE retraits SET rue = :rue, code_postal = :code_postal, ville = ;ville WHERE no_article = :no_article";
+	private static final String UPDATE_RETRAIT = "UPDATE retraits SET rue = :rue, code_postal = :code_postal, ville = :ville WHERE no_article = :no_article";
 	private static final String DELETE_RETRAIT = "DELETE FROM retraits WHERE no_article = :no_article";
 	
 	private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
@@ -55,6 +55,7 @@ public class RetraitDAOImpl implements RetraitDAO {
 	@Override
 	public void updateRetrait(Retrait retrait, int articleId) {
 		MapSqlParameterSource namedParameters = new MapSqlParameterSource();
+		namedParameters.addValue("no_article", articleId);
 		namedParameters.addValue("rue", retrait.getStreet());
 	    namedParameters.addValue("code_postal", retrait.getPostalCode());
 	    namedParameters.addValue("ville", retrait.getCity());
