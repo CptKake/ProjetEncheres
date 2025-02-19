@@ -22,4 +22,16 @@ public class RetraitServiceImpl implements RetraitService {
 	    public void saveRetrait(Retrait retrait, int articleId) {
 	        retraitDAO.saveRetrait(retrait, articleId);
 	    }
+
+		@Override
+		public void updateRetrait(Retrait retrait, int articleId) {
+			retraitDAO.updateRetrait(retrait, articleId);
+			
+		}
+
+		@Override
+		public void deleteRetrait(int articleId) {
+			retraitDAO.deleteRetrait(articleId);
+			
+		}
 }

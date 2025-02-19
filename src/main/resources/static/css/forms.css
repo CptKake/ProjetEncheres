@@ -7,7 +7,20 @@
 
 }
 
+.retrait{
+	border: 2px solid #659e6f; 
+    padding: 10px; 
+    margin-top: 5px;
+    border-radius: 5px; 
+    
+}
 
+.retrait p{
+	font-size: 1.5em;
+    font-weight: bold; 
+  	margin: 5px;
+    color: #659e6f; 
+}
 
 .form-container {
     background: #fff;

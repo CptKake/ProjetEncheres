@@ -12,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -49,10 +50,22 @@ public class EnchereController {
 		 Article article = new Article();
 		 Retrait retrait = new Retrait(user.getStreet(), user.getPostalCode(), user.getCity());
 		 article.setRetrait(retrait); 
-		 System.err.println(retrait);
-		model.addAttribute("article", new Article());
+		 
+		model.addAttribute("article", article);
 		
 		return "vente";
+	}
+	
+	@GetMapping("/vendre/{idArt}")
+	public String modifierArticle(@PathVariable("idArt") int idArt, Model model) {
+	    Article article = enchereService.readArticle(idArt);
+	    List<Categorie> categories = enchereService.getAllCategories();
+System.err.println(article );
+System.err.println(categories );
+	    model.addAttribute("article", article);
+	    model.addAttribute("categories", categories);
+
+	    return "vente";
 	}
 	
 	@PostMapping("/vendre")
