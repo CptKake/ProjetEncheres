@@ -16,6 +16,7 @@ import fr.eni.tp.bll.RetraitService;
 import fr.eni.tp.bll.UtilisateurService;
 import fr.eni.tp.bo.Article;
 import fr.eni.tp.bo.Categorie;
+import fr.eni.tp.bo.Enchere;
 import fr.eni.tp.bo.Retrait;
 import fr.eni.tp.bo.Utilisateur;
 
@@ -61,12 +62,14 @@ public class ArticleController {
 		Categorie cat = this.enchereService.getCatById(art.getCategory().getNumber());
 		Utilisateur user = this.utilisateurService.profileByNbUser(art.getUser().getNbUser());
 		Retrait retrait = this.retraitService.getRetraitForArticle(idArt);
+		Enchere ench = this.enchereService.bestEnchere(art);
+		ench.setNbUser(this.utilisateurService.profileByNbUser(ench.getNbUser().getNbUser()));
 		
 		model.addAttribute("cat", cat);
 		model.addAttribute("user", user);
 		model.addAttribute("art", art);
 		model.addAttribute("retrait", retrait);
-		
+		model.addAttribute("ench", ench);
 		
 		return "view-article-details";
 	}

@@ -14,16 +14,15 @@
 		<ul>
 			<h2>Détail vente</h2>
 			<li th:text="${art.name}"></li>
-			<li>Description :<p th:text="${art.description}"></p></li>
-			<li>Catégorie :<p th:text="${cat.name}"></p></li>
-			<p>meilleur offre par ...</p>
-			<li>Mise à prix :<p th:text="${art.initPrice}"></p></li>
-			<li>Fin de l'enchère :<p th:text="${art.bidEnd}"></p></li>
-			<p>Retrait :</p>
-				<li>Rue : <p th:text="${retrait.street}"></p></li>
-				<li>Code Postal : <p th:text="${retrait.postalCode}"></p></li>
-				<li>Ville : <p th:text="${retrait.city}"></p></li>
-			<li>Vendeur :<p th:text="${user.pseudo}"></p></li>
+			<li th:text="|Description : ${art.description}|"></li>
+			<li th:text="|Catégorie : ${cat.name}|"></li>
+			<li th:text="|Meilleure offre : ${art.sellPrice} pts par ${ench.nbUser.pseudo}|"></li>
+			<li th:text="|Mise à prix : ${art.initPrice}|"></li>
+			<li th:text="|Fin de l'enchère : ${art.bidEnd}|"></li>
+			<h3>Retrait :</h3>
+			<li th:text="|${retrait.street} |"></li>
+			<li th:text="|${retrait.postalCode} | + |${retrait.city}|"></li>
+			<li th:text="|Vendeur : ${user.pseudo}|"></li>
 		</ul>
 		<form th:action="@{/encherir}" method="POST">
 			<label for="idBid">Ma proposition: </label>
