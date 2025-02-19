@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Modifier un article</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
+    <link rel="stylesheet" th:href="@{/css/forms.css}" />
+</head>
+<body class="container">
+
+    <div th:replace="~{fragments/fragment-entete}"></div>
+
+    <main class="form-container">
+        <h1>Modifier un article</h1>
+        <form class="form-group" th:action="@{/vendre/update}" method="POST" th:object="${article}">
+            <ul>
+                <li>
+                    <label for="idName">Article: </label>
+                    <input id="idName" type="text" th:field="*{name}"/>
+                    <div th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name Error</div>
+                </li>
+                <li>
+                    <label for="idDescription">Description: </label>
+                    <textarea id="idDescription" rows="5" th:field="*{description}"></textarea>
+                    <div th:if="${#fields.hasErrors('description')}" th:errors="*{description}">Description Error</div>
+                </li>
+                <li>
+                    <label for="idCategory">Catégorie</label>
+                    <select id="idCategory" th:field="*{category}">
+                        <option th:each="cat : ${categories}"
+                                th:text="${cat.name}"
+                                th:value="${cat.number}">
+                        </option>
+                    </select>
+                    <div th:if="${#fields.hasErrors('category')}" th:errors="*{category}">Category Error</div>
+                </li>
+                <p>Upload image (à venir)</p>
+                <li>
+                    <label for="idPrix">Mise à prix: </label>
+                    <input id="idPrix" type="number" min="1" th:field="*{initPrice}"/>
+                    <div th:if="${#fields.hasErrors('initPrice')}" th:errors="*{initPrice}">InitPrice Error</div>
+                </li>
+                <li>
+                    <label for="idStart">Début de l'enchère: </label>
+                    <input id="idStart" type="date" th:field="*{bidStart}"/>
+                    <div th:if="${#fields.hasErrors('bidStart')}" th:errors="*{bidStart}">BidStart Error</div>
+                </li>
+                <li>
+                    <label for="idEnd">Fin de l'enchère: </label>
+                    <input id="idEnd" type="date" th:field="*{bidEnd}"/>
+                    <div th:if="${#fields.hasErrors('bidEnd')}" th:errors="*{bidEnd}">BidEnd Error</div>
+                </li>
+
+                <div class="retrait">
+                    <p>Retrait</p>
+                    <li>
+                        <label for="idStreet">Rue : </label>
+                        <input id="idStreet" type="text" th:field="*{retrait.street}"/>
+                    </li>
+                    <li>
+                        <label for="idPostalCode">Code Postal : </label>
+                        <input id="idPostalCode" type="text" th:field="*{retrait.postalCode}"/>
+                    </li>
+                    <li>
+                        <label for="idCity">Ville : </label>
+                        <input id="idCity" type="text" th:field="*{retrait.city}"/>
+                    </li>
+                </div>
+            </ul>
+            <button type="submit">Enregistrer modifications</button>
+            <a href="/encheres" class="button">Annuler</a>
+            <form th:action="@{/vendre/delete/{idArt}(idArt=${article.number})}" method="POST" style="display:inline;">
+                <button type="submit">Annuler la vente</button>
+            </form>
+        </form>
+
+        <div th:if="${error}" style="color: red;">
+            <p th:text="${error}"></p>
+        </div>
+    </main>
+    <div th:replace="~{fragments/fragment-footer}"></div>
+</body>
+</html>
