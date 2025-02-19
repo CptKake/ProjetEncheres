@@ -11,9 +11,10 @@
 	
 	<div th:replace="~{fragments/fragment-entete}"></div>
 	
-    <p>Filtres :</p>
+    <h3>Filtres :</h3>
     <div class="search-container">
-        <input type="text" placeholder="Rechercher...">
+    <form action="">
+        <input type="text" placeholder="Le nom de l'article contient">
      
         <label for="idCat">Categorie</label>
         <select id="idCat" th:field="*{categories}">
@@ -22,9 +23,50 @@
      				th:value="${cat.number}">
      		</option> 
         </select>
-        
+ 
         <button type="button">Rechercher</button>
-    </div>
+	    </div>
+	    
+	    <div class="radio">
+	    	<div>
+		        <input type="radio" id="achats" name="choixAchVen" value="achats" checked />
+		        <label for="achats">Achats</label>
+			    <ul>
+			    	<li>
+				        <input type="radio" id="open" name="choixEnch" value="open" />
+				        <label for="open">enchères ouvertes</label>
+				    </li>    
+				    <li>    
+				        <input type="radio" id="enCours" name="choixEnch" value="enCours" />
+				        <label for="enCours">mes enchères en cours</label>
+				    </li>    
+				    <li>   
+				        <input type="radio" id="win" name="choixEnch" value="win" />
+				        <label for="win">mes enchères remportées</label>
+				    </li>   
+			    </ul>    
+	        </div>
+	        
+	        <div>
+		        <input type="radio" id="ventes" name="choixAchVen" value="ventes" />
+		        <label for="ventes">Mes ventes</label>
+		        <ul>
+		        	<li>
+				        <input type="radio" id="enCoursVen" name="choixEnch" value="enCoursVen" />
+				        <label for="enCoursVen">mes ventes en cours</label>
+			        </li>
+			        <li>
+				        <input type="radio" id="nonStart" name="choixEnch" value="nonStart" />
+				        <label for="nonStart">ventes non débutées</label>
+			        </li>
+			        <li>
+				        <input type="radio" id="ended" name="choixEnch" value="ended" />
+				        <label for="ended">ventes terminées</label>
+			        </li>
+		        </ul>
+	        </div>
+	    </div>
+    </form>
     <div class="annonces">
 		<div th:each="art : ${articles}" class="article">
 			<p th:text="${art.name}"></p>
