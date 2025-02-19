@@ -12,20 +12,20 @@
 	<div th:replace="~{fragments/fragment-entete}"></div>
 	
     <h3>Filtres :</h3>
-    <div class="search-container">
     <form action="">
-        <input type="text" placeholder="Le nom de l'article contient">
-     
-        <label for="idCat">Categorie</label>
-        <select id="idCat" th:field="*{categories}">
-     		<option th:each="cat : ${categories}"
-     				th:text="${cat.name}"
-     				th:value="${cat.number}">
-     		</option> 
-        </select>
- 
-        <button type="button">Rechercher</button>
-	    </div>
+	    <div class="search-container">
+	        <input type="text" placeholder="Le nom de l'article contient">
+	     
+	        <label for="idCat">Categorie</label>
+	        <select id="idCat" th:field="*{categories}">
+	     		<option th:each="cat : ${categories}"
+	     				th:text="${cat.name}"
+	     				th:value="${cat.number}">
+	     		</option> 
+	        </select>
+	
+	        <button type="button">Rechercher</button>
+		</div>
 	    
 	    <div class="radio">
 	    	<div>
@@ -66,7 +66,7 @@
 		        </ul>
 	        </div>
 	    </div>
-    </form>
+     </form>
     <div class="annonces">
 		<div th:each="art : ${articles}" class="article">
 			<p th:text="${art.name}"></p>
