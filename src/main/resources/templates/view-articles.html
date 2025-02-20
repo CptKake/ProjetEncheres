@@ -69,14 +69,21 @@
      </form>
     <div class="annonces">
 		<div th:each="art : ${articles}" class="article">
-			<p th:text="${art.name}"></p>
+			<a  th:href="@{encheres/details(idArt=${art.number})}"><p th:text="${art.name}"></p></a>
 			<p th:text="|Prix : ${art.sellPrice}|"></p>
 			<p th:text="|Fin de l'enchère : ${art.bidEnd}|"></p>
-			<p th:text="|Vendeur : ${art.user.pseudo}|"></p>
-			<p>
+			<div class= vendeur> Vendeur :
+			    <p sec:authorize="!isAuthenticated()" th:text="${art.user.pseudo}"></p>
+			
+			   
+			    <a sec:authorize="isAuthenticated()" th:href="@{/profil/vendeur/{userId}(userId=${art.user.nbUser})}">
+			        <p th:text="${art.user.pseudo}"></p>
+			    </a>
+			</div>
 				<a th:if="${user != null and user.nbUser == art.user.nbUser}" th:href="@{/modifvente/{idArt}(idArt=${art.number})}">Modifier</a>
-				<a  th:href="@{encheres/details(idArt=${art.number})}">Détails</a>
-			</p>
+				
+				
+			
 		</div>
 	</div>	
 	<div th:replace="~{fragments/fragment-footer}"></div>
