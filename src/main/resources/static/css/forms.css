@@ -93,7 +93,7 @@
 .suppress{
 	padding: 10px 20px;
     font-size: 16px;
-    background-color: #007bff;
+    background-color: #555;
     color: white;
     border: none;
     cursor: pointer;
@@ -107,7 +107,7 @@
 .reset {
      padding: 10px 20px;
     font-size: 16px;
-    background-color: #007bff;
+    background-color: #555;
     color: white;
     border: none;
     cursor: pointer;
@@ -131,6 +131,7 @@
     background: #555;
 }
 
+
 .button {
     padding: 10px 20px;
     font-size: 16px;
@@ -146,6 +147,7 @@ form {
     border-color: burlywood;
     background-color: #659e6f;
 }
+
 
 form input {
     border-radius: 8px;

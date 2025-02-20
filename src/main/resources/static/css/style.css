@@ -24,12 +24,14 @@ ul {
 }
 
 button {
+
     padding: 10px 20px;
         font-size: 16px;
         background-color: grey;
         color: white;
         border: none;
         cursor: pointer;
+
 }
 
 button:hover{
@@ -72,18 +74,18 @@ header li{
 	justify-content: space-between;
 }
 
-div p a{
-	text-decoration: none;
-	color: inherit; 
-	background-color:  #212423;
-	border-radius: 3px;
-	padding: 3px
+.article a{
+	text-decoration: blink;
+	color: #4220df; 
+	
+	
+	
 
 	}
 	
 a :hover{
 	text-decoration:blink;
-	color :#007bff;
+	color :#000000;
 	background-color:#007bff
 	
 }
@@ -91,7 +93,7 @@ a :hover{
 .vendeur{
 	
     display: flex;
-    align-items: center;
+    align-items: center; 
   	gap : 10px
 }
 
@@ -133,21 +135,26 @@ a :hover{
 
 .article {
     border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     background-color: #659e6f;
     margin: 5px;
     padding: 2rem;
     display: inline-block;
+
     width: fit-content;
     height: fit-content;
+
     color: whitesmoke;
 }
+
+
+
 
 .annonces {
     display: block;
     justify-content: flex-start;
     
 }
+
 
 .radio {
     display: inline-flex;
@@ -181,3 +188,4 @@ a {
     text-decoration: none;
     color: #d1dd2d;
 }
+

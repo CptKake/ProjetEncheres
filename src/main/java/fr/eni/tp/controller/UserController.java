@@ -90,7 +90,7 @@ public class UserController {
 	
 	@PostMapping("/modifier")
 	public String modifyProfile(@ModelAttribute("user") @Valid Utilisateur user, BindingResult result, Model model) {
-		System.out.println(user);
+		
 	    if (result.hasErrors()) {
 	        return "modifier-profile";
 	    }

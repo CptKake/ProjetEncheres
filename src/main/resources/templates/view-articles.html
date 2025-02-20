@@ -80,7 +80,9 @@
 			        <p th:text="${art.user.pseudo}"></p>
 			    </a>
 			</div>
+
 				<a th:class="${user != null and user.nbUser == art.user.nbUser}? visible : hidden" th:href="@{/modifvente/{idArt}(idArt=${art.number})}">Modifier</a>
+
 				
 				
 			

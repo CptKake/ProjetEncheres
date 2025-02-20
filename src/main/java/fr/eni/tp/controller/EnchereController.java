@@ -80,9 +80,12 @@ public class EnchereController {
 	public String modifierArticle(@PathVariable("idArt") int idArt, Model model) {
 	    
 		List<Categorie> categories = enchereService.getAllCategories();
+		
 		Article art = this.enchereService.readArticle(idArt);
 		Utilisateur user = this.utilisateurService.profileByNbUser(art.getUser().getNbUser());
 		Retrait retrait = this.retraitService.getRetraitForArticle(idArt);
+		art.setRetrait(retrait); 
+		 
 		System.err.println(art);
 		System.err.println(categories );
 			
