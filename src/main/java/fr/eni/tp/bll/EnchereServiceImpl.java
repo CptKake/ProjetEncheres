@@ -96,14 +96,19 @@ public class EnchereServiceImpl implements EnchereService  {
 	}
 
 	@Override
-	public void deleteArticle(Article article) {
-		if (LocalDate.now().isBefore(article.getBidStart())) {
-			articleDAO.suppressArticle(article);
+	public void deleteArticle(int idArt) {
+		 Article art = articleDAO.readArticle(idArt);
+		if (LocalDate.now().isBefore(art.getBidStart())) {
+			
+			    if (art != null) {
+			        articleDAO.suppressArticle(art);
+			    }
 		}
 	}
 
 	@Override
-	public void updateArticle(Article art) {
+	public void updateArticle(int idArt) {
+		Article art = articleDAO.readArticle(idArt);
 		if (LocalDate.now().isBefore(art.getBidStart())) {
 			articleDAO.updateArticle(art);
 		}

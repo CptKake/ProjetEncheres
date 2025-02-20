@@ -12,7 +12,7 @@
 
     <main class="form-container">
         <h1>Modifier un article</h1>
-        <form class="form-group" th:action="@{/vendre/update}" method="POST" th:object="${article}">
+        <form class="form-group" th:action="@{/vendre/update/{idArt}(idArt=${article.number})}" method="POST" th:object="${article}">
             <ul>
                 <li>
                     <label for="idName">Article: </label>
@@ -70,10 +70,12 @@
             </ul>
             <button type="submit">Enregistrer modifications</button>
             <a href="/encheres" class="button">Annuler</a>
-            <form th:action="@{/vendre/delete/{idArt}(idArt=${article.number})}" method="POST" style="display:inline;">
+          
+        </form>
+        
+          <form th:action="@{/vendre/delete/{idArt}(idArt=${article.number})}" method="POST" style="display:inline;">
                 <button type="submit">Annuler la vente</button>
             </form>
-        </form>
 
         <div th:if="${error}" style="color: red;">
             <p th:text="${error}"></p>

@@ -27,9 +27,9 @@ public interface EnchereService {
 	
 	void createArticle (Article article);
 	
-	void deleteArticle ( Article article);
+	void deleteArticle ( int idArt);
 	
-	void updateArticle(Article article);
+	void updateArticle(int idArt);
 	
 	Article readArticle (int nbrArticle);
 	

@@ -90,6 +90,8 @@ public class ArticleDAOImpl implements ArticleDAO {
 
 	@Override
 	public void updateArticle(Article art) {
+		
+		
 		MapSqlParameterSource map = new MapSqlParameterSource();
 		map.addValue("name", art.getName());
 		map.addValue("description", art.getDescription());

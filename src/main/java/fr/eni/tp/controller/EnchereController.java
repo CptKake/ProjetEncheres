@@ -97,8 +97,8 @@ public class EnchereController {
 	    return "modifier-vente";
 	}
 	
-	@PostMapping("/vendre/update")
-	public String updateArticle(@ModelAttribute("article") @Valid Article art, BindingResult result, Model model) {
+	@PostMapping("/vendre/update/{idArt}")
+	public String updateArticle(@PathVariable("idArt") int idArt, @ModelAttribute("article") @Valid Article art, BindingResult result, Model model) {
 	    if (result.hasErrors()) {
 	        List<Categorie> categories = enchereService.getAllCategories();
 	        model.addAttribute("categories", categories);
@@ -106,15 +106,51 @@ public class EnchereController {
 	    }
 
 	    try {
-	        enchereService.updateArticle(art);
-	        retraitService.updateRetrait(art.getRetrait(), art.getNumber());
-	        return "redirect:/encheres";
+	        // Récupérer l'article à partir de l'identifiant
+	        Article existingArt = enchereService.readArticle(idArt);
+
+	        // Mettre à jour les champs de l'article existant avec les nouvelles valeurs
+	        existingArt.setName(art.getName());
+	        existingArt.setDescription(art.getDescription());
+	        existingArt.setBidStart(art.getBidStart());
+	        existingArt.setBidEnd(art.getBidEnd());
+	        existingArt.setInitPrice(art.getInitPrice());
+	        existingArt.setSellPrice(art.getSellPrice());
+	        existingArt.setCategory(art.getCategory());
+	        
+	       
+	        enchereService.updateArticle(idArt);
+	        
+	        Retrait retrait = retraitService.getRetraitForArticle(idArt);
+	        if (retrait != null) {
+	            retrait.setStreet(art.getRetrait().getStreet());
+	            retrait.setPostalCode(art.getRetrait().getPostalCode());
+	            retrait.setCity(art.getRetrait().getCity());
+	            retraitService.updateRetrait(retrait, existingArt.getNumber());
+	            
+	            //la modif est bonne jusque là / KO dans DAO
+	            System.err.println("article :" + existingArt);
+	        }
+
+	        return "modifier-vente";
 	    } catch (IllegalArgumentException e) {
 	        model.addAttribute("error", e.getMessage());
 	        List<Categorie> categories = enchereService.getAllCategories();
 	        model.addAttribute("categories", categories);
+	     
 	        return "modifier-vente";
 	    }
+	
+	}
+	
+	@PostMapping("/vendre/delete/{idArt}")
+	public String deleteArt (@PathVariable("idArt") int idArt) {
+		Article art = enchereService.readArticle(idArt);
+		
+		enchereService.deleteArticle(idArt);
+	
+		return "redirect:/encheres";
+		
 	}
 	
 	@PostMapping("/encherir")
