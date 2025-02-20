@@ -9,11 +9,14 @@ header {
     align-items: center;
     padding: 10px 20px;
   	background-color: #659e6f;
+  	border-radius: 8px;
 }
 
 footer{
 	background-color: #659e6f;
-	
+	border-radius: 8px;
+	padding: 1px;
+	padding-left: 20px;
 }
 
 ul {
@@ -21,13 +24,12 @@ ul {
 }
 
 button {
-	padding: 10px 20px;
-    font-size: 16px;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    cursor: pointer;
-    border-radius: 4px;
+    padding: 10px 20px;
+        font-size: 16px;
+        background-color: grey;
+        color: white;
+        border: none;
+        cursor: pointer;
 }
 
 button:hover{
@@ -108,7 +110,7 @@ a :hover{
 .search-container button {
     padding: 10px 20px;
     font-size: 16px;
-    background-color: #007bff;
+    background-color: grey;
     color: white;
     border: none;
     cursor: pointer;
@@ -175,3 +177,7 @@ form input {
     text-decoration: none;
 }
 
+a {
+    text-decoration: none;
+    color: #d1dd2d;
+}

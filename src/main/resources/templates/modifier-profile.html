@@ -65,14 +65,12 @@
         <label for="idConfirmMdp">Confirmer le mot de passe: </label>
         <input id="idConfirmMdp" type="password" th:field="*{confirmPassword}"/>
     </li>
- 	<li class="credits">
-        <label for="idCredits">Crédit </label>
-        <input id="idCredits" type="text" th:field="*{credit}" readonly/>
-    </li>
- 
+ 	<li>
+ 		<p class="credits" th:text="|Crédits:  ${user.credit}|"></p>
+ 	</li>
     
     
-		<button class=save type="submit">Enregistrer</button>
+		<button type="submit">Enregistrer</button>
 	
 	
 
@@ -80,7 +78,7 @@
 </form>
 
 	<form  th:action="@{/profil/supprimer}" method="POST">
-	    <button class=suppress type="submit">Supprimer le compte</button>
+	    <button class="suppress" type="submit">Supprimer le compte</button>
 	</form>
 </main>
 

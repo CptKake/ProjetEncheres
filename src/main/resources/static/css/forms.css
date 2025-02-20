@@ -23,7 +23,7 @@
 }
 
 .form-container {
-    background: #fff;
+    background: #659e6f;
     padding: 20px;
     margin: 20px 0;
     border-radius: 8px;
@@ -75,12 +75,7 @@
 .credits {
     margin-top: 20px;
     font-size: 1.2em;
-    color: #333;
-    display: flex;
-    flex-direction: row
     
-    
-   
 }
 
 #idCredits{
@@ -125,18 +120,36 @@
 
 .save {
     padding: 10px 20px;
-    font-size: 16px;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    cursor: pointer;
-    border-radius: 4px;
+        font-size: 16px;
+        background-color: grey;
+        color: white;
+        border: none;
+        cursor: pointer;
 }
 
 .save:hover {
     background: #555;
 }
 
+.button {
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: grey;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+}
 
+form {
+    border-radius: 8px;
+    border-color: burlywood;
+    background-color: #659e6f;
+}
 
+form input {
+    border-radius: 8px;
+    border-color: burlywood;
+    border-style: inset;
+}
 
