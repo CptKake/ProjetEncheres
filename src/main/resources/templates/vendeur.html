@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Profil vendeur</title>
+<link rel="stylesheet" th:href="@{/css/style.css}" />
+
+
+
+
+
+</head>
+<body>
+
+	<div th:replace="~{fragments/fragment-entete}"></div>
+
+ <h1>User Profile</h1>
+    <p>Pseudo: <span th:text="${user.pseudo}"></span></p>
+    <p>Nom: <span th:text="${user.lastName}"></span></p>
+    <p>Prénom: <span th:text="${user.firstName}"></span></p>
+    <p>Email: <span th:text="${user.email}"></span></p>
+    <p>Téléphone: <span th:text="${user.phone}"></span></p>
+    <p>Rue: <span th:text="${user.street}"></span></p>
+    <p>Code Postal: <span th:text="${user.postalCode}"></span></p>
+    <p>Ville: <span th:text="${user.city}"></span></p>
+    <p>Crédits : <span th:text="${user.credit}"></span></p>
+
+	<button><a th:href="@{/encheres}">Retour</a></button>	
+	
+	
+	<div th:replace="~{fragments/fragment-footer}"></div>
+</body>
+</html>

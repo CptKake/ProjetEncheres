@@ -8,6 +8,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -78,6 +79,14 @@ public class UserController {
         // Retourner le nom de la vue
         return "profil";
     }
+	
+	@GetMapping("/vendeur/{userId}")
+	public String seeSellerProfile(@PathVariable("userId") int userId, Model model) {
+	    Utilisateur user = utilisateurService.profileByNbUser(userId);
+
+	    model.addAttribute("user", user);
+	    return "vendeur"; // Assurez-vous que ce nom correspond au fichier HTML
+	}
 	
 	@PostMapping("/modifier")
 	public String modifyProfile(@ModelAttribute("user") @Valid Utilisateur user, BindingResult result, Model model) {
