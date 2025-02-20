@@ -3,25 +3,66 @@
 <head>
     <meta charset="UTF-8">
     <title>Liste des enchères</title>
-	<link rel="stylesheet" href="/ProjetEncheres/src/main/resources/static/css/style.css" />
+	<link rel="stylesheet" href="/static/css/style.css" />
 </head>
 <body>
 	
 	<div th:replace="~{fragments/fragment-entete}"></div>
 	
-    <p>Filtres :</p>
-    <div class="search-container">
-        <input type="text" placeholder="Rechercher...">
-     
-        <label for="idCat">Categorie</label>
-        <select id="idCat">
-     		<option>sport</option>
-			<option>sport</option>
-			<option>sport</option>
-        </select>
-        
-        <button type="button">Rechercher</button>
-    </div>
+	<h3>Filtres :</h3>
+	<form action="#" th:action="@{/encheres}" method="POST">
+		<div class="search-container">
+			<input type="text" placeholder="Le nom de l'article contient">
+	
+			<label for="idCat">Categorie</label>
+			<select id="idCat" th:field="*{categories}">
+				<option th:each="cat : ${categories}" th:text="${cat.name}" th:value="${cat.number}">
+				</option>
+			</select>
+	
+			<button type="submit">Rechercher</button>
+		</div>
+	
+		<div class="radio">
+			<div>
+				<input type="radio" id="achats" name="choixAchVen" value="achats" checked />
+				<label for="achats">Achats</label>
+				<ul>
+					<li>
+						<input type="radio" id="open" name="choixEnch" value="open" />
+						<label for="open">enchères ouvertes</label>
+					</li>
+					<li>
+						<input type="radio" id="enCours" name="choixEnch" value="enCours" />
+						<label for="enCours">mes enchères en cours</label>
+					</li>
+					<li>
+						<input type="radio" id="win" name="choixEnch" value="win" />
+						<label for="win">mes enchères remportées</label>
+					</li>
+				</ul>
+			</div>
+	
+			<div>
+				<input type="radio" id="ventes" name="choixAchVen" value="ventes" />
+				<label for="ventes">Mes ventes</label>
+				<ul>
+					<li>
+						<input type="radio" id="enCoursVen" name="choixEnch" value="enCoursVen" />
+						<label for="enCoursVen">mes ventes en cours</label>
+					</li>
+					<li>
+						<input type="radio" id="nonStart" name="choixEnch" value="nonStart" />
+						<label for="nonStart">ventes non débutées</label>
+					</li>
+					<li>
+						<input type="radio" id="ended" name="choixEnch" value="ended" />
+						<label for="ended">ventes terminées</label>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</form>
     
 	<div class="annonces">
 		<div class="article">
@@ -29,36 +70,42 @@
 			<p>Prix : 210 points</p>
 			<p>Fin de l'enchère : 18/02/2025</p>
 			<p>Vendeur : jojo44</p>
+			<a href="http://localhost:8080/encheres">modifier</a>
 		</div>
 		<div class="article">
 			<p>Formateur</p>
 			<p>Prix : 210 points</p>
 			<p>Fin de l'enchère : 18/02/2025</p>
 			<p>Vendeur : jojo44</p>
+			<a class="hidden" href="http://localhost:8080/encheres">modifier</a>
 		</div>
 		<div class="article">
 			<p>Formateur</p>
 			<p>Prix : 210 points</p>
 			<p>Fin de l'enchère : 18/02/2025</p>
 			<p>Vendeur : jojo44</p>
+			<a class="hidden" href="http://localhost:8080/encheres">modifier</a>
 		</div>
 		<div class="article">
 			<p>Formateur</p>
 			<p>Prix : 210 points</p>
 			<p>Fin de l'enchère : 18/02/2025</p>
 			<p>Vendeur : jojo44</p>
+			<a class="hidden" href="http://localhost:8080/encheres">modifier</a>
 		</div>
 		<div class="article">
 			<p>Formateur</p>
 			<p>Prix : 210 points</p>
 			<p>Fin de l'enchère : 18/02/2025</p>
 			<p>Vendeur : jojo44</p>
+			<a href="http://localhost:8080/encheres">modifier</a>
 		</div>
 		<div class="article">
 			<p>Formateur</p>
 			<p>Prix : 210 points</p>
 			<p>Fin de l'enchère : 18/02/2025</p>
 			<p>Vendeur : jojo44</p>
+			<a class="hidden" href="http://localhost:8080/encheres">modifier</a>
 		</div>
 	<div th:replace="~{fragments/fragment-footer}"></div>
 </body>

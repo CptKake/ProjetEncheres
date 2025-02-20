@@ -1,7 +1,7 @@
 body {
     font-family: Arial, sans-serif;
     overflow: scroll;
-      
+    background-color: #bb65034d;
 }
 header {
     display: flex;
@@ -130,14 +130,14 @@ a :hover{
 }
 
 .article {
-    border-style: solid;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     background-color: #659e6f;
     margin: 5px;
     padding: 2rem;
     display: inline-block;
-    
+    width: fit-content;
+    height: fit-content;
     color: whitesmoke;
 }
 
@@ -146,3 +146,32 @@ a :hover{
     justify-content: flex-start;
     
 }
+
+.radio {
+    display: inline-flex;
+}
+
+.radio div {
+    margin-right: 5rem;
+}
+
+form {
+    border-radius: 8px;
+    border-color: burlywood;
+    background-color: #659e6f;
+}
+
+form input {
+    border-radius: 8px;
+    border-color: burlywood;
+    border-style: inset;
+
+}
+
+.hidden {
+    opacity: 0;
+    pointer-events: none;
+    cursor: default;
+    text-decoration: none;
+}
+
