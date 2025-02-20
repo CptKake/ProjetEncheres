@@ -25,7 +25,8 @@
     <p>Ville: <span th:text="${user.city}"></span></p>
     <p>Crédits : <span th:text="${user.credit}"></span></p>
     
-<button><a th:href="@{/profil/modifier}">Modifier</a></button>
+
+ <a th:href="@{/profil/modifier}" class="button">Modifier</a>
 
 	<div th:replace="~{fragments/fragment-footer}"></div>
 </body>

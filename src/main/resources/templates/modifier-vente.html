@@ -29,7 +29,8 @@
                     <select id="idCategory" th:field="*{category}">
                         <option th:each="cat : ${categories}"
                                 th:text="${cat.name}"
-                                th:value="${cat.number}">
+                                th:value="${cat.number}"
+                                th:selected="${cat.number == article.category.number}">
                         </option>
                     </select>
                     <div th:if="${#fields.hasErrors('category')}" th:errors="*{category}">Category Error</div>
