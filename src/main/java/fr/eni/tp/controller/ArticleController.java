@@ -56,10 +56,8 @@ public class ArticleController {
 		return "view-articles";
 	}
 	
-	@PostMapping("/encheres/{choixEnch}")
-	public String trierArticles (@PathVariable("choixEnch") String choixEnch, Model model, @AuthenticationPrincipal UserDetails userDetails) {
-		
-		System.err.println("##### CHOIXENCH = " + choixEnch);
+	@PostMapping("/encheres")
+	public String trierArticles (@RequestParam("choixEnch") String choixEnch, Model model, @AuthenticationPrincipal UserDetails userDetails) {
 		
 		Utilisateur user = null;
 		
@@ -71,7 +69,7 @@ public class ArticleController {
 		    model.addAttribute("user", user);
 		}
 		
-		List<Article> articles = whichFilter(choixEnch.toString(), user);
+		List<Article> articles = whichFilter(choixEnch, user);
 		model.addAttribute("articles", articles);
 		
 		for (Article art : articles) {
@@ -79,7 +77,7 @@ public class ArticleController {
 		}
 		
 		
-		return "redirect:/view-articles";
+		return "view-articles";
 	}
 		
 	@GetMapping("/encheres/details")

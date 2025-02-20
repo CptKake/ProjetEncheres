@@ -28,10 +28,10 @@ public class ArticleDAOImpl implements ArticleDAO {
 	private static final String FIND_BY_ID = "SELECT * FROM articles_vendus WHERE no_article = :id";
 	private static final String DELETE_ART_BY_ID = "delete from articles_vendus where no_article = :id";
 	private static final String FIND_ALL = "select * from articles_vendus";
-	private static final String FIND_EN_OPEN = "SELECT * FROM articles_vendus WHERE date_fin_encheres > CURRENT_DATE";
+	private static final String FIND_EN_OPEN = "SELECT * FROM articles_vendus WHERE date_fin_encheres > CURRENT_DATE AND date_debut_encheres < CURRENT_DATE";
 	private static final String FIND_SELLS_PRESENT = "SELECT * FROM articles_vendus WHERE no_utilisateur = :idUser AND date_fin_encheres > CURRENT_DATE AND date_debut_encheres < CURRENT_DATE";
 	private static final String FIND_SELLS_PAST = "SELECT * FROM articles_vendus WHERE no_utilisateur = :idUser AND date_fin_encheres < CURRENT_DATE ";
-	private static final String FIND_SELLS_FUTURE = "SELECT * FROM articles_vendus WHERE no_utilisateur = :idUser AND date_debut_encheres < CURRENT_DATE";
+	private static final String FIND_SELLS_FUTURE = "SELECT * FROM articles_vendus WHERE no_utilisateur = :idUser AND date_debut_encheres > CURRENT_DATE";
 	private static final String FIND_WINNED = "SELECT av.no_article, av.nom_article, av.description, av.date_debut_encheres, "
 												+ "av.date_fin_encheres, av.prix_initial, av.prix_vente, av.no_utilisateur, av.no_categorie "
 												+ "FROM articles_vendus av JOIN encheres e ON e.no_article = av.no_article "
@@ -40,7 +40,9 @@ public class ArticleDAOImpl implements ArticleDAO {
 	private static final String FIND_OPEN_BIDDED = "SELECT 	av.no_article, av.nom_article, av.description, av.date_debut_encheres, "
 												+ "av.date_fin_encheres, av.prix_initial, av.prix_vente, av.no_utilisateur, av.no_categorie "
 												+ "FROM articles_vendus av JOIN encheres e ON e.no_article = av.no_article "
-												+ "WHERE e.no_utilisateur = :idUser AND date_fin_encheres > CURRENT_DATE";	
+												+ "WHERE e.no_utilisateur = :idUser AND date_fin_encheres >= CURRENT_DATE AND date_debut_encheres < CURRENT_DATE";
+	private static final String FIND_CONTIENT = "";
+	private static final String FIND_PAR_CAT = "";
 	
 	
 	private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
