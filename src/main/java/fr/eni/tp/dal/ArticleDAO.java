@@ -20,5 +20,13 @@ public interface ArticleDAO {
 	List<Article> findEnCours();
 	
 	List<Article> findUserSells(Utilisateur user);
+
+	List<Article> findUserFutureSells(Utilisateur user);
+
+	List<Article> findUserPastSells(Utilisateur user);
+
+	List<Article> findUserBidded(Utilisateur user);
+
+	List<Article> findWinned(Utilisateur user);
 	
 }

@@ -9,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
@@ -55,11 +56,30 @@ public class ArticleController {
 		return "view-articles";
 	}
 	
-	@GetMapping("/encheres/{choixEnch}")
+	@PostMapping("/encheres/{choixEnch}")
 	public String trierArticles (@PathVariable("choixEnch") String choixEnch, Model model, @AuthenticationPrincipal UserDetails userDetails) {
 		
+		System.err.println("##### CHOIXENCH = " + choixEnch);
 		
-		return null;
+		Utilisateur user = null;
+		
+		List<Categorie> categories = this.enchereService.getAllCategories(); 
+		model.addAttribute("categories", categories);
+		
+		if (userDetails != null) {
+			user = utilisateurService.profileByPseudo(userDetails.getUsername());
+		    model.addAttribute("user", user);
+		}
+		
+		List<Article> articles = whichFilter(choixEnch.toString(), user);
+		model.addAttribute("articles", articles);
+		
+		for (Article art : articles) {
+			art.setUser(utilisateurService.profileByNbUser(art.getUser().getNbUser()));
+		}
+		
+		
+		return "redirect:/view-articles";
 	}
 		
 	@GetMapping("/encheres/details")
@@ -89,5 +109,38 @@ public class ArticleController {
 	public List<Categorie> chargerCatEnSession() {
 		return this.enchereService.getAllCategories();	
 	}
-	
+
+	public List<Article> whichFilter(String value, Utilisateur user) {
+		List<Article> articles = null;
+		switch (value) {
+			
+			case "open": {
+				articles = this.enchereService.enchOpen();
+				break;
+			}
+			case "enCours": {
+				articles = this.enchereService.enchBidded(user);
+				break;
+			}
+			case "win": {
+				articles = this.enchereService.enchWinned(user);
+				break;
+			}
+			case "enCoursVen": {
+				articles = this.enchereService.ventesEnCours(user);
+				break;
+			}
+			case "nonStart": {
+				articles = this.enchereService.ventesFutures(user);
+				break;
+			}
+			case "ended": {
+				articles = this.enchereService.ventesTerminees(user);
+				break;
+			}
+			default:
+				throw new IllegalArgumentException("Unexpected value: " + value);
+			}
+		return articles;
+	}
 }

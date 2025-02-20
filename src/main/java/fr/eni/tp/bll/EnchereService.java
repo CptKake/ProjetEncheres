@@ -34,14 +34,22 @@ public interface EnchereService {
 	Article readArticle (int nbrArticle);
 	
 	List<Article> allArticles();
-	
-	List<Article> VentesEnCours();
-	
-	List<Article> UserVentes(Utilisateur user);
-
+		
 	List<Categorie> getAllCategories();
 
 	Categorie getCatById(int id);
 	
 	Categorie getCatByName(String libelle);
+
+	List<Article> ventesEnCours(Utilisateur user);
+
+	List<Article> ventesFutures(Utilisateur user);
+
+	List<Article> ventesTerminees(Utilisateur user);
+
+	List<Article> enchOpen();
+
+	List<Article> enchBidded(Utilisateur user);
+
+	List<Article> enchWinned(Utilisateur user);
 }

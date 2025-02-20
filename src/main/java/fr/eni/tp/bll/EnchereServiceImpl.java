@@ -123,17 +123,39 @@ public class EnchereServiceImpl implements EnchereService  {
 	}
 
 	@Override
-	public List<Article> VentesEnCours() {
+	public List<Article> enchOpen() {
 		List<Article> articles = articleDAO.findEnCours();
 		return articles;
+		
+	}@Override
+	public List<Article> enchBidded(Utilisateur user) {
+		List<Article> articles = articleDAO.findUserBidded(user);
+		return articles;
+		
+	}@Override
+	public List<Article> enchWinned(Utilisateur user) {
+		List<Article> articles = articleDAO.findWinned(user);
+		return articles;
 	}
-
+	
 	@Override
-	public List<Article> UserVentes(Utilisateur user) {
+	public List<Article> ventesEnCours(Utilisateur user) {
 		List<Article> articles = articleDAO.findUserSells(user);
 		return articles;
 	}
 
+	@Override
+	public List<Article> ventesFutures(Utilisateur user) {
+		List<Article> articles = articleDAO.findUserFutureSells(user);
+		return articles;
+	}
+	
+	@Override
+	public List<Article> ventesTerminees(Utilisateur user) {
+		List<Article> articles = articleDAO.findUserPastSells(user);
+		return articles;
+	}
+	
 	@Override
 	public Categorie getCatByName(String libelle) {
 		Categorie cat = categorieDAO.readCategorie(libelle);

@@ -28,8 +28,20 @@ public class ArticleDAOImpl implements ArticleDAO {
 	private static final String FIND_BY_ID = "SELECT * FROM articles_vendus WHERE no_article = :id";
 	private static final String DELETE_ART_BY_ID = "delete from articles_vendus where no_article = :id";
 	private static final String FIND_ALL = "select * from articles_vendus";
-	private static final String FIND_EN_COURS = "SELECT * FROM articles_vendus WHERE date_fin_encheres > CURRENT_DATE";
-	private static final String FIND_SELLS = "SELECT * FROM articles_vendus WHERE no_utilisateur = :idUser";
+	private static final String FIND_EN_OPEN = "SELECT * FROM articles_vendus WHERE date_fin_encheres > CURRENT_DATE";
+	private static final String FIND_SELLS_PRESENT = "SELECT * FROM articles_vendus WHERE no_utilisateur = :idUser AND date_fin_encheres > CURRENT_DATE AND date_debut_encheres < CURRENT_DATE";
+	private static final String FIND_SELLS_PAST = "SELECT * FROM articles_vendus WHERE no_utilisateur = :idUser AND date_fin_encheres < CURRENT_DATE ";
+	private static final String FIND_SELLS_FUTURE = "SELECT * FROM articles_vendus WHERE no_utilisateur = :idUser AND date_debut_encheres < CURRENT_DATE";
+	private static final String FIND_WINNED = "SELECT av.no_article, av.nom_article, av.description, av.date_debut_encheres, "
+												+ "av.date_fin_encheres, av.prix_initial, av.prix_vente, av.no_utilisateur, av.no_categorie "
+												+ "FROM articles_vendus av JOIN encheres e ON e.no_article = av.no_article "
+												+ "WHERE e.montant_enchere = av.prix_vente AND date_fin_encheres < CURRENT_DATE "
+												+ "AND e.no_utilisateur = :idUser";
+	private static final String FIND_OPEN_BIDDED = "SELECT 	av.no_article, av.nom_article, av.description, av.date_debut_encheres, "
+												+ "av.date_fin_encheres, av.prix_initial, av.prix_vente, av.no_utilisateur, av.no_categorie "
+												+ "FROM articles_vendus av JOIN encheres e ON e.no_article = av.no_article "
+												+ "WHERE e.no_utilisateur = :idUser AND date_fin_encheres > CURRENT_DATE";	
+	
 	
 	private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 	
@@ -95,16 +107,49 @@ public class ArticleDAOImpl implements ArticleDAO {
 
 	@Override
 	public List<Article> findEnCours() {
-		return namedParameterJdbcTemplate.query(FIND_EN_COURS, new ArticleRowMapper());
+		return namedParameterJdbcTemplate.query(FIND_EN_OPEN, new ArticleRowMapper());
 	}
 
+	@Override
+	public List<Article> findUserBidded(Utilisateur user) {
+		MapSqlParameterSource map = new MapSqlParameterSource();
+		map.addValue("idUser", user.getNbUser());
+		
+		return namedParameterJdbcTemplate.query(FIND_OPEN_BIDDED, map, new ArticleRowMapper());
+	}
+	
+	@Override
+	public List<Article> findWinned(Utilisateur user) {
+		MapSqlParameterSource map = new MapSqlParameterSource();
+		map.addValue("idUser", user.getNbUser());
+		
+		return namedParameterJdbcTemplate.query(FIND_WINNED, map, new ArticleRowMapper());
+	}
+	
 	@Override
 	public List<Article> findUserSells(Utilisateur user) {
 		MapSqlParameterSource map = new MapSqlParameterSource();
 		map.addValue("idUser", user.getNbUser());
 		
-		return namedParameterJdbcTemplate.query(FIND_SELLS, map, new ArticleRowMapper());
+		return namedParameterJdbcTemplate.query(FIND_SELLS_PRESENT, map, new ArticleRowMapper());
 	}
+	
+	@Override
+	public List<Article> findUserFutureSells(Utilisateur user) {
+		MapSqlParameterSource map = new MapSqlParameterSource();
+		map.addValue("idUser", user.getNbUser());
+		
+		return namedParameterJdbcTemplate.query(FIND_SELLS_FUTURE, map, new ArticleRowMapper());
+	}
+	
+	@Override
+	public List<Article> findUserPastSells(Utilisateur user) {
+		MapSqlParameterSource map = new MapSqlParameterSource();
+		map.addValue("idUser", user.getNbUser());
+		
+		return namedParameterJdbcTemplate.query(FIND_SELLS_PAST, map, new ArticleRowMapper());
+	}
+	
 }
 
 class ArticleRowMapper implements RowMapper<Article> {

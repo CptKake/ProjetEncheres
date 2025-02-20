@@ -12,7 +12,7 @@
 	<div th:replace="~{fragments/fragment-entete}"></div>
 	
     <h3>Filtres :</h3>
-    <form action="">
+    <form action="#" th:action="@{/encheres/open}" method="POST">
 	    <div class="search-container">
 	        <input type="text" placeholder="Le nom de l'article contient">
 	     
@@ -24,7 +24,7 @@
 	     		</option> 
 	        </select>
 	
-	        <button type="button">Rechercher</button>
+	        <button type="submit">Rechercher</button>
 		</div>
 	    
 	    <div class="radio">
