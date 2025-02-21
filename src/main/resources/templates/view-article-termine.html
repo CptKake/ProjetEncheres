@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" th:href="@{/css/style.css}" />
+</head>
+<body>
+
+	<div th:replace="~{fragments/fragment-entete}"></div>
+
+	
+	<div>
+		<ul>
+			<h2 th:if="${ench.nbUser.pseudo} == ${connectedUser.pseudo}" th:text="|Vous avez remporté la vente|"></h2>
+			<h2 th:if="${ench.nbUser.pseudo} != ${connectedUser.pseudo}" th:text="|Vente remportée par ${ench.nbUser.pseudo}|"></h2>
+			<li th:text="${art.name}"></li>
+			<li th:text="|Description : ${art.description}|"></li>
+			<li th:text="|Catégorie : ${cat.name}|"></li>
+			<li th:if="${ench != null}" th:text="|Meilleure offre : ${art.sellPrice} pts par ${ench.nbUser.pseudo}|"></li>
+			<li th:text="|Mise à prix : ${art.initPrice} points|"></li>
+			<li th:text="|Fin de l'enchère : ${art.bidEnd}|"></li>
+			<h3>Retrait :</h3>
+			<li th:text="|${retrait.street} |"></li>
+			<li th:text="|${retrait.postalCode} | + |${retrait.city}|"></li>
+			<li th:text="|Vendeur : ${user.pseudo}|"></li>
+			<li th:if="${ench.nbUser.pseudo} == ${connectedUser.pseudo}" th:text="|Tel : ${user.phone}|"></li>
+			<li th:if="${ench.nbUser.pseudo} == ${connectedUser.pseudo}" th:text="|Email : ${user.email}|"></li>
+		</ul>
+		
+	</div>
+
+	<div th:replace="~{fragments/fragment-footer}"></div>
+</body>
+</html>
