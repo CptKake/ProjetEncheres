@@ -61,11 +61,12 @@
 .create {
      padding: 10px 20px;
     font-size: 16px;
-    background-color: #007bff;
+    background-color: grey;
     color: white;
     border: none;
     cursor: pointer;
     border-radius: 4px;
+    border-radius: 8px;
 }
 
 .create:hover {
@@ -98,6 +99,7 @@
     border: none;
     cursor: pointer;
     border-radius: 4px;
+    border-radius: 8px;
 }
 
 .suppress:hover {
@@ -112,6 +114,7 @@
     border: none;
     cursor: pointer;
     border-radius: 4px;
+    border-radius: 8px;
 }
 
 .reset:hover {
@@ -125,6 +128,7 @@
         color: white;
         border: none;
         cursor: pointer;
+        border-radius: 8px;
 }
 
 .save:hover {

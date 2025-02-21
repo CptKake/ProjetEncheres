@@ -1,5 +1,6 @@
 package fr.eni.tp.controller;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -8,7 +9,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
@@ -82,7 +82,7 @@ public class ArticleController {
 		
 	@GetMapping("/encheres/details")
 	public String afficherDetailArticle(@RequestParam(name="idArt",
-			required = true) int idArt, Model model) {
+			required = true) int idArt, @AuthenticationPrincipal UserDetails userDetails, Model model) {
 		
 		Article art = this.enchereService.readArticle(idArt);
 		Categorie cat = this.enchereService.getCatById(art.getCategory().getNumber());
@@ -99,8 +99,14 @@ public class ArticleController {
 		model.addAttribute("art", art);
 		model.addAttribute("retrait", retrait);
 		model.addAttribute("ench", ench);
+		model.addAttribute("connectedUser", utilisateurService.profileByPseudo(userDetails.getUsername()));
 		
-		return "view-article-details";
+		if (art.getBidEnd().isAfter(LocalDate.now())) {
+			return "view-article-details";
+		} else {
+			return "view-article-termine";
+		}
+		
 	}
 	
 	@ModelAttribute("catSession")
