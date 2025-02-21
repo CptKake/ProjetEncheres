@@ -76,8 +76,8 @@ public class EnchereController {
 
 	}
 	
-	@GetMapping("/modifvente/{idArt}")
-	public String modifierArticle(@PathVariable("idArt") int idArt, Model model) {
+	@GetMapping("/modifvente")
+	public String modifierArticle(@RequestParam("idArt") int idArt, Model model) {
 	    
 		List<Categorie> categories = enchereService.getAllCategories();
 		
@@ -97,9 +97,11 @@ public class EnchereController {
 	    return "modifier-vente";
 	}
 	
-	@PostMapping("/vendre/update/{idArt}")
-	public String updateArticle(@PathVariable("idArt") int idArt, @ModelAttribute("article") @Valid Article art, BindingResult result, Model model) {
-	    if (result.hasErrors()) {
+	@PostMapping("/vendre/update")
+	public String updateArticle(@AuthenticationPrincipal UserDetails userDetails, @RequestParam("idArt") int idArt, @ModelAttribute("article") @Valid Article art, BindingResult result, Model model) {
+		art.setUser(utilisateurService.profileByPseudo(userDetails.getUsername()));
+		System.err.println(art.getUser());
+		if (result.hasErrors()) {
 	        List<Categorie> categories = enchereService.getAllCategories();
 	        model.addAttribute("categories", categories);
 	        return "modifier-vente";
@@ -117,9 +119,10 @@ public class EnchereController {
 	        existingArt.setInitPrice(art.getInitPrice());
 	        existingArt.setSellPrice(art.getSellPrice());
 	        existingArt.setCategory(art.getCategory());
+	        existingArt.setUser(art.getUser());
 	        
-	       
-	        enchereService.updateArticle(idArt);
+	        
+	        enchereService.updateArticle(existingArt);
 	        
 	        Retrait retrait = retraitService.getRetraitForArticle(idArt);
 	        if (retrait != null) {
@@ -131,8 +134,22 @@ public class EnchereController {
 	            //la modif est bonne jusque là / KO dans DAO
 	            System.err.println("article :" + existingArt);
 	        }
-
-	        return "modifier-vente";
+	        List<Categorie> categories = enchereService.getAllCategories();
+	        model.addAttribute("categories", categories);
+	        Article updatedArt = this.enchereService.readArticle(existingArt.getNumber());
+			Categorie cat = this.enchereService.getCatById(existingArt.getCategory().getNumber());
+			Utilisateur user = this.utilisateurService.profileByNbUser(existingArt.getUser().getNbUser());
+			Retrait newRetrait = this.retraitService.getRetraitForArticle(existingArt.getNumber());
+			Enchere ench = null;
+			
+			 
+			model.addAttribute("cat", cat);
+			model.addAttribute("user", user);
+			model.addAttribute("art", updatedArt);
+			model.addAttribute("retrait", newRetrait);
+			model.addAttribute("ench", ench);
+			
+	        return "view-article-details";
 	    } catch (IllegalArgumentException e) {
 	        model.addAttribute("error", e.getMessage());
 	        List<Categorie> categories = enchereService.getAllCategories();
@@ -143,8 +160,8 @@ public class EnchereController {
 	
 	}
 	
-	@PostMapping("/vendre/delete/{idArt}")
-	public String deleteArt (@PathVariable("idArt") int idArt) {
+	@PostMapping("/vendre/delete")
+	public String deleteArt (@RequestParam("idArt") int idArt) {
 		Article art = enchereService.readArticle(idArt);
 		
 		enchereService.deleteArticle(idArt);
