@@ -29,7 +29,7 @@ public interface EnchereService {
 	
 	void deleteArticle ( int idArt);
 	
-	void updateArticle(int idArt);
+	void updateArticle(Article art);
 	
 	Article readArticle (int nbrArticle);
 	

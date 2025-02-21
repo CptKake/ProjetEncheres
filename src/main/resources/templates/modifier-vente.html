@@ -12,7 +12,7 @@
 
     <main class="form-container">
         <h1>Modifier un article</h1>
-        <form class="form-group" th:action="@{/vendre/update/{idArt}(idArt=${article.number})}" method="POST" th:object="${article}">
+        <form class="form-group" th:action="@{/vendre/update(idArt=${article.number})}" method="POST" th:object="${article}">
             <ul>
                 <li>
                     <label for="idName">Article: </label>
@@ -73,7 +73,7 @@
           
         </form>
         
-          <form th:action="@{/vendre/delete/{idArt}(idArt=${article.number})}" method="POST" style="display:inline;">
+          <form th:action="@{/vendre/delete(idArt=${article.number})}" method="POST" style="display:inline;">
                 <button type="submit">Annuler la vente</button>
             </form>
 

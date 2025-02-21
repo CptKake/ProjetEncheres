@@ -107,9 +107,10 @@ public class EnchereServiceImpl implements EnchereService  {
 	}
 
 	@Override
-	public void updateArticle(int idArt) {
-		Article art = articleDAO.readArticle(idArt);
+	public void updateArticle(Article art) {
+
 		if (LocalDate.now().isBefore(art.getBidStart())) {
+		
 			articleDAO.updateArticle(art);
 		}
 	}
